@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class GridPositions : MonoBehaviour {
 
-	public Vector3[,] positions = new Vector3[7,7];
+	private Vector3[,] positions = new Vector3[7,7];
 
-	private Vector3 leftBound;
-	private Vector3 rightBound;
-	private Vector3 upperBound;
-	private Vector3 lowerBound;
+	public float distanceBetweenPoints;
 
-	private float distanceBetweenPoints;
+	private float leftBound;
+	private float upperBound;
 
 
-	void Start () {
+	public Vector3[,] calculatePositions() {
+
 		Bounds bounds = GetComponent<MeshRenderer> ().bounds;
-		leftBound = bounds.center - bounds.extents;
-		print (leftBound);
+		leftBound = bounds.center.x - bounds.extents.x;
+		upperBound = bounds.center.y + bounds.extents.y;
+		
+		distanceBetweenPoints = (bounds.center.x + bounds.extents.x) / 3;
+
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 7; j++) {
+				positions [i, j] = new Vector3 (leftBound + i * distanceBetweenPoints, upperBound - j * distanceBetweenPoints);
+			}
+		}
+		return positions;
 	}
 }
