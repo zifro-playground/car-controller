@@ -12,7 +12,9 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 	private Vector3[,] gridPositions;
 
 	public List<TextAsset> textLevel = new List<TextAsset>();
-	public List<Level1Settings> levelSettings = new List<Level1Settings> ();
+	private List<GameObject> activeGameObjects = new List<GameObject> ();
+
+	public LevelSettings levelSettings;
 
 
 	void Start () {		
@@ -20,6 +22,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 	}
 
 	public void OnPMCompilerStopped (HelloCompiler.StopStatus status) {
+		player.resetPlayer ();
 		LoadCurrentLevel();
 	}
 
@@ -31,7 +34,9 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 
 
 	public void LoadCurrentLevel() {
-		levelSettings [PMWrapper.currentLevel].setLevelSettings ();
+		deleteLastLevel ();
+
+		levelSettings.setLevelSettings (PMWrapper.currentLevel);
 
 		string[] rows = textLevel [PMWrapper.currentLevel].text.Split ('\n');
 
@@ -43,9 +48,16 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 				if (characters [j] == "P") {
 					player.transform.position = gridPositions [j, i];
 				} else if (characters [j] == "C") {
-					Instantiate (chargeStation, gridPositions [j, i], Quaternion.identity);
+					GameObject station = Instantiate (chargeStation, gridPositions [j, i], Quaternion.identity);
+					activeGameObjects.Add (station);
 				}
 			}
+		}
+	}
+
+	public void deleteLastLevel() {
+		foreach (GameObject obj in activeGameObjects) {
+			Destroy (obj);
 		}
 	}
 }

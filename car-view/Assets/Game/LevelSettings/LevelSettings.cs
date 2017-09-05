@@ -2,17 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Base class for level settings. You must implement the method setGameFunctions().
-/// </summary>
-public abstract class LevelSettings {
+public class LevelSettings : MonoBehaviour {
 
-	/// Sets the functions that the user should be able to use.
-	protected abstract void setGameFunctions();
+	public void setLevelSettings(int level){
+		if (level == 0)
+			setLevel1Settings ();
+	}
 
-	/// Set the pre code that is not editable for the user.
-	protected abstract void setPreCode();
+	public void setLevel1Settings(){
 
-	/// Set the code that should be given to the user at start.
-	protected abstract void setCode();
+		PMWrapper.SetSmartButtons(new string[] {
+			"åk_mot_öst()",
+			"åk_mot_norr()"
+		});
+
+		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+			new MoveEast(),
+			new MoveNorth()
+		});
+
+		// Set pre code
+
+		// Set given code
+	}
+
+	public void setLevel2Settings(){
+
+		PMWrapper.SetSmartButtons(new string[] {
+			"åk_mot_öst()",
+			"åk_mot_norr()"
+		});
+
+		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+			new MoveEast(),
+			new MoveNorth()
+		});
+
+		// Set pre code
+
+		// Set given code
+	}
 }
