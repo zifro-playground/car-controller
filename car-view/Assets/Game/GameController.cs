@@ -11,9 +11,12 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 	public GridPositions grid;
 	private Vector3[,] gridPositions;
 
+	[Space(5)]
 	public List<TextAsset> textLevel = new List<TextAsset>();
+
 	private List<GameObject> activeGameObjects = new List<GameObject> ();
 
+	[Space(10)]
 	public LevelSettings levelSettings;
 
 
@@ -22,11 +25,18 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 	}
 
 	public void OnPMCompilerStopped (HelloCompiler.StopStatus status) {
-		player.resetPlayer ();
-		LoadCurrentLevel();
+		if (status == HelloCompiler.StopStatus.Finished) {
+			player.resetPlayer ();
+			LoadCurrentLevel ();
+			PMWrapper.RaiseError ("Bilen kom inte hela vägen fram. Försök igen!");
+		} else {
+			player.resetPlayer ();
+			LoadCurrentLevel ();
+		}
 	}
 
 	public void OnPMLevelChanged () {
+		print (PMWrapper.numOfLevels);
 		gridPositions = grid.calculatePositions ();
 		player.distanceBetweenPoints = grid.distanceBetweenPoints;
 		LoadCurrentLevel ();

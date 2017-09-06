@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour {
 	private bool isMoving;
 	private direction currentDirection;
 
+	public bool atChargeStation;
+
 	#endregion
 
 
@@ -63,8 +65,28 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		isMoving = true;
 	}
-}
 
+	public void charge(){
+		if (atChargeStation) {
+			//PMWrapper.RaiseError (transform.position, "Bra jobbat! Bilen hittade fram.");
+			PMWrapper.SetLevelCompleted ();
+		} else {
+			PMWrapper.RaiseError (transform.position, "Det går inte att ladda här. Försök igen!");
+		}
+	}
+
+	void OnTriggerEnter(Collider other){
+		if (other.CompareTag ("ChargeStation")) {
+			atChargeStation = true;
+		}
+	}
+
+	void OnTriggerExit(Collider other){
+		if (other.CompareTag ("ChargeStation")) {
+			atChargeStation = false;
+		}
+	}
+}
 
 public enum direction{
 	east,
