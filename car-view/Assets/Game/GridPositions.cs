@@ -20,8 +20,8 @@ public class GridPositions : MonoBehaviour {
 		
 		distanceBetweenPoints = (bounds.center.x + bounds.extents.x) / 4;
 
-		for (int i = 0; i < positions.GetLength(0)-1; i++) {
-			for (int j = 0; j < positions.GetLength(0)-1; j++) {
+		for (int i = 0; i < positions.GetLength(0); i++) {
+			for (int j = 0; j < positions.GetLength(0); j++) {
 				positions [i, j] = new Vector3 (leftBound + i * distanceBetweenPoints, upperBound - j * distanceBetweenPoints);
 			}
 		}

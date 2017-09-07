@@ -46,13 +46,37 @@ public class PlayerMovement : MonoBehaviour {
 		isMoving = false;
 		currentDirection = direction.north;
 		transform.localEulerAngles = new Vector3 (0, 0, 0);
+		atChargeStation = false;
 	}
 
+	void OnTriggerEnter(Collider other){
+		if (other.CompareTag ("ChargeStation")) {
+			atChargeStation = true;
+		}
+	}
+	
+	void OnTriggerExit(Collider other){
+		if (other.CompareTag ("ChargeStation")) {
+			atChargeStation = false;
+		}
+	}
+
+
+	#region Custom functions called from user
 	public void moveEast(){
 		lastPosition = transform.position;
 		if (currentDirection != direction.east) {
 			transform.localEulerAngles = new Vector3 (0, 0, -90);
 			currentDirection = direction.east;
+		}
+		isMoving = true;
+	}
+
+	public void moveWest(){
+		lastPosition = transform.position;
+		if (currentDirection != direction.west) {
+			transform.localEulerAngles = new Vector3 (0, 0, 90);
+			currentDirection = direction.west;
 		}
 		isMoving = true;
 	}
@@ -66,6 +90,15 @@ public class PlayerMovement : MonoBehaviour {
 		isMoving = true;
 	}
 
+	public void moveSouth(){
+		lastPosition = transform.position;
+		if (currentDirection != direction.south) {
+			transform.localEulerAngles = new Vector3 (0, 0, 180);
+			currentDirection = direction.south;
+		}
+		isMoving = true;
+	}
+
 	public void charge(){
 		if (atChargeStation) {
 			//PMWrapper.RaiseError (transform.position, "Bra jobbat! Bilen hittade fram.");
@@ -74,18 +107,8 @@ public class PlayerMovement : MonoBehaviour {
 			PMWrapper.RaiseError (transform.position, "Det går inte att ladda här. Försök igen!");
 		}
 	}
+	#endregion
 
-	void OnTriggerEnter(Collider other){
-		if (other.CompareTag ("ChargeStation")) {
-			atChargeStation = true;
-		}
-	}
-
-	void OnTriggerExit(Collider other){
-		if (other.CompareTag ("ChargeStation")) {
-			atChargeStation = false;
-		}
-	}
 }
 
 public enum direction{

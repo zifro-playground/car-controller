@@ -26,9 +26,16 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 
 	public void OnPMCompilerStopped (HelloCompiler.StopStatus status) {
 		if (status == HelloCompiler.StopStatus.Finished) {
-			player.resetPlayer ();
-			LoadCurrentLevel ();
-			PMWrapper.RaiseError ("Bilen kom inte hela vägen fram. Försök igen!");
+			if (player.atChargeStation) {
+				player.resetPlayer ();
+				LoadCurrentLevel ();
+				PMWrapper.RaiseError ("Glöm inte att ladda när du kommit fram!");
+			} else {
+				player.resetPlayer ();
+				LoadCurrentLevel ();
+				PMWrapper.RaiseError ("Bilen kom inte hela vägen fram. Försök igen!");
+			}
+			
 		} else {
 			player.resetPlayer ();
 			LoadCurrentLevel ();
@@ -36,7 +43,6 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 	}
 
 	public void OnPMLevelChanged () {
-		print (PMWrapper.numOfLevels);
 		gridPositions = grid.calculatePositions ();
 		player.distanceBetweenPoints = grid.distanceBetweenPoints;
 		LoadCurrentLevel ();
@@ -50,10 +56,10 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 
 		string[] rows = textLevel [PMWrapper.currentLevel].text.Split ('\n');
 
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 9; i++) {
 			string[] characters = rows [i].Trim().Split (' ');
 
-			for (int j = 0; j < 7; j++) {
+			for (int j = 0; j < 9; j++) {
 
 				if (characters [j] == "P") {
 					player.transform.position = gridPositions [j, i];
