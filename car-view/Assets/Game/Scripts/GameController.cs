@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 
 				if (characters [j] == "P") {
 					player.transform.position = gridPositions [j, i];
+					player.currentPosition = new Vector2 (j, 9-(i+1));
 				} else if (characters [j] == "C") {
 					GameObject station = Instantiate (chargeStation, gridPositions [j, i], Quaternion.identity);
 					activeGameObjects.Add (station);
