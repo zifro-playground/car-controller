@@ -31,7 +31,7 @@ public class LevelSettings : MonoBehaviour {
 		else if (level == 6)
 			setLevel6Settings ();
 		else if (level == 7)
-			setLevel6Settings ();
+			setLevel7Settings ();
 	}
 
 	public void setLevel0Settings(){
@@ -143,21 +143,25 @@ public class LevelSettings : MonoBehaviour {
 
 	public void setLevel6Settings(){
 		PMWrapper.SetSmartButtons(new string[] {
-			"kolla_x_läge()"
+			"kolla_x_läge()",
+			"svara()"
 
 		});
 		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
-			new CheckPositionX()
+			new CheckPositionX(),
+			new Answere()
 		});
 	}
 
 	public void setLevel7Settings(){
 		PMWrapper.SetSmartButtons(new string[] {
-			"kolla_x_läge()"
+			"kolla_x_läge()",
+			"svara()"
 
 		});
 		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
-			new CheckPositionX()
+			new CheckPositionX(),
+			new Answere()
 		});
 	}
 }

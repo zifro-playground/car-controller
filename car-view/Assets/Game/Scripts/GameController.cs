@@ -6,6 +6,7 @@ using PM;
 public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged {
 
 	public PlayerMovement player;
+	public LevelAnsweres answeres;
 	public GameObject chargeStation;
 
 	public GridPositions grid;
@@ -31,9 +32,11 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 				LoadCurrentLevel ();
 				PMWrapper.RaiseError ("Glöm inte att ladda när du kommit fram!");
 			} else {
-				player.resetPlayer ();
-				LoadCurrentLevel ();
-				PMWrapper.RaiseError ("Bilen kom inte hela vägen fram. Försök igen!");
+				if (!currentLevelShouldBeAnswered()) {
+					player.resetPlayer ();
+					LoadCurrentLevel ();
+					PMWrapper.RaiseError ("Bilen kom inte hela vägen fram. Försök igen!");
+				}
 			}
 			
 		} else {
@@ -76,5 +79,11 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 		foreach (GameObject obj in activeGameObjects) {
 			Destroy (obj);
 		}
+	}
+
+	public bool currentLevelShouldBeAnswered(){
+		if (PMWrapper.currentLevel == 6)
+			return true;
+		return false;
 	}
 }

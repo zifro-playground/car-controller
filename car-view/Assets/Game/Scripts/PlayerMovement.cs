@@ -116,6 +116,10 @@ public class PlayerMovement : MonoBehaviour {
 	public int checkPositionX(){
 		return (int)currentPosition.x;
 	}
+
+	public int checkPositionY(){
+		return (int)currentPosition.y;
+	}
 	#endregion
 
 }
