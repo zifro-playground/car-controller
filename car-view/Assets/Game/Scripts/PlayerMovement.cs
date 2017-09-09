@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour {
 	public float playerSpeed = 4;
 
 	public Vector2 currentPosition;
+	public Vector3 startPosition;
 	private Vector3 lastPosition;
 
 	private bool isMoving;
@@ -25,16 +26,11 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.S)) {
-			isMoving = true;
-		}
-
 		if (isMoving) {
 			transform.position += transform.up * Time.deltaTime * PMWrapper.speedMultiplier * playerSpeed;
 
 			// Calculate differance in distance without sqrt
 			if (Mathf.Pow((transform.position.x - lastPosition.x), 2) + Mathf.Pow((transform.position.y - lastPosition.y), 2) > Mathf.Pow(distanceBetweenPoints, 2)) {
-				print ("x: " + currentPosition.x + "y: " + currentPosition.y);
 				transform.position = lastPosition + transform.up * distanceBetweenPoints;
 				isMoving = false;
 				lastPosition = transform.position;
@@ -44,6 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void resetPlayer() {
+		transform.position = startPosition;
 		isMoving = false;
 		currentDirection = direction.north;
 		transform.localEulerAngles = new Vector3 (0, 0, 0);

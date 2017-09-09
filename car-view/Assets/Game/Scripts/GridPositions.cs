@@ -22,7 +22,7 @@ public class GridPositions : MonoBehaviour {
 
 		for (int i = 0; i < positions.GetLength(0); i++) {
 			for (int j = 0; j < positions.GetLength(0); j++) {
-				positions [i, j] = new Vector3 (leftBound + i * distanceBetweenPoints, upperBound - j * distanceBetweenPoints);
+				positions [i, j] = new Vector3 (leftBound + i * distanceBetweenPoints, upperBound - j * distanceBetweenPoints, -0.3f);
 			}
 		}
 		return positions;

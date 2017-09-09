@@ -32,6 +32,20 @@ public class LevelSettings : MonoBehaviour {
 			setLevel6Settings ();
 		else if (level == 7)
 			setLevel7Settings ();
+		else if (level == 8)
+			setLevel8Settings ();
+		else if (level == 9)
+			setLevel9Settings ();
+		else if (level == 10)
+			setLevel10Settings ();
+		else if (level == 11)
+			setLevel11Settings ();
+		else if (level == 12)
+			setLevel12Settings ();
+		else if (level == 13)
+			setLevel13Settings ();
+		else if (level == 14)
+			setLevel14Settings ();
 	}
 
 	public void setLevel0Settings(){
@@ -100,7 +114,7 @@ public class LevelSettings : MonoBehaviour {
 			new MoveSouth(),
 			new Charge()
 		});
-		PMWrapper.AddCode ("for i in range(6):\n\tåk_mot_öst()\nladda()");
+		//PMWrapper.mainCode = "for i in range(6):\n\tåk_mot_öst()ladda()";
 		PMWrapper.codeRowsLimit = 7;
 	}
 
@@ -119,8 +133,8 @@ public class LevelSettings : MonoBehaviour {
 			new MoveSouth(),
 			new Charge()
 		});
-		PMWrapper.AddCode ("for i in range(6):\n\tåk_mot_norr()\nfor i in range(4):\n\tåk_mot_öst()");
-		PMWrapper.codeRowsLimit = 20;
+		//PMWrapper.mainCode = "for i in range(6):\n\tåk_mot_norr()\nfor i in range(4):\n\tåk_mot_öst()";
+		PMWrapper.codeRowsLimit = 7;
 	}
 
 	public void setLevel5Settings(){
@@ -130,7 +144,6 @@ public class LevelSettings : MonoBehaviour {
 			"åk_mot_norr()",
 			"åk_mot_syd()",
 			"ladda()"
-
 		});
 		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
 			new MoveEast(),
@@ -143,24 +156,114 @@ public class LevelSettings : MonoBehaviour {
 
 	public void setLevel6Settings(){
 		PMWrapper.SetSmartButtons(new string[] {
-			"kolla_x_läge()",
 			"svara()"
-
 		});
 		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
-			new CheckPositionX(),
 			new Answere()
 		});
+		PMWrapper.preCode = "station_x = 6";
+		PMWrapper.codeRowsLimit = 20;
 	}
 
 	public void setLevel7Settings(){
 		PMWrapper.SetSmartButtons(new string[] {
 			"kolla_x_läge()",
 			"svara()"
-
 		});
 		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
 			new CheckPositionX(),
+			new Answere()
+		});
+		PMWrapper.mainCode = "bil_x = kolla_x_läge()\n\nsvara(bil_x)";
+	}
+
+	public void setLevel8Settings(){
+		PMWrapper.SetSmartButtons(new string[] {
+			"kolla_x_läge()",
+			"svara()"
+		});
+		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+			new CheckPositionX(),
+			new Answere()
+		});
+		PMWrapper.preCode = "station_x = 6";
+	}
+
+	public void setLevel9Settings(){
+		PMWrapper.SetSmartButtons(new string[] {
+			"kolla_x_läge()",
+			"svara()"
+		});
+		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+			new CheckPositionX(),
+			new Answere()
+		});
+		PMWrapper.preCode = "station1_x = 1\nstation2_x = 6";
+	}
+
+	public void setLevel10Settings(){
+		PMWrapper.SetSmartButtons(new string[] {
+			"kolla_x_läge()",
+			"kolla_y_läge()",
+			"svara()"
+		});
+		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+			new CheckPositionX(),
+			new CheckPositionY(),
+			new Answere()
+		});
+		PMWrapper.preCode = "station_x = 3\nstation_y = 4";
+		PMWrapper.mainCode = "\nsvara(station_x, station_y)";
+	}
+
+	public void setLevel11Settings(){
+		PMWrapper.SetSmartButtons(new string[] {
+			"kolla_x_läge()",
+			"kolla_y_läge()",
+			"svara()"
+		});
+		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+			new CheckPositionX(),
+			new CheckPositionY(),
+			new Answere()
+		});
+		PMWrapper.mainCode = "\nbil_x = kolla_x_läge()";
+	}
+
+	public void setLevel12Settings(){
+		PMWrapper.SetSmartButtons(new string[] {
+			"kolla_x_läge()",
+			"kolla_y_läge()",
+			"svara()"
+		});
+		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+			new CheckPositionX(),
+			new CheckPositionY(),
+			new Answere()
+		});
+		PMWrapper.preCode = "station_x = 3\nstation_y = 5";
+		PMWrapper.mainCode = "\nbil_x = kolla_x_läge()\navstånd_x = station_x - bil_x";
+	}
+
+	public void setLevel13Settings(){
+		PMWrapper.SetSmartButtons(new string[] {
+			"räkna_avstånd_till_station()",
+			"svara()"
+		});
+		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+			new CalculateDistanceToStation(),
+			new Answere()
+		});
+		PMWrapper.mainCode = "avstånd_1 = räkna_avstånd_till_station()";
+	}
+
+	public void setLevel14Settings(){
+		PMWrapper.SetSmartButtons(new string[] {
+			"räkna_avstånd_till_station()",
+			"svara()"
+		});
+		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+			new CalculateDistanceToStation(),
 			new Answere()
 		});
 	}

@@ -7,15 +7,14 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 
 	public PlayerMovement player;
 	public LevelAnsweres answeres;
-	public GameObject chargeStation;
+	public GameObject chargeStationPrefab;
+	public List<GameObject> chargeStations = new List<GameObject>();
 
 	public GridPositions grid;
 	private Vector3[,] gridPositions;
 
 	[Space(5)]
 	public List<TextAsset> textLevel = new List<TextAsset>();
-
-	private List<GameObject> activeGameObjects = new List<GameObject> ();
 
 	[Space(10)]
 	public LevelSettings levelSettings;
@@ -29,19 +28,16 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 		if (status == HelloCompiler.StopStatus.Finished) {
 			if (player.atChargeStation) {
 				player.resetPlayer ();
-				LoadCurrentLevel ();
 				PMWrapper.RaiseError ("Glöm inte att ladda när du kommit fram!");
 			} else {
 				if (!currentLevelShouldBeAnswered()) {
 					player.resetPlayer ();
-					LoadCurrentLevel ();
 					PMWrapper.RaiseError ("Bilen kom inte hela vägen fram. Försök igen!");
 				}
 			}
 			
 		} else {
 			player.resetPlayer ();
-			LoadCurrentLevel ();
 		}
 	}
 
@@ -66,24 +62,46 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 
 				if (characters [j] == "P") {
 					player.transform.position = gridPositions [j, i];
+					player.startPosition = player.transform.position;
 					player.currentPosition = new Vector2 (j, 9-(i+1));
 				} else if (characters [j] == "C") {
-					GameObject station = Instantiate (chargeStation, gridPositions [j, i], Quaternion.identity);
-					activeGameObjects.Add (station);
+					GameObject station = Instantiate (chargeStationPrefab, new Vector3(gridPositions [j, i].x, gridPositions [j, i].y, 0), Quaternion.identity);
+					station.GetComponent<ChargeStation> ().position = new Vector2(j, 9-(i+1));
+					chargeStations.Add (station);
 				}
 			}
 		}
 	}
 
 	public void deleteLastLevel() {
-		foreach (GameObject obj in activeGameObjects) {
+		foreach (GameObject obj in chargeStations) {
 			Destroy (obj);
 		}
+		chargeStations.Clear ();
+		PMWrapper.preCode = "";
 	}
 
 	public bool currentLevelShouldBeAnswered(){
-		if (PMWrapper.currentLevel == 6)
+		if (PMWrapper.currentLevel == 6 || PMWrapper.currentLevel == 7 || PMWrapper.currentLevel == 8 || PMWrapper.currentLevel == 9 || PMWrapper.currentLevel == 10 
+			|| PMWrapper.currentLevel == 11 || PMWrapper.currentLevel == 12 || PMWrapper.currentLevel == 13 || PMWrapper.currentLevel == 14)
 			return true;
 		return false;
+	}
+
+	public double calculateDistanceToStation (double i){
+
+		int index;
+		int.TryParse(i.ToString(), out index);
+
+		if (index < 0 || index > chargeStations.Count - 1) {
+			PMWrapper.RaiseError ("Stationsnummret " + (index + 1) + " finns inte med i detta problem. Prova att stoppa in en siffra mellan 0 och " + chargeStations.Count); 
+		}
+
+		ChargeStation station = chargeStations [index].GetComponent<ChargeStation> ();
+
+		float distanceX = Mathf.Abs (player.currentPosition.x - station.position.x);
+		float distanceY = Mathf.Abs (player.currentPosition.y - station.position.y);
+
+		return (double)(distanceX + distanceY);
 	}
 }
