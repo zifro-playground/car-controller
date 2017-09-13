@@ -1,0 +1,232 @@
+fileFormatVersion: 2
+guid: 9b08ba9869f4944d28996a185e8d881f
+timeCreated: 1505243186
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: block_1
+    100002: block_2
+    100004: block_3
+    100006: block_4
+    100008: block_5
+    100010: car_blue
+    100012: car_blue_001
+    100014: car_blue_002
+    100016: car_blue_003
+    100018: car_blue_004
+    100020: car_blue_005
+    100022: car_blue_006
+    100024: car_green
+    100026: //RootNode
+    100028: car_green_001
+    100030: car_green_002
+    100032: car_green_003
+    100034: car_green_004
+    100036: car_green_005
+    100038: car_green_007
+    100040: car_red
+    100042: car_red_001
+    100044: car_red_002
+    100046: car_red_003
+    100048: car_red_004
+    100050: car_red_005
+    100052: car_red_007
+    100054: Cube
+    100056: Cylinder
+    100058: Cylinder_001
+    100060: Cylinder_002
+    400000: block_1
+    400002: block_2
+    400004: block_3
+    400006: block_4
+    400008: block_5
+    400010: car_blue
+    400012: car_blue_001
+    400014: car_blue_002
+    400016: car_blue_003
+    400018: car_blue_004
+    400020: car_blue_005
+    400022: car_blue_006
+    400024: //RootNode
+    400026: car_green
+    400028: car_green_001
+    400030: car_green_002
+    400032: car_green_003
+    400034: car_green_004
+    400036: car_green_005
+    400038: car_green_007
+    400040: car_red
+    400042: car_red_001
+    400044: car_red_002
+    400046: car_red_003
+    400048: car_red_004
+    400050: car_red_005
+    400052: car_red_007
+    400054: Cube
+    400056: Cylinder
+    400058: Cylinder_001
+    400060: Cylinder_002
+    2300000: block_1
+    2300002: block_2
+    2300004: block_3
+    2300006: block_4
+    2300008: block_5
+    2300010: car_blue
+    2300012: car_blue_001
+    2300014: car_blue_002
+    2300016: car_blue_003
+    2300018: car_blue_004
+    2300020: car_blue_005
+    2300022: car_blue_006
+    2300024: car_green
+    2300026: car_green_001
+    2300028: car_green_002
+    2300030: car_green_003
+    2300032: car_green_004
+    2300034: car_green_005
+    2300036: car_green_007
+    2300038: car_red
+    2300040: car_red_001
+    2300042: car_red_002
+    2300044: car_red_003
+    2300046: car_red_004
+    2300048: car_red_005
+    2300050: car_red_007
+    2300052: Cube
+    2300054: Cylinder
+    2300056: Cylinder_001
+    2300058: Cylinder_002
+    2300060: //RootNode
+    3300000: block_1
+    3300002: block_2
+    3300004: block_3
+    3300006: block_4
+    3300008: block_5
+    3300010: car_blue
+    3300012: car_blue_001
+    3300014: car_blue_002
+    3300016: car_blue_003
+    3300018: car_blue_004
+    3300020: car_blue_005
+    3300022: car_blue_006
+    3300024: car_green
+    3300026: car_green_001
+    3300028: car_green_002
+    3300030: car_green_003
+    3300032: car_green_004
+    3300034: car_green_005
+    3300036: car_green_007
+    3300038: car_red
+    3300040: car_red_001
+    3300042: car_red_002
+    3300044: car_red_003
+    3300046: car_red_004
+    3300048: car_red_005
+    3300050: car_red_007
+    3300052: Cube
+    3300054: Cylinder
+    3300056: Cylinder_001
+    3300058: Cylinder_002
+    3300060: //RootNode
+    4300000: car_blue_006
+    4300002: car_red_007
+    4300004: car_green_007
+    4300006: car_red
+    4300008: car_green
+    4300010: Cylinder_002
+    4300012: car_blue
+    4300014: block_5
+    4300016: block_4
+    4300018: block_1
+    4300020: block_3
+    4300022: block_2
+    4300024: Cylinder
+    4300026: Cylinder_001
+    4300028: car_green_001
+    4300030: car_green_002
+    4300032: car_green_003
+    4300034: car_green_004
+    4300036: car_green_005
+    4300038: car_red_001
+    4300040: car_red_002
+    4300042: car_red_003
+    4300044: car_red_004
+    4300046: car_red_005
+    4300048: car_blue_001
+    4300050: car_blue_002
+    4300052: car_blue_003
+    4300054: car_blue_004
+    4300056: car_blue_005
+    4300058: Cube
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

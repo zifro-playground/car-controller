@@ -114,7 +114,7 @@ public class LevelSettings : MonoBehaviour {
 			new MoveSouth(),
 			new Charge()
 		});
-		//PMWrapper.mainCode = "for i in range(6):\n\tåk_mot_öst()ladda()";
+		PMWrapper.mainCode = "for i in range(6):\n\tåk_mot_öst()ladda()";
 		PMWrapper.codeRowsLimit = 7;
 	}
 

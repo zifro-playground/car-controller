@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 
 	public PlayerMovement player;
 	public LevelAnsweres answeres;
-	public GameObject chargeStationPrefab;
+	public List<GameObject> chargeStationPrefabs = new List<GameObject>();
 	public List<GameObject> chargeStations = new List<GameObject>();
 
 	public GridPositions grid;
@@ -54,6 +54,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 		levelSettings.setLevelSettings (PMWrapper.currentLevel);
 
 		string[] rows = textLevel [PMWrapper.currentLevel].text.Split ('\n');
+		int nextStationToSpawn = 0;
 
 		for (int i = 0; i < 9; i++) {
 			string[] characters = rows [i].Trim().Split (' ');
@@ -65,9 +66,16 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 					player.startPosition = player.transform.position;
 					player.currentPosition = new Vector2 (j, 9-(i+1));
 				} else if (characters [j] == "C") {
-					GameObject station = Instantiate (chargeStationPrefab, new Vector3(gridPositions [j, i].x, gridPositions [j, i].y, 0), Quaternion.identity);
+
+					// TEMPORARY 
+					if (nextStationToSpawn > 1)
+						nextStationToSpawn = 1;
+					//END
+
+					GameObject station = Instantiate (chargeStationPrefabs[nextStationToSpawn], new Vector3(gridPositions [j, i].x, gridPositions [j, i].y, -0.1f), Quaternion.Euler(new Vector3(180,0,180)));
 					station.GetComponent<ChargeStation> ().position = new Vector2(j, 9-(i+1));
 					chargeStations.Add (station);
+					nextStationToSpawn++;
 				}
 			}
 		}
