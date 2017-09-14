@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 
 	public PlayerMovement player;
 	public LevelAnsweres answeres;
+
+	public string[] taskDescriptions;
 	public List<GameObject> chargeStationPrefabs = new List<GameObject>();
 	public List<GameObject> chargeStations = new List<GameObject>();
 
@@ -20,7 +22,11 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 	public LevelSettings levelSettings;
 
 
-	void Start () {		
+	void Awake () {		
+		PMWrapper.SetTaskDescriptions (taskDescriptions);
+	}
+
+	void Start(){
 		PMWrapper.numOfLevels = textLevel.Count;
 	}
 
@@ -86,7 +92,6 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 			Destroy (obj);
 		}
 		chargeStations.Clear ();
-		PMWrapper.preCode = "";
 	}
 
 	public bool currentLevelShouldBeAnswered(){

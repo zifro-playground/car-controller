@@ -12,11 +12,9 @@ namespace PM {
 			if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
 				if (Input.GetKeyDown(KeyCode.F4)) {
 					if (PMWrapper.isDemoingLevel)
-						UISingleton.instance.manusPlayer.SetIsManusPlaying (false);
-					else {
-						PMWrapper.unlockedLevel = PMWrapper.numOfLevels - 1;
-						PMWrapper.SetLevelCompleted ();
-					}
+						UISingleton.instance.manusPlayer.SetIsManusPlaying(false);
+					else
+						PMWrapper.SetLevelCompleted();
 				}
 			}
 		}

@@ -30,6 +30,8 @@ namespace PM {
 		public RectTransform tooltipParent;
 		public IDEPrintBubble printBubble;
 		public IDEManusBubble manusBubble;
+		public IDEGuideBubble guideBubble;
+		public IDETaskDescription taskDescription;
 		public CanvasGroup uiCanvasGroup;
 		[Header("Misc")]
 		public Camera uiCamera;
@@ -48,20 +50,6 @@ namespace PM {
 
 		private void Awake() {
 			instance = this;
-
-			// Load error api config
-			TextAsset file = Resources.Load<TextAsset>("game_token");
-			if (file == null) 
-				gameToken = "1234";
-
-			try {
-				gameToken = file.text.Trim();
-			} catch { }
-
-			if (gameToken == null || gameToken.Length != 32 || !System.Text.RegularExpressions.Regex.IsMatch(gameToken, @"[a-fA-F0-9]+")) {
-				Debug.LogError("Invalid game token!");
-				gameToken = null;
-			}
 		}
 
 		/// <summary>
