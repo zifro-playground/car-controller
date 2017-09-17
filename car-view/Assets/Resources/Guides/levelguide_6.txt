@@ -1,0 +1,1 @@
+﻿2: Använd *svara()* för att ge svaret på frågan.

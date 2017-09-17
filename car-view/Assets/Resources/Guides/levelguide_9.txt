@@ -1,0 +1,1 @@
+﻿3: Nu ska du jämföra avstånden till de olika stationerna. Använd sen *svara()* för att svara med avståndet till den närmsta stationen.

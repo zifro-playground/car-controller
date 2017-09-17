@@ -1,3 +1,2 @@
-﻿1: Level 0
-3: Hej på dig
-4: Vad gör du?
+﻿1: Här skriver du koden! Den bestämmer vad som kommer att hända ute till höger.
+1: Klicka på play för att köra koden!

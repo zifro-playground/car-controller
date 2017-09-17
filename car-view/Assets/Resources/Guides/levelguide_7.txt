@@ -1,0 +1,1 @@
+﻿1: Här sparas bilens x-läge i variabeln *bil_x*.
