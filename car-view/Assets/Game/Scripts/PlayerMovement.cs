@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour {
 		transform.position = startPosition;
 		isMoving = false;
 		currentDirection = direction.north;
-		transform.localEulerAngles = new Vector3 (180, 0, 0);
+		transform.localEulerAngles = new Vector3 (180, 0, 180);
 		atChargeStation = false;
 	}
 
@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour {
 		lastPosition = transform.position;
 		currentPosition.y += 1;
 		if (currentDirection != direction.north) {
-			transform.localEulerAngles = new Vector3 (180, 0, 0);
+			transform.localEulerAngles = new Vector3 (180, 0, 180);
 			currentDirection = direction.north;
 		}
 		isMoving = true;
@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour {
 		lastPosition = transform.position;
 		currentPosition.y -= 1;
 		if (currentDirection != direction.south) {
-			transform.localEulerAngles = new Vector3 (180, 0, 180);
+			transform.localEulerAngles = new Vector3 (180, 0, 0);
 			currentDirection = direction.south;
 		}
 		isMoving = true;
