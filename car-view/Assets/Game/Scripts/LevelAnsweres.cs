@@ -50,8 +50,7 @@ public class LevelAnsweres : MonoBehaviour {
 		#endregion
 
 		if (recievedCorrectAnswere) {
-			print (player.transform.position);
-			PMWrapper.ShowGuideBubble (1, "Svar: " + ans);
+			PMWrapper.ShowGuideBubble (player.transform.position, "Svar: " + ans);
 			StartCoroutine (LevelCompleted());
 		}
 		else

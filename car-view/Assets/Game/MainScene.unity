@@ -3158,7 +3158,7 @@ Prefab:
     - target: {fileID: 224341814871374680, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.00000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 224341814871374680, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
         type: 2}
@@ -3183,7 +3183,7 @@ Prefab:
     - target: {fileID: 224781491776565876, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 206
+      value: 205.99998
       objectReference: {fileID: 0}
     - target: {fileID: 224206800265749616, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
         type: 2}
@@ -3213,7 +3213,7 @@ Prefab:
     - target: {fileID: 224809143492519608, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.9999992
       objectReference: {fileID: 0}
     - target: {fileID: 224468918822405988, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
         type: 2}
@@ -3248,7 +3248,7 @@ Prefab:
     - target: {fileID: 224407482960301878, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -14.769231
+      value: -13.75
       objectReference: {fileID: 0}
     - target: {fileID: 224407482960301878, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
         type: 2}
@@ -3258,7 +3258,17 @@ Prefab:
     - target: {fileID: 224407482960301878, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 29.538462
+      value: 27.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224329220201570722, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000091552734
+      objectReference: {fileID: 0}
+    - target: {fileID: 224347047631486984, guid: 2f912094c8a4d9d4f8c3342a6db14d58,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f912094c8a4d9d4f8c3342a6db14d58, type: 2}
@@ -5651,10 +5661,10 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.5166088
-    y: 0.15751767
-    width: 0.4036091
-    height: 0.7182634
+    x: 0.51742786
+    y: 0.15716648
+    width: 0.4046499
+    height: 0.7190001
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
