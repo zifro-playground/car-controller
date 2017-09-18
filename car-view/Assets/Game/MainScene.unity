@@ -4700,12 +4700,27 @@ Prefab:
     - target: {fileID: 224796255619799242, guid: 72f309886b0852745a5495649e199222,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.00000011920929
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224291441942306948, guid: 72f309886b0852745a5495649e199222,
         type: 2}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224912974334776270, guid: 72f309886b0852745a5495649e199222,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224912974334776270, guid: 72f309886b0852745a5495649e199222,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224912974334776270, guid: 72f309886b0852745a5495649e199222,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: -17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72f309886b0852745a5495649e199222, type: 2}
@@ -5405,10 +5420,10 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.49444085
-    y: 0.13962698
-    width: 0.44892216
-    height: 0.79848623
+    x: 0.49483132
+    y: 0.13944435
+    width: 0.44950557
+    height: 0.7988887
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
