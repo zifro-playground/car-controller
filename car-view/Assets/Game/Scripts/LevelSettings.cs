@@ -153,7 +153,7 @@ public class LevelSettings : MonoBehaviour {
 			new MoveSouth(),
 			new Charge()
 		});
-		PMWrapper.AddCodeAtStart ("for i in range(5):\n\tåk_mot_öst()\n\tåk_mot_norr()\n");
+		PMWrapper.AddCodeAtStart ("for i in range(5):\n\tåk_mot_öst()\n\tåk_mot_norr()\nladda()\n");
 	}
 
 	public void setLevel6Settings(){

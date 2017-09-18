@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void charge(){
 		if (atChargeStation) {
-			//PMWrapper.RaiseError (transform.position, "Bra jobbat! Bilen hittade fram.");
+			PMWrapper.ShowGuideBubble (transform.position, "Bra jobbat! Bilen hittade fram.");
 			PMWrapper.SetLevelCompleted ();
 		} else {
 			PMWrapper.RaiseError (transform.position, "Det går inte att ladda här. Försök igen!");

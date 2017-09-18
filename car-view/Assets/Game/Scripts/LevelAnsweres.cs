@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelAnsweres : MonoBehaviour {
 
 	public PlayerMovement player;
+	public float waitTimeBeforeLevelComplete = 2;
 
 	public bool recievedCorrectAnswere = false;
 
@@ -48,24 +49,36 @@ public class LevelAnsweres : MonoBehaviour {
 
 		#endregion
 
-		if (recievedCorrectAnswere)
-			PMWrapper.SetLevelCompleted ();
+		if (recievedCorrectAnswere) {
+			print (player.transform.position);
+			PMWrapper.ShowGuideBubble (1, "Svar: " + ans);
+			StartCoroutine (LevelCompleted());
+		}
 		else
-			PMWrapper.RaiseError (ans + " är tyvärr fel svar. Försök igen!");
+			PMWrapper.ShowGuideBubble (1, ans + " är tyvärr fel svar. Försök igen!");
 	}
 
 	public void Answere (double x, double y){
 		if (PMWrapper.currentLevel == 10) {
-			if (x == 3 && y == 4)
-				PMWrapper.SetLevelCompleted ();
+			if (x == 3 && y == 4) {
+				PMWrapper.ShowGuideBubble (1, "Svar: " + x + ", " + y);
+				StartCoroutine (LevelCompleted());
+			}
 			else
 				PMWrapper.RaiseError ("Det är tyvärr fel svar. Försök igen!");
 		}
 		else if (PMWrapper.currentLevel == 11) {
-			if (x.Equals(player.currentPosition.x) && y.Equals(player.currentPosition.y))
-				PMWrapper.SetLevelCompleted ();
+			if (x.Equals (player.currentPosition.x) && y.Equals (player.currentPosition.y)) {
+				PMWrapper.ShowGuideBubble (1, "Svar: " + x + ", " + y);
+				StartCoroutine (LevelCompleted ());
+			}
 			else
 				PMWrapper.RaiseError ("Det är tyvärr fel svar. Försök igen!");
 		}
+	}
+
+	public IEnumerator LevelCompleted(){
+		yield return new WaitForSeconds (2);
+		PMWrapper.SetLevelCompleted ();
 	}
 }
