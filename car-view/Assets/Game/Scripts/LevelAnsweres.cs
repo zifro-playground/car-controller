@@ -22,12 +22,12 @@ public class LevelAnsweres : MonoBehaviour {
 		}
 
 		else if (PMWrapper.currentLevel == 8){
-			if (ans == 4)
+			if (ans == 5)
 				recievedCorrectAnswere = true;
 		}
 
 		else if (PMWrapper.currentLevel == 9){
-			if (ans == 1)
+			if (ans == 2)
 				recievedCorrectAnswere = true;
 		}
 
@@ -37,12 +37,12 @@ public class LevelAnsweres : MonoBehaviour {
 		}
 
 		else if (PMWrapper.currentLevel == 13){
-			if (ans == 6)
+			if (ans == 7)
 				recievedCorrectAnswere = true;
 		}
 
 		else if (PMWrapper.currentLevel == 14){
-			if (ans == 7)
+			if (ans == 5)
 				recievedCorrectAnswere = true;
 		}
 

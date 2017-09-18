@@ -72,12 +72,6 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 					player.startPosition = player.transform.position;
 					player.currentPosition = new Vector2 (j, 9-(i+1));
 				} else if (characters [j] == "C") {
-
-					// TEMPORARY 
-					if (nextStationToSpawn > 1)
-						nextStationToSpawn = 1;
-					//END
-
 					GameObject station = Instantiate (chargeStationPrefabs[nextStationToSpawn], new Vector3(gridPositions [j, i].x, gridPositions [j, i].y, -0.1f), Quaternion.Euler(new Vector3(180,0,180)));
 					station.GetComponent<ChargeStation> ().position = new Vector2(j, 9-(i+1));
 					chargeStations.Add (station);
@@ -92,6 +86,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 			Destroy (obj);
 		}
 		chargeStations.Clear ();
+		PMWrapper.preCode = "";
 	}
 
 	public bool currentLevelShouldBeAnswered(){
@@ -107,7 +102,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 		int.TryParse(i.ToString(), out index);
 
 		if (index < 0 || index > chargeStations.Count - 1) {
-			PMWrapper.RaiseError ("Stationsnummret " + (index + 1) + " finns inte med i detta problem. Prova att stoppa in en siffra mellan 0 och " + chargeStations.Count); 
+			PMWrapper.RaiseError ("Stationsnummret " + (index + 1) + " finns inte med i denna uppgift. Prova att stoppa in en siffra mellan 0 och " + chargeStations.Count); 
 		}
 
 		ChargeStation station = chargeStations [index].GetComponent<ChargeStation> ();

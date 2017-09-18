@@ -115,8 +115,8 @@ public class LevelSettings : MonoBehaviour {
 			new MoveSouth(),
 			new Charge()
 		});
-		PMWrapper.AddCodeAtStart ("for i in range(6):\n\tåk_mot_öst()\n\nladda()\n");
 		PMWrapper.codeRowsLimit = 7;
+		PMWrapper.AddCodeAtStart ("for i in range(4):\n\tåk_mot_öst()\n\nladda()\n");
 	}
 
 	public void setLevel4Settings(){
@@ -153,7 +153,7 @@ public class LevelSettings : MonoBehaviour {
 			new MoveSouth(),
 			new Charge()
 		});
-		PMWrapper.AddCodeAtStart ("for i in range(6):\n\tåk_mot_öst()\n\tåk_mot_norr()\n");
+		PMWrapper.AddCodeAtStart ("for i in range(5):\n\tåk_mot_öst()\n\tåk_mot_norr()\n");
 	}
 
 	public void setLevel6Settings(){
@@ -230,7 +230,7 @@ public class LevelSettings : MonoBehaviour {
 			new CheckPositionY(),
 			new Answere()
 		});
-		PMWrapper.mainCode = "\nbil_x = kolla_x_läge()\n";
+		PMWrapper.mainCode = "bil_x = kolla_x_läge()\n";
 	}
 
 	public void setLevel12Settings(){
@@ -244,6 +244,7 @@ public class LevelSettings : MonoBehaviour {
 			new CheckPositionY(),
 			new Answere()
 		});
+		print ("HEJ");
 		PMWrapper.preCode = "station_x = 3\nstation_y = 5";
 		PMWrapper.AddCodeAtStart ("bil_x = kolla_x_läge()\navstånd_x = station_x - bil_x\n");
 	}

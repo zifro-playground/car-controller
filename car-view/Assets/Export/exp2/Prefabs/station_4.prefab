@@ -21,10 +21,11 @@ GameObject:
   - component: {fileID: 4812347379237404}
   - component: {fileID: 33129397129917916}
   - component: {fileID: 23415246974922140}
-  - component: {fileID: 95947803615525840}
+  - component: {fileID: 114300476798210472}
+  - component: {fileID: 65334157607709338}
   m_Layer: 0
   m_Name: station_4
-  m_TagString: Untagged
+  m_TagString: ChargeStation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1825639626849092}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: -11.65, y: -0.2, z: 6.72}
-  m_LocalScale: {x: 0.6691298, y: 0.6691298, z: 0.2348147}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,20 +83,27 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1825639626849092}
   m_Mesh: {fileID: 4300000, guid: bf3a03af70bdd49088f5bf44e9049736, type: 3}
---- !u!95 &95947803615525840
-Animator:
-  serializedVersion: 3
+--- !u!65 &65334157607709338
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825639626849092}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0997952, y: 1.2699342, z: 3.6}
+  m_Center: {x: 0.012328659, y: 0.35767236, z: -0.019747438}
+--- !u!114 &114300476798210472
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1825639626849092}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: bf3a03af70bdd49088f5bf44e9049736, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a0ba4b2b334ce4d8a5cee5e28888e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {x: 0, y: 0}
