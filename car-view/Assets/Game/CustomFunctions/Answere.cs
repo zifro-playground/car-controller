@@ -21,13 +21,13 @@ public class Answere : Compiler.Function {
 		} 
 		else if (inputParas.Length == 1) {
 			if (inputParas [0].variableType == Compiler.VariableTypes.number)
-				GameObject.FindGameObjectWithTag ("Game").GetComponent<LevelAnsweres> ().Answere (inputParas [0].getNumber ());
+				GameObject.FindGameObjectWithTag ("Game").GetComponent<LevelAnsweres> ().Answere (inputParas [0].getNumber (), lineNumber);
 			else
 				PMWrapper.RaiseError ("Svaret på denna fråga är ett tal. Försök igen!");
 		} 
 		else if (inputParas.Length == 2) {
 			if (inputParas [0].variableType == Compiler.VariableTypes.number && inputParas [1].variableType == Compiler.VariableTypes.number)
-				GameObject.FindGameObjectWithTag ("Game").GetComponent<LevelAnsweres> ().Answere (inputParas [0].getNumber (), inputParas [1].getNumber ());
+				GameObject.FindGameObjectWithTag ("Game").GetComponent<LevelAnsweres> ().Answere (inputParas [0].getNumber (), inputParas [1].getNumber (), lineNumber);
 			else
 				PMWrapper.RaiseError ("Svaret på denna fråga är två tal. Försök igen!");
 		}

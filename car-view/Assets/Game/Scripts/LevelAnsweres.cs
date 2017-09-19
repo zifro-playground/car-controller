@@ -9,7 +9,7 @@ public class LevelAnsweres : MonoBehaviour {
 
 	public bool recievedCorrectAnswere = false;
 
-	public void Answere (double ans){
+	public void Answere (double ans, int lineNumber){
 
 		#region Check answere against correct answeres
 		if (PMWrapper.currentLevel == 6){
@@ -50,17 +50,17 @@ public class LevelAnsweres : MonoBehaviour {
 		#endregion
 
 		if (recievedCorrectAnswere) {
-			PMWrapper.ShowGuideBubble (player.transform.position, "Svar: " + ans);
+			PMWrapper.ShowGuideBubble (lineNumber, "Svar: " + ans);
 			StartCoroutine (LevelCompleted());
 		}
 		else
-			PMWrapper.ShowGuideBubble (1, ans + " är tyvärr fel svar. Försök igen!");
+			PMWrapper.RaiseError (ans + " är tyvärr fel svar. Försök igen!");
 	}
 
-	public void Answere (double x, double y){
+	public void Answere (double x, double y, int lineNumber){
 		if (PMWrapper.currentLevel == 10) {
 			if (x == 3 && y == 4) {
-				PMWrapper.ShowGuideBubble (1, "Svar: " + x + ", " + y);
+				PMWrapper.ShowGuideBubble (lineNumber, "Svar: " + x + ", " + y);
 				StartCoroutine (LevelCompleted());
 			}
 			else
@@ -68,7 +68,7 @@ public class LevelAnsweres : MonoBehaviour {
 		}
 		else if (PMWrapper.currentLevel == 11) {
 			if (x.Equals (player.currentPosition.x) && y.Equals (player.currentPosition.y)) {
-				PMWrapper.ShowGuideBubble (1, "Svar: " + x + ", " + y);
+				PMWrapper.ShowGuideBubble (lineNumber, "Svar: " + x + ", " + y);
 				StartCoroutine (LevelCompleted ());
 			}
 			else
