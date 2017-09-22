@@ -11,6 +11,8 @@ public class LevelAnsweres : MonoBehaviour {
 
 	public void Answere (double ans, int lineNumber){
 
+		recievedCorrectAnswere = false;
+
 		#region Check answere against correct answeres
 		if (PMWrapper.currentLevel == 6){
 			if (ans == 6)
@@ -61,22 +63,22 @@ public class LevelAnsweres : MonoBehaviour {
 		if (PMWrapper.currentLevel == 10) {
 			if (x == 3 && y == 4) {
 				PMWrapper.ShowGuideBubble (lineNumber, "Svar: " + x + ", " + y);
-				StartCoroutine (LevelCompleted());
-			}
-			else
+				StartCoroutine (LevelCompleted ());
+			} else
 				PMWrapper.RaiseError ("Det är tyvärr fel svar. Försök igen!");
-		}
-		else if (PMWrapper.currentLevel == 11) {
+		} else if (PMWrapper.currentLevel == 11) {
 			if (x.Equals (player.currentPosition.x) && y.Equals (player.currentPosition.y)) {
 				PMWrapper.ShowGuideBubble (lineNumber, "Svar: " + x + ", " + y);
 				StartCoroutine (LevelCompleted ());
-			}
-			else
+			} else
 				PMWrapper.RaiseError ("Det är tyvärr fel svar. Försök igen!");
+		} else {
+			PMWrapper.RaiseError ("Denna fråga ska besvaras med endast 1 siffra.");
 		}
 	}
 
 	public IEnumerator LevelCompleted(){
+		PMWrapper.StopCompiler ();
 		yield return new WaitForSeconds (2);
 		PMWrapper.SetLevelCompleted ();
 	}
