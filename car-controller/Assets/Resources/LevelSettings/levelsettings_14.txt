@@ -1,0 +1,2 @@
+startcode: närmsta_avstånd = 20\nfor i in range(5):\navstånd=räkna_avstånd_till_station(i)
+smartbuttons: räkna_avstånd_till_station(), svara()

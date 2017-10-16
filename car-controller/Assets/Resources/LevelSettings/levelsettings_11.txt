@@ -1,0 +1,2 @@
+startcode: bil_x_ = kolla_x_läge()
+smartbuttons: kolla_x_läge(), kolla_y_läge(), svara()

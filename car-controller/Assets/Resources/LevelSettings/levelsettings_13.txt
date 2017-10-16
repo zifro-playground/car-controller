@@ -1,0 +1,2 @@
+startcode: avstånd_1 = räkna_avstånd_till_station(1)
+smartbuttons: räkna_avstånd_till_station(), svara()
