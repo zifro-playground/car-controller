@@ -46,7 +46,7 @@ namespace PM {
 
 
 		#region CodeWalker
-		// Update method runs everyframe, and checks the timer if it is time to parse a line.
+		// Update method runs every frame, and check if it is time to parse a line.
 		// if so is the case, then we call "Runtime.CodeWalker.parseLine()" while we handle any thrown runtime exceptions that the codeWalker finds.
 
 		void Update() {
@@ -104,11 +104,7 @@ namespace PM {
 
 
 		#region Public Unity Methods
-		[Obsolete("Please refer to PMWrapper.UnpauseWalker instead.", true)]
-		public void unPauseWalker() { }
 
-		// Renamed just to mark previous one as obsolete
-		// Marking as obsolete helps in updating the pythonmachine
 		public void resumeWalker() {
 			sleepTimer = 0;
 			isSleeping = true;

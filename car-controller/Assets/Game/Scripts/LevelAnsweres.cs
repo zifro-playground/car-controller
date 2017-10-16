@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelAnsweres : MonoBehaviour {
 
-	public PlayerMovement player;
+	/*public PlayerMovement player;
 	public float waitTimeBeforeLevelComplete = 2;
 
 	public bool recievedCorrectAnswere = false;
@@ -81,5 +81,5 @@ public class LevelAnsweres : MonoBehaviour {
 		PMWrapper.StopCompiler ();
 		yield return new WaitForSeconds (2);
 		PMWrapper.SetLevelCompleted ();
-	}
+	}*/
 }

@@ -6,14 +6,13 @@ using UnityEngine;
 
 namespace PM.Guide {
 
-	public static class GuideLoader{
+	public static class Loader{
 
 		public const string resourceName = "Guides/levelguide_{0}";
 		public static readonly string[] linebreaks = new string[] { "\n\r", "\r\n", "\n", "\r" };
 		public static List<LevelGuide> allGuides = new List<LevelGuide>();
 
 		public static void BuildAll() {
-			
 			for (int i=0; i<PMWrapper.numOfLevels; i++) {
 				LevelGuide guide = BuildFromPath (string.Format (resourceName, i));
 				if (guide != null) {
@@ -31,8 +30,7 @@ namespace PM.Guide {
 			try {
 				return BuildFromString("Assets/Resources/Guides" + asset.name, asset.text);
 			} catch (Exception err) {
-				if (err is GuideLoaderException)
-					Debug.LogException(err);
+				Debug.Log (err);
 				return null;
 			}
 		}
@@ -64,7 +62,7 @@ namespace PM.Guide {
 					target = Target.lineNumber;
 					int.TryParse (row [0], out lineNumber);
 				} else {
-					throw new GuideLoaderException ("The first word on each row must be a integer.");
+					throw new Exception ("The first word on each row must be a integer.");
 				}
 
 				// Checks if message uses : in text and rejoin strings if true

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Answere : Compiler.Function {
+public class Answere  {
 
-	public Answere(){
+	/*public Answere(){
 		this.name = "svara";
 		this.inputParameterAmount.Add (1);
 		this.inputParameterAmount.Add (2);
@@ -35,4 +35,5 @@ public class Answere : Compiler.Function {
 		return new Compiler.Variable();
 	}
 	#endregion
+	*/
 }

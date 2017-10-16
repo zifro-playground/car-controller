@@ -15,7 +15,7 @@ public class LevelSettings : MonoBehaviour {
 	 *
 	 * */
 
-	public void setLevelSettings(int level){
+	/*public void setLevelSettings(int level){
 		if (level == 0)
 			setLevel0Settings ();
 		else if (level == 1)
@@ -272,4 +272,5 @@ public class LevelSettings : MonoBehaviour {
 		});
 		PMWrapper.AddCodeAtStart ("närmsta_avstånd = 20\n\nfor i in range(5):\n\tavstånd = räkna_avstånd_till_station(i)\n");
 	}
+*/
 }

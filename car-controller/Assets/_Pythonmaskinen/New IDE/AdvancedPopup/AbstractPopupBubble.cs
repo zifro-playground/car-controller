@@ -11,8 +11,6 @@ namespace PM {
 		public bool isShowing { get; private set; }
 
 		[Header("Object references")]
-		public RectTransform pointerInside;
-		public RectTransform pointerOutside;
 		public RectTransform bubbleRect;
 
 		[Header("Settings")]
@@ -113,7 +111,7 @@ namespace PM {
 
 			Vector2 canvasPos = canvas.transform.InverseTransformPoint(textfieldRect.TransformPoint(localPos));
 
-			FocusOnCanvasPosition(canvasPos, new Vector2(-3.5f,-1));
+			FocusOnCanvasPosition (canvasPos, new Vector2 (-3.5f, 0.3f));
 			_ShowMessage(codeRow, instant);
 		}
 
@@ -200,13 +198,13 @@ namespace PM {
 			bubbleRect.anchoredPosition = pos;
 
 			// Move the pointer
-			pointerInside.anchoredPosition =
-			pointerOutside.anchoredPosition =
-				Vector2.Scale(bubbleRect.sizeDelta * 0.5f, squarified);
+			/*pointerInside.anchoredPosition =
+				pointerOutside.anchoredPosition =
+					Vector2.Scale(bubbleRect.sizeDelta * 0.5f, squarified);
 
 			pointerInside.localEulerAngles =
-			pointerOutside.localEulerAngles =
-				Vector3.forward * (Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg + 90);
+				pointerOutside.localEulerAngles =
+					Vector3.forward * (Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg + 90);*/
 		}
 
 		IEnumerator FadeRoutine(float target, float time) {
@@ -217,7 +215,7 @@ namespace PM {
 				// Wait 1 timestep
 				yield return null;
 			}
-			
+
 			if (Mathf.Approximately(target, 0))
 				foreach (Transform t in transform)
 					t.gameObject.SetActive(false);

@@ -13,7 +13,7 @@ public static class PMWrapper {
 	/// <summary>
 	/// Version of the Pythonmachine wrapper/UI.
 	/// </summary>
-	public const string version = "0.9.0";
+	public const string version = "0.9.3";
 
 	/// <summary>
 	/// Value from the speed slider. Ranges from 0 to 1, with a default of 0.5.
@@ -75,8 +75,9 @@ public static class PMWrapper {
 	public static int codeRowsLimit {
 		get { return UISingleton.instance.textField.codeRowsLimit; }
 		set {
-			if (value > 0)
-				UISingleton.instance.textField.codeRowsLimit = value;
+			if (value > 0) {
+				UISingleton.instance.textField.rowLimit = value;
+			}
 			else throw new ArgumentOutOfRangeException("codeRowsLimit", value, "Zero and negative values are not accepted!");
 		}
 	}
@@ -141,6 +142,14 @@ public static class PMWrapper {
 	}
 
 	/// <summary>
+	/// Starts case 0 and starts compiler. Will run all test cases if possible
+	/// </summary>
+	public static void RunCode() {
+		UISingleton.instance.levelHandler.currentLevel.caseHandler.ResetHandlerAndButtons ();
+		UISingleton.instance.levelHandler.currentLevel.caseHandler.RunCase (0);
+	}
+
+	/// <summary>
 	/// Stops the compiler if it's currently running. Static wrapper for <see cref="HelloCompiler.stopCompiler(HelloCompiler.StopStatus)"/> with the argument <seealso cref="HelloCompiler.StopStatus.Forced"/>
 	/// </summary>
 	public static void StopCompiler() {
@@ -200,6 +209,11 @@ public static class PMWrapper {
 		UISingleton.instance.taskDescription.SetLevelTaskDescription (taskDescriptions);
 	}
 
+	public static void SetCurrentLevelAnswere (Compiler.VariableTypes type, string[] answere) {
+		int parameterAmount = answere.Length;
+		UISingleton.instance.levelHandler.currentLevel.answere = new PM.Level.LevelAnswere (parameterAmount, type, answere);
+	}
+
 	/// <summary>
 	/// Represents the current level. Setting this value will automatically setoff <see cref="IPMLevelChanged.OnPMLevelChanged(int)"/>
 	/// <para>If set to a value higher than highest unlocked level then <seealso cref="unlockedLevel"/> will also be set to the same value.</para>
@@ -253,11 +267,31 @@ public static class PMWrapper {
 		get { return UISingleton.instance.levelHints.storyRevealedForLevel; }
 	}
 
+
+	public static int currentCase {
+		get { return UISingleton.instance.levelHandler.currentLevel.caseHandler.currentCase; }
+	}
+
 	/// <summary>
 	/// Stops the compiler, shows the "Level complete!" popup, marks the current level as complete and unlocks the next level.
 	/// </summary>
 	public static void SetLevelCompleted() {
 		UISingleton.instance.winScreen.SetLevelCompleted();
+	}
+
+	/// <summary>
+	/// Set case completed if test case is passed. Marks current case as completed and starts next test case.
+	/// </summary>
+	public static void SetCaseCompleted() {
+		UISingleton.instance.levelHandler.currentLevel.caseHandler.CaseCompleted ();
+	}
+
+	/// <summary>
+	/// Switches to choosen case.
+	/// </summary>
+	/// <param name="caseNumber">The case number to switch to.</param> 
+	public static void SwitchCase(int caseNumber) {
+		UISingleton.instance.levelHandler.currentLevel.caseHandler.SetCurrentCase (caseNumber);
 	}
 
 	/// <summary>
@@ -331,22 +365,6 @@ public static class PMWrapper {
 	/// <exception cref="PMRuntimeException">Is always thrown</exception>
 	public static void RaiseError(Vector3 targetWorldPosition, string message) {
 		UISingleton.instance.textField.theLineMarker.setErrorMarker(targetWorldPosition, message);
-	}
-
-	/// <summary>
-	/// Shows a guide bubble at the specified linenumber.
-	/// </summary>
-	public static void ShowGuideBubble(int lineNumber, string message){
-		UISingleton.instance.guideBubble.ShowMessage (lineNumber);
-		UISingleton.instance.guideBubble.SetGuideMessage(message);
-	}
-
-	/// <summary>
-	/// Shows a guide bubble at world position.
-	/// </summary>
-	public static void ShowGuideBubble(Vector3 targetWorldPosition, string message){
-		UISingleton.instance.guideBubble.ShowMessage (targetWorldPosition);
-		UISingleton.instance.guideBubble.SetGuideMessage(message);
 	}
 
 	/// <summary>

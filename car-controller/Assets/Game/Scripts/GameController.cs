@@ -57,7 +57,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 	public void LoadCurrentLevel() {
 		deleteLastLevel ();
 
-		levelSettings.setLevelSettings (PMWrapper.currentLevel);
+		//levelSettings.setLevelSettings (PMWrapper.currentLevel);
 
 		string[] rows = textLevel [PMWrapper.currentLevel].text.Split ('\n');
 		int nextStationToSpawn = 0;
