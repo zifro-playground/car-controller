@@ -1,0 +1,2 @@
+precode: station1_x = 1\nstation2_x = 6
+smartbuttons: kolla_x_läge(), svara()
