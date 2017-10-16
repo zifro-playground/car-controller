@@ -75,13 +75,13 @@ namespace PM.Level {
 
 		// Can be used if text got splitted by : when not intended
 		private string JoinSplittedText (string[] text){
+			
 			string result = "";
 			for (int i = 1; i < text.Length; i++) {
 				result += text [i];
 				if (i != text.Length - 1)
 					result += ":";
 			}
-			Debug.Log (result);
 			// Quick solution to encoding problem with text file
 			result = result.Replace ("\\n", "\n");
 			result = result.Replace ("\\t", "\t");
