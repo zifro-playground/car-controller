@@ -15,6 +15,8 @@ namespace PM.Level {
 		public LevelSetting levelSetting;
 		public CaseHandler caseHandler;
 
+		public bool hasShownTaskDescription = false;
+
 		public void BuildLevelSettings(int levelNumber){
 			TextAsset asset = Resources.Load<TextAsset> (string.Format(resourceName, levelNumber));
 
@@ -75,7 +77,6 @@ namespace PM.Level {
 
 		// Can be used if text got splitted by : when not intended
 		private string JoinSplittedText (string[] text){
-			
 			string result = "";
 			for (int i = 1; i < text.Length; i++) {
 				result += text [i];

@@ -1,0 +1,4 @@
+precode: station_x = 6
+startcode: svara(station_x)
+smartbuttons: svara()
+rowlimit: 20

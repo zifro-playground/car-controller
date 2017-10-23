@@ -8,17 +8,21 @@ namespace PM {
 	public class AnswereBubble : AbstractPopupBubble, IPMLevelChanged {
 
 		[Header("AnswereBubble fields")]
-		public Text theAnswereText;
+		public Text theAnswerText;
 		public Image responseImage;
 		public Sprite correct;
 		public Sprite wrong;
 
 
-		public void SetAnswereMessage(string answereMessage, bool correctAnswere) {
-			theAnswereText.text = answereMessage;
-			ResizeToFit(theAnswereText, bubbleRect);
+		public void SetAnswerMessage(string answerMessage) {
+			theAnswerText.text = answerMessage;
+			ResizeToFit(theAnswerText, bubbleRect);
+			responseImage.enabled = false;
+		}
 
-			responseImage.sprite = correctAnswere ? correct : wrong;
+		public void SetAnswereSprite (bool correctAnswer){
+			responseImage.enabled = true;
+			responseImage.sprite = correctAnswer ? correct : wrong;
 		}
 
 		void IPMLevelChanged.OnPMLevelChanged() {

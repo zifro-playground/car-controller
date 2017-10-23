@@ -100,7 +100,7 @@ namespace PM {
 		}
 
 		public void ShowMessage(int codeRow, bool instant = false) {
-
+			
 			RectTransform textfieldRect = UISingleton.instance.textField.theInputField.textComponent.rectTransform;
 
 			Vector2 localPos = new Vector2(
@@ -111,7 +111,7 @@ namespace PM {
 
 			Vector2 canvasPos = canvas.transform.InverseTransformPoint(textfieldRect.TransformPoint(localPos));
 
-			FocusOnCanvasPosition (canvasPos, new Vector2 (-3.5f, 0.3f));
+			FocusOnCanvasPosition (canvasPos, new Vector2 (-3.5f, 1.6f));
 			_ShowMessage(codeRow, instant);
 		}
 

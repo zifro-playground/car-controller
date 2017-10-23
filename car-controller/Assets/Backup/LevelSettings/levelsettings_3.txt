@@ -1,0 +1,2 @@
+startcode: for i in range(4):\n\tåk_mot_öst()\n\nladda()
+smartbuttons: åk_mot_öst(), åk_mot_väst(), åk_mot_norr(), åk_mot_syd(), ladda()

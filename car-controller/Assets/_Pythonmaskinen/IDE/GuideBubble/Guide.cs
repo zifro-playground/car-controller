@@ -6,11 +6,17 @@ namespace PM.Guide {
 
 	public class Guide {
 
-		public Target target;
+		public string target;
 		public int lineNumber;
 		public string message;
 
-		public Guide (Target target, string message, int lineNumber) {
+		public Guide (string target, string message){
+			this.target = target;
+			this.message = message;
+			lineNumber = -1;
+		}
+
+		public Guide (string target, string message, int lineNumber) {
 			this.target = target;
 			this.message = message;
 			this.lineNumber = lineNumber;

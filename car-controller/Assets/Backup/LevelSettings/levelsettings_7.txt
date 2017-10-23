@@ -1,0 +1,3 @@
+startcode:bil_x = kolla_x_läge()
+smartbuttons: kolla_x_läge(), svara()
+casecount: 2

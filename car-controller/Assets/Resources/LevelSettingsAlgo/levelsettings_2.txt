@@ -1,0 +1,5 @@
+precode: station_x = 6
+startcode: bil_x = kolla_x_läge()
+smartbuttons: kolla_x_läge(), svara()
+casecount: 2
+rowlimit: 20

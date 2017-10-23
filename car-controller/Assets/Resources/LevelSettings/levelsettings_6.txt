@@ -1,3 +1,2 @@
-precode: station_x = 6
-startcode: svara(station_x)
-smartbuttons: svara()
+﻿smartbuttons: åk_mot_öst(), åk_mot_väst(), åk_mot_norr(), åk_mot_syd(), ladda()
+rowlimit: 10

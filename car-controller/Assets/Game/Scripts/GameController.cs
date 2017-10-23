@@ -83,10 +83,13 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 	}
 
 	private bool currentLevelShouldBeAnswered(){
-		if (PMWrapper.currentLevel == 6 || PMWrapper.currentLevel == 7 || PMWrapper.currentLevel == 8 || PMWrapper.currentLevel == 9 || PMWrapper.currentLevel == 10 
-			|| PMWrapper.currentLevel == 11 || PMWrapper.currentLevel == 12 || PMWrapper.currentLevel == 13 || PMWrapper.currentLevel == 14)
-			return true;
+		#region return for game 2
+		//return true;
+		#endregion
+
+		#region return for game 1
 		return false;
+		#endregion
 	}
 
 	public double calculateDistanceToStation (double i){
@@ -110,24 +113,25 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 		int level = PMWrapper.currentLevel;
 
-		if (level >= 0 && level < 6) {
-			PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
-				new MoveEast(),
-				new MoveWest(),
-				new MoveNorth(),
-				new MoveSouth(),
-				new Charge()
-			});
-		}
+		#region functions for game 1
+		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+			new MoveEast(),
+			new MoveWest(),
+			new MoveNorth(),
+			new MoveSouth(),
+			new Charge()
+		});
+		#endregion
 
-		if (level == 6 || level == 7 || level == 8 || level == 9) {
+		#region functions for game 2
+		/*if (level == 0 || level == 1 || level == 2 || level == 3) {
 			PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
 				new CheckPositionX (),
 				new AnswereFunction()
 			});
 		}
 
-		if (level == 10 || level == 11 || level == 12) {
+		if (level == 4 || level == 5 || level == 6) {
 			PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
 				new CheckPositionX (),
 				new CheckPositionY (),
@@ -135,12 +139,13 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 			});
 		}
 
-		if (level == 13 || level == 14) {
+		if (level == 7 || level == 8) {
 			PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
 				new CalculateDistanceToStation(),
 				new AnswereFunction()
 			});
-		}
+		}*/
+		#endregion
 	}
 
 	private void SetLevelAnswere () {
@@ -148,61 +153,63 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		int level = PMWrapper.currentLevel;
 		int caseNumber = PMWrapper.currentCase;
 
-		if (level == 6) {
+		#region answeres for game 2
+		/*if (level == 0) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "6" });
 		}
 
-		if (level == 7) {
+		if (level == 1) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "1" });
 			if (caseNumber == 1)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "3" });
 		}
 
-		if (level == 8) {
+		if (level == 2) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "5" });
 			if (caseNumber == 1)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "4" });
 		}
 
-		if (level == 9) {
+		if (level == 3) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "2" });
 		}
 
-		if (level == 10) {
+		if (level == 4) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[2] { "3", "4" });
 		}
 
-		if (level == 11) {
+		if (level == 5) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[2] { "7", "5" });
 			if (caseNumber == 1)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[2] { "5", "6" });
 		}
 
-		if (level == 12) {
+		if (level == 6) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "6" });
 			if (caseNumber == 1)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "4" });
 		}
 
-		if (level == 13) {
+		if (level == 7) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "7" });
 			if (caseNumber == 1)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "4" });
 		}
 
-		if (level == 14) {
+		if (level == 8) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "5" });
 			if (caseNumber == 1)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "7" });
-		}
+		}*/
+		#endregion
 	}
 }

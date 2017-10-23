@@ -40,9 +40,10 @@ namespace PM.Guide {
 			List<string> splitText = new List<string>(fileText.Split(linebreaks, StringSplitOptions.RemoveEmptyEntries));
 			LevelGuide levelGuide = new LevelGuide ();
 
-			Target target;
-			int lineNumber;
-			string guideMessage;
+			//Target target;
+			string target = "";
+			int lineNumber = 0;
+			string guideMessage = "";
 			string[] row;
 
 			for (int i = 0; i < splitText.Count; i++) {
@@ -50,20 +51,11 @@ namespace PM.Guide {
 				// Comments
 				if (splitText[i].StartsWith("//") || splitText[i].StartsWith("#")) continue;
 
-				row = splitText [i].Trim().Split(':');
-				
+				row = splitText [i].Trim().Split(new char[1] {':'}, StringSplitOptions.RemoveEmptyEntries);
+
 				// Empty rows
 				if (row.Length == 0) continue;
 
-				Match match = Regex.Match (row [0], @"^[0-9]+$");
-
-
-				if (match.Success) {
-					target = Target.lineNumber;
-					int.TryParse (row [0], out lineNumber);
-				} else {
-					throw new Exception ("The first word on each row must be a integer.");
-				}
 
 				// Checks if message uses : in text and rejoin strings if true
 				if (row.Length > 2) {
@@ -78,7 +70,20 @@ namespace PM.Guide {
 					guideMessage = row [1].Trim ();
 				}
 
-				levelGuide.guides.Add( new Guide (target, guideMessage, lineNumber));
+
+				target = row [0].Trim().ToLower();
+
+				// Check if target is a number
+				Match match = Regex.Match (target, @"^[0-9]+$");
+			
+				if (match.Success) {
+					int.TryParse (target, out lineNumber);
+					levelGuide.guides.Add (new Guide (target, guideMessage, lineNumber));
+				} else {
+					levelGuide.guides.Add(new Guide(target, guideMessage));
+				}
+
+
 			}
 			return levelGuide;
 		}
