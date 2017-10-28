@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PM;
@@ -53,6 +54,9 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		resourceName = string.Format (resourceName, PMWrapper.currentLevel, PMWrapper.currentCase);
 		TextAsset asset = Resources.Load<TextAsset> (resourceName);
 
+		if (asset == null)
+			throw new Exception ("Could not find asset \"" + resourceName + "\"");
+
 		string[] rows = asset.text.Split ('\n');
 		int nextStationToSpawn = 0;
 
@@ -84,11 +88,11 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 	private bool currentLevelShouldBeAnswered(){
 		#region return for game 2
-		//return true;
+		return true;
 		#endregion
 
 		#region return for game 1
-		return false;
+		//return false;
 		#endregion
 	}
 
@@ -114,17 +118,17 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		int level = PMWrapper.currentLevel;
 
 		#region functions for game 1
-		PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
+		/*PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
 			new MoveEast(),
 			new MoveWest(),
 			new MoveNorth(),
 			new MoveSouth(),
 			new Charge()
-		});
+		});*/
 		#endregion
 
 		#region functions for game 2
-		/*if (level == 0 || level == 1 || level == 2 || level == 3) {
+		if (level == 0 || level == 1 || level == 2 || level == 3) {
 			PMWrapper.SetCompilerFunctions (new Compiler.Function[] {
 				new CheckPositionX (),
 				new AnswereFunction()
@@ -144,7 +148,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 				new CalculateDistanceToStation(),
 				new AnswereFunction()
 			});
-		}*/
+		}
 		#endregion
 	}
 
@@ -154,7 +158,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		int caseNumber = PMWrapper.currentCase;
 
 		#region answeres for game 2
-		/*if (level == 0) {
+		if (level == 0) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "6" });
 		}
@@ -176,6 +180,8 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		if (level == 3) {
 			if (caseNumber == 0)
 				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "2" });
+			if (caseNumber == 1)
+				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "1" });
 		}
 
 		if (level == 4) {
@@ -206,10 +212,10 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 		if (level == 8) {
 			if (caseNumber == 0)
-				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "5" });
+				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "6" });
 			if (caseNumber == 1)
-				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "7" });
-		}*/
+				PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "5" });
+		}
 		#endregion
 	}
 }

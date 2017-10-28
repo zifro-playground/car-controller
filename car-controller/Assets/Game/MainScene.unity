@@ -698,16 +698,18 @@ MonoBehaviour:
   player: {fileID: 1545113567}
   answeres: {fileID: 215815310}
   taskDescriptions:
-  - "Styr bilen till laddstationen och s\xE4tt den p\xE5 laddning."
-  - "Styr bilen till laddstationen och s\xE4tt den p\xE5 laddning."
-  - "Styr bilen till laddstationen och s\xE4tt den p\xE5 laddning."
-  - "Styr bilen till laddstationen och s\xE4tt den p\xE5 laddning."
-  - "Styr bilen till laddstationen och s\xE4tt den p\xE5 laddning."
-  - "Styr bilen till laddstationen och s\xE4tt den p\xE5 laddning."
-  - "Styr bilen till laddstationen och s\xE4tt den p\xE5 laddning."
-  - "Styr bilen till laddstationen och s\xE4tt den p\xE5 laddning."
-  - "Styr bilen till laddstationen och s\xE4tt den p\xE5 laddning."
-  - "Styr bilen till laddstationen och s\xE4tt den p\xE5 laddning."
+  - "Vad \xE4r stationens x-l\xE4ge?"
+  - "Vad \xE4r bilens x-l\xE4ge?"
+  - "Vad \xE4r avst\xE5ndet mellan bilen och stationen?"
+  - "Vad \xE4r avst\xE5ndet till den n\xE4rmsta stationen?  (Station 1 \xE4r v\xE4sterut
+    och station 2 \xE4r \xF6sterut)"
+  - "Vad \xE4r stationens x-l\xE4ge och y-l\xE4ge?"
+  - "Vad \xE4r bilens position, dvs x-l\xE4ge och y-l\xE4ge?"
+  - "Vad \xE4r avst\xE5ndet (bilv\xE4gen) mellan bilen och stationen?"
+  - "Hur l\xE5ngt bort, bilv\xE4gen, ligger n\xE4rmsta stationen?  (Om de \xE4r lika
+    l\xE5ngt borta kan du svara vilken som.)"
+  - "Hur l\xE5ngt bort, bilv\xE4gen, ligger n\xE4rmsta stationen?  (Om de \xE4r lika
+    l\xE5ngt borta kan du svara vilken som.)"
   chargeStationPrefabs:
   - {fileID: 1994973681744636, guid: 09f1f5e85b8a547b7a48fe7033824dba, type: 2}
   - {fileID: 1910917662772906, guid: d9f2230a174ce42d2a5bc2b5ba10a1cd, type: 2}
@@ -2278,12 +2280,12 @@ Prefab:
     - target: {fileID: 224947962998118428, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0.9999996
+      value: 0.9993669
       objectReference: {fileID: 0}
     - target: {fileID: 224199471149085946, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 205.99998
+      value: 206
       objectReference: {fileID: 0}
     - target: {fileID: 224103183396449020, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
@@ -2303,12 +2305,12 @@ Prefab:
     - target: {fileID: 224426776865544558, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00030517578
+      value: 0.00016784668
       objectReference: {fileID: 0}
     - target: {fileID: 224375217974815568, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000091552734
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 224161400828816402, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
@@ -2333,27 +2335,27 @@ Prefab:
     - target: {fileID: 114087900476212974, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
       propertyPath: numberOfLevels
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 114994827854730386, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114180557190506200, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114579080661915976, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114776906130480594, guid: 6fdb0bd8c42e83f44add90b832f7e108,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fdb0bd8c42e83f44add90b832f7e108, type: 2}
@@ -5952,7 +5954,7 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0.51715
-    y: 0.15723507
+    y: 0.15723412
     width: 0.40429014
     height: 0.71847624
   near clip plane: 0.3

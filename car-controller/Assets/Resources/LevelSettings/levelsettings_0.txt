@@ -1,3 +1,4 @@
-startcode: åk_mot_öst()\nåk_mot_öst()\nåk_mot_norr()\nladda()
-smartbuttons: åk_mot_öst(), åk_mot_väst(), åk_mot_norr(), åk_mot_syd(), ladda()
-rowlimit: 10
+precode: station_x = 6
+startcode: svara(station_x)
+smartbuttons: svara()
+rowlimit: 20

@@ -1,4 +1,5 @@
-﻿1: Här är en for-slinga. Den gör så att kod körs flera gånger. Hur många gånger den körs beror på siffran inom parantes.
-2: Det är koden som är *indenterad* som körs flera gånger, alltså den som står ett hopp in ifrån vänsterkanten.
-4: *ladda()* står längst ut till vänster och kommer därför bara att köras en gång, som vanligt.
-1: Testa att ändra på siffran!
+﻿5: Här räknas avståndet till station 1 ut.
+6: Här räknas avståndet till station 2 ut.
+8: Här kollar vi om station 1 är närmast.
+9: I så fall ska vi svara med avståndet till station 1.
+11: Annars ska vi svara med avståndet till station 2.

@@ -1,3 +1,4 @@
-startcode: for i in range(5):\n\tåk_mot_norr()
-smartbuttons: åk_mot_öst(), åk_mot_väst(), åk_mot_norr(), åk_mot_syd(), ladda()
-rowlimit: 10
+precode: station_x = 3\nstation_y = 4
+startcode:svara(station_x, station_y)
+smartbuttons: svara()
+rowlimit: 20

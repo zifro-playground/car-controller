@@ -1,2 +1,4 @@
-﻿smartbuttons: åk_mot_öst(), åk_mot_väst(), åk_mot_norr(), åk_mot_syd(), ladda()
-rowlimit: 10
+startcode: närmsta_avstånd = 20\nfor i in range(5):\n\tavstånd=räkna_avstånd_till_station(i+1)
+smartbuttons: räkna_avstånd_till_station(), svara()
+casecount: 2
+rowlimit: 20

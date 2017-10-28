@@ -1,1 +1,2 @@
-﻿4: Fyll på med instruktioner!
+﻿3: Nu frågas det efter både x-läge och y-läge, så då tar <i>svara()</i>-funktionen två saker. Vi använder ett kommatecken för att skilja på värdena!
+3: Testa att köra!
