@@ -1,0 +1,5 @@
+taskdescription: Vad är stationens x-läge?
+precode: station_x = 6
+startcode: svara(station_x)
+rowlimit: 20
+smartbuttons: svara()

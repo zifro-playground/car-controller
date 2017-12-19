@@ -1,0 +1,5 @@
+taskdescription: Styr bilen till laddstationen och sätt den på laddning.
+startcode: åk_mot_öst()\nåk_mot_öst()\nåk_mot_norr()\nladda()
+rowlimit: 10
+smartbuttons: åk_mot_öst(), åk_mot_väst(), åk_mot_norr(), åk_mot_syd(), ladda()
+functions: MoveEast, MoveWest, MoveNorth, MoveSouth, Charge

@@ -1,0 +1,7 @@
+taskdescription: Vad är avståndet mellan bilen och stationen?
+precode: station_x = 6
+startcode: bil_x = kolla_x_läge()
+casecount: 2
+rowlimit: 20
+smartbuttons: kolla_x_läge(), svara()
+functions: CheckPositionX

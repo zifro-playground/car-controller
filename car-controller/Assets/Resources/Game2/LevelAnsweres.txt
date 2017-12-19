@@ -1,0 +1,60 @@
+﻿#region answeres for game 2
+if (level == 0) {
+	if (caseNumber == 0)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "6" });
+}
+
+if (level == 1) {
+	if (caseNumber == 0)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "1" });
+	if (caseNumber == 1)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "3" });
+}
+
+if (level == 2) {
+	if (caseNumber == 0)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "5" });
+	if (caseNumber == 1)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "4" });
+}
+
+if (level == 3) {
+	if (caseNumber == 0)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "2" });
+	if (caseNumber == 1)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "1" });
+}
+
+if (level == 4) {
+	if (caseNumber == 0)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[2] { "3", "4" });
+}
+
+if (level == 5) {
+	if (caseNumber == 0)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[2] { "7", "5" });
+	if (caseNumber == 1)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[2] { "5", "6" });
+}
+
+if (level == 6) {
+	if (caseNumber == 0)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "6" });
+	if (caseNumber == 1)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "4" });
+}
+
+if (level == 7) {
+	if (caseNumber == 0)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "7" });
+	if (caseNumber == 1)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "4" });
+}
+
+if (level == 8) {
+	if (caseNumber == 0)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "6" });
+	if (caseNumber == 1)
+		PMWrapper.SetCurrentLevelAnswere (Compiler.VariableTypes.number, new string[1] { "5" });
+}
+#endregion

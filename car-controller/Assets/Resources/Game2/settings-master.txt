@@ -1,0 +1,11 @@
+﻿// settings-master for game 2 - calculate distances
+
+Game2/LevelSettings/levelsettings_0
+Game2/LevelSettings/levelsettings_1
+Game2/LevelSettings/levelsettings_2
+Game2/LevelSettings/levelsettings_3
+Game2/LevelSettings/levelsettings_4
+Game2/LevelSettings/levelsettings_5
+Game2/LevelSettings/levelsettings_6
+Game2/LevelSettings/levelsettings_7
+Game2/LevelSettings/levelsettings_8

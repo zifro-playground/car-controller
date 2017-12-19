@@ -64,7 +64,7 @@ namespace PM {
 				
 				Compiler.GameFunctions.setGameFunctions(allAddedFunctions);
 
-				theCodeWalker.activateWalker(stopCompiler, theVarWindow);
+				theCodeWalker.activateWalker(stopCompiler);
 			} catch {
 				stopCompiler(StopStatus.RuntimeError);
 				throw;
@@ -82,8 +82,8 @@ namespace PM {
 		}
 
 		public void stopCompiler(StopStatus status = StopStatus.Forced) {
-			if (!isRunning) return;
-			else isRunning = false;
+			//if (!isRunning) return;
+			/*else*/ isRunning = false;
 			
 			theCodeWalker.stopWalker();
 

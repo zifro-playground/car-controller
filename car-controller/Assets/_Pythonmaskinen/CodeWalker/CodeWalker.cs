@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -8,8 +8,17 @@ namespace PM {
 	public class CodeWalker : MonoBehaviour, IPMSpeedChanged {
 
 		#region time based variables
-		float walkerWaitTime = 3f;
-		public float sleepTime = 3;
+		private float baseWalkerWaitTime = 3f;
+		public float BaseWalkerWaitTime
+		{
+			get { return baseWalkerWaitTime; }
+			set {
+				baseWalkerWaitTime = Mathf.Clamp(value, 0.01f, 1000);
+				OnPMSpeedChanged(PMWrapper.speedMultiplier);
+			}
+		}
+
+		float sleepTime = 3f;
 		private float sleepTimer;
 		#endregion
 
@@ -18,7 +27,6 @@ namespace PM {
 		public static bool walkerRunning = true;
 		private static bool doEndWalker = false;
 		private static Action<HelloCompiler.StopStatus> stopCompiler;
-		private VariableWindow theVarWindow;
 		public bool isUserPaused { get; private set; }
 
 		//This Script needs to be added to an object in the scene
@@ -32,13 +40,12 @@ namespace PM {
 		/// <summary>
 		/// Activates the walker by telling the compiler to compile code and links necessary methods.
 		/// </summary>
-		public void activateWalker(Action<HelloCompiler.StopStatus> stopCompilerMeth, VariableWindow theVarWindow) {
+		public void activateWalker(Action<HelloCompiler.StopStatus> stopCompilerMeth) {
 			Compiler.SyntaxCheck.CompileCode(PMWrapper.fullCode, endWalker, pauseWalker, IDELineMarker.activateFunctionCall, IDELineMarker.SetWalkerPosition);
 			enabled = true;
 			walkerRunning = true;
 			doEndWalker = false;
 			stopCompiler = stopCompilerMeth;
-			this.theVarWindow = theVarWindow;
 			isUserPaused = false;
 			manusPlayerSaysICanContinue = true;
 		}
@@ -64,7 +71,6 @@ namespace PM {
 				try {
 
 					Runtime.CodeWalker.parseLine();
-					theVarWindow.updateWindow();
 
 					if (PMWrapper.isDemoingLevel) {
 						manusPlayerSaysICanContinue = false;
@@ -82,9 +88,13 @@ namespace PM {
 
 		private void runSleepTimer() {
 			sleepTimer += Time.deltaTime;
-			if (sleepTimer > sleepTime) {
-				sleepTimer = 0;
-				isSleeping = false;
+			float firstInterval = sleepTime - sleepTime / 20;
+			if (sleepTimer > firstInterval) {
+				IDELineMarker.instance.SetState(IDELineMarker.State.Hidden);
+				if (sleepTimer > sleepTime) {
+					sleepTimer = 0;
+					isSleeping = false;
+				}
 			}
 		}
 		#endregion
@@ -132,9 +142,9 @@ namespace PM {
 			}
 		}
 
-		void IPMSpeedChanged.OnPMSpeedChanged(float speed) {
+		public void OnPMSpeedChanged(float speed) {
 			float speedFactor = 1 - speed;
-			sleepTime = walkerWaitTime * speedFactor;
+			sleepTime = baseWalkerWaitTime * speedFactor;
 		}
 		#endregion
 	}

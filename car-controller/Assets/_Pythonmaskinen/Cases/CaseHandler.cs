@@ -28,9 +28,10 @@ namespace PM.Level {
 				button.text = i
 				caseButtons.add(button)
 			}*/
-			
+
 			for (int i = 0; i < caseButtons.Count; i++) {
-				if (i < numberOfCases) {
+				// Don't show buttons if there is only one case
+				if (i < numberOfCases && numberOfCases > 1) {
 					caseButtons [i].SetActive (true);
 					caseButtons [i].GetComponent<CaseButton> ().SetButtonActive ();
 				} else {
@@ -83,7 +84,7 @@ namespace PM.Level {
 		private IEnumerator ResetFailButton (){
 			caseButtons[currentCase].GetComponent<CaseButton>().SetButtonFailed();
 			yield return new WaitForSeconds(2);
-			UISingleton.instance.answereBubble.HideMessage ();
+			UISingleton.instance.answerBubble.HideMessage ();
 			// TODO UISingleton.instance.errorBubble.HideMessage ();
 			ResetHandlerAndButtons();
 		}

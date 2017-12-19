@@ -1,0 +1,5 @@
+﻿5: Här räknas avståndet till station 1 ut.
+6: Här räknas avståndet till station 2 ut.
+8: Här kollar vi om station 1 är närmast.
+9: I så fall ska vi svara med avståndet till station 1.
+11: Annars ska vi svara med avståndet till station 2.

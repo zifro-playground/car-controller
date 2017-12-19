@@ -55,8 +55,8 @@ namespace PM {
 		private void moveMarker() {
 			if (lineNumber < 0)
 				theMarkerRect.anchoredPosition = new Vector2(0, -5000);
-			else
-				theMarkerRect.anchoredPosition = new Vector2(0, theTextField.DetermineYOffset(lineNumber));
+			else //+20 on x to fix offset. Should possibly be changed in UI instead
+				theMarkerRect.anchoredPosition = new Vector2(20, theTextField.DetermineYOffset(lineNumber));
 		}
 		
 		#region All setErrorMarkers
@@ -67,7 +67,7 @@ namespace PM {
 
 			theErrorBubble.SetErrorMessage(message);
 			UISingleton.instance.compiler.stopCompiler(HelloCompiler.StopStatus.RuntimeError);
-			UISingleton.instance.exceptionHandler.sendErrorToAnalytics (message);
+			//UISingleton.instance.exceptionHandler.sendErrorToAnalytics (message);
 			throw new PMRuntimeException(message);
 		}
 

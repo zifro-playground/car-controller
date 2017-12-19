@@ -1,0 +1,6 @@
+taskdescription: Vad är bilens x-läge?
+startcode:bil_x = kolla_x_läge()
+casecount: 2
+rowlimit: 20
+smartbuttons: kolla_x_läge(), svara()
+functions: CheckPositionX

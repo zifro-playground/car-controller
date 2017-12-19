@@ -1,0 +1,10 @@
+﻿Game1/LevelSettings/levelsettings_0
+Game1/LevelSettings/levelsettings_1
+Game1/LevelSettings/levelsettings_2
+Game1/LevelSettings/levelsettings_3
+Game1/LevelSettings/levelsettings_4
+Game1/LevelSettings/levelsettings_5
+Game1/LevelSettings/levelsettings_6
+Game1/LevelSettings/levelsettings_7
+Game1/LevelSettings/levelsettings_8
+Game1/LevelSettings/levelsettings_9

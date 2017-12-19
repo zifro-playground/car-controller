@@ -1,0 +1,11 @@
+﻿// guide-master for game 2 - calculate distances
+
+Game2/Guides/levelguide_0
+Game2/Guides/levelguide_1
+-
+Game2/Guides/levelguide_3
+Game2/Guides/levelguide_4
+-
+Game2/Guides/levelguide_6
+Game2/Guides/levelguide_7
+Game2/Guides/levelguide_8
