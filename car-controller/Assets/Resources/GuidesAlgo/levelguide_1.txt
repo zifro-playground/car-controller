@@ -1,1 +1,0 @@
-﻿1: Här sparas bilens x-läge i variabeln <i>bil_x</i>.

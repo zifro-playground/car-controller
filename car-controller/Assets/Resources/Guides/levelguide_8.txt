@@ -1,9 +1,0 @@
-﻿3: Nu när vi har 5 stationer så använder vi oss av en for-slinga.
-
-4: Funktionen <i>räkna_avstånd_till_station()</i> beräknar avstånd på samma sätt som du gjorde i förra uppgiften. Här skriver vi <i>i</i> istället för siffrorna 1,2 direkt.
-
-4: För varje gång som for-slingan körs, så kommer <i>i</i> att öka med 1. Därför kommer vi att räkna ut avståndet till alla fem olika stationerna genom att skriva såhär.
-
-5: Din uppgift nu är att hålla koll på vilket avstånd som är kortast. Spara det kortaste som du hittat hittills i <i>kortast_avstånd</i>.
-
-1: Till en början säger vi att det kortaste avståndet är långt. Sen uppdaterar vi det med bättre och bättre värden!

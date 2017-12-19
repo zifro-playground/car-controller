@@ -1,5 +1,0 @@
-precode: station1_x = 1\nstation2_x = 6
-startcode: bil_x = kolla_x_läge()\n\navstånd1 = bil_x - station1_x\navstånd2 = station2_x - bil_x\n\nif avstånd1 < avstånd2:\n\tsvara(avstånd1)\nelse:\n\tsvara(avstånd2)
-smartbuttons: kolla_x_läge(), svara()
-casecount: 2
-rowlimit: 20

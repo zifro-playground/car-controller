@@ -1,2 +1,0 @@
-﻿1: Funktionen <i>räkna_avstånd_till_station()</i> beräknar avstånd på samma sätt som du gjorde i förra uppgiften. Genom att använda den här så slipper du skriva om koden.
-1: Du väljer vilken station du vill beräkna avståndet till med siffran inom parantesen.

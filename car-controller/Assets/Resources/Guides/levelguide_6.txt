@@ -1,1 +1,0 @@
-﻿5: Räkna ut avståndet bilvägen och svara sedan med <i>svara()</i>.
