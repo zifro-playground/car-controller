@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelAnsweres : MonoBehaviour {
 
-	/*public PlayerMovement player;
+	/*public PlayerMovement Player;
 	public float waitTimeBeforeLevelComplete = 2;
 
 	public bool recievedCorrectAnswere = false;
@@ -13,14 +13,14 @@ public class LevelAnsweres : MonoBehaviour {
 
 		recievedCorrectAnswere = false;
 
-		#region Check answere against correct answeres
+		#region Check answere against correct Answeres
 		if (PMWrapper.currentLevel == 6){
 			if (ans == 6)
 				recievedCorrectAnswere = true;
 		}
 		
 		else if (PMWrapper.currentLevel == 7){
-			if (ans.Equals(player.currentPosition.x))
+			if (ans.Equals(Player.currentPosition.x))
 				recievedCorrectAnswere = true;
 		}
 
@@ -67,7 +67,7 @@ public class LevelAnsweres : MonoBehaviour {
 			} else
 				PMWrapper.RaiseError ("Det är tyvärr fel svar. Försök igen!");
 		} else if (PMWrapper.currentLevel == 11) {
-			if (x.Equals (player.currentPosition.x) && y.Equals (player.currentPosition.y)) {
+			if (x.Equals (Player.currentPosition.x) && y.Equals (Player.currentPosition.y)) {
 				PMWrapper.ShowGuideBubble (lineNumber, "Svar: " + x + ", " + y);
 				StartCoroutine (LevelCompleted ());
 			} else

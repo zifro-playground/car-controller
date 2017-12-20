@@ -18,7 +18,7 @@ public class CalculateDistanceToStation : Compiler.Function {
 		if (inputParas[0].variableType != Compiler.VariableTypes.number)
 			PMWrapper.RaiseError ("Funktionen vill ha ett tal för att kunna räkna ut avståndet");
 
-		double totalDistance = GameObject.FindGameObjectWithTag ("Game").GetComponent<GameController> ().calculateDistanceToStation (inputParas[0].getNumber()-1);
+		double totalDistance = GameObject.FindGameObjectWithTag ("Game").GetComponent<GameController> ().CalculateDistanceToStation (inputParas[0].getNumber()-1);
 
 		return new Compiler.Variable ("distance", totalDistance);
 	}

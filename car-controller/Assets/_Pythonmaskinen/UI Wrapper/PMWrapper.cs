@@ -239,7 +239,7 @@ public static class PMWrapper
 	}
 
 	/// <summary>
-	/// Set the correct answeres for the current case.
+	/// Set the correct Answeres for the current case.
 	/// </summary>
 	public static void SetCaseAnswer(params int[] answer)
 	{
@@ -247,7 +247,7 @@ public static class PMWrapper
 	}
 
 	/// <summary>
-	/// Set the correct answeres for the current case.
+	/// Set the correct Answeres for the current case.
 	/// </summary>
 	public static void SetCaseAnswer(params string[] answer)
 	{
@@ -255,7 +255,7 @@ public static class PMWrapper
 	}
 
 	/// <summary>
-	/// Set the correct answeres for the current case.
+	/// Set the correct Answeres for the current case.
 	/// </summary>
 	public static void SetCaseAnswer(params bool[] answer)
 	{

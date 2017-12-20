@@ -5,14 +5,14 @@ using PM;
 
 public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched{
 
-	public PlayerMovement player;
-	public LevelAnsweres answeres;
+	public PlayerMovement Player;
+	public LevelAnsweres Answeres;
 
 	public string[] taskDescriptions;
-	public List<GameObject> chargeStationPrefabs = new List<GameObject>();
-	public List<GameObject> chargeStations = new List<GameObject>();
+	public List<GameObject> ChargeStationPrefabs = new List<GameObject>();
+	public List<GameObject> ChargeStations = new List<GameObject>();
 
-	public GridPositions grid;
+	public GridPositions Grid;
 	private Vector3[,] gridPositions;
 
 
@@ -22,24 +22,24 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 	public void OnPMCompilerStopped (HelloCompiler.StopStatus status) {
 		if (status == HelloCompiler.StopStatus.Finished) {
-			if (player.atChargeStation) {
-				player.resetPlayer ();
+			if (Player.atChargeStation) {
+				Player.resetPlayer ();
 				PMWrapper.RaiseError ("Glöm inte att ladda när du kommit fram!");
 			} else {
 				if (!currentLevelShouldBeAnswered()) {
-					player.resetPlayer ();
+					Player.resetPlayer ();
 					PMWrapper.RaiseError ("Bilen kom inte hela vägen fram. Försök igen!");
 				}
 			}
 			
 		} else {
-			player.resetPlayer ();
+			Player.resetPlayer ();
 		}
 	}
 
 	public void OnPMCaseSwitched (int caseNumber) {
-		gridPositions = grid.calculatePositions ();
-		player.distanceBetweenPoints = grid.distanceBetweenPoints;
+		gridPositions = Grid.calculatePositions ();
+		Player.distanceBetweenPoints = Grid.distanceBetweenPoints;
 		LoadCurrentTextLevel ();
 		SetAvailableFunctions ();
 		SetLevelAnswere ();
@@ -62,13 +62,13 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 			for (int j = 0; j < 9; j++) {
 
 				if (characters [j] == "P") {
-					player.transform.position = gridPositions [j, i];
-					player.startPosition = player.transform.position;
-					player.currentPosition = new Vector2 (j, 9-(i+1));
+					Player.transform.position = gridPositions [j, i];
+					Player.startPosition = Player.transform.position;
+					Player.currentPosition = new Vector2 (j, 9-(i+1));
 				} else if (characters [j] == "C") {
-					GameObject station = Instantiate (chargeStationPrefabs[nextStationToSpawn], new Vector3(gridPositions [j, i].x, gridPositions [j, i].y, -0.1f), Quaternion.Euler(new Vector3(180,0,180)));
+					GameObject station = Instantiate (ChargeStationPrefabs[nextStationToSpawn], new Vector3(gridPositions [j, i].x, gridPositions [j, i].y, -0.1f), Quaternion.Euler(new Vector3(180,0,180)));
 					station.GetComponent<ChargeStation> ().position = new Vector2(j, 9-(i+1));
-					chargeStations.Add (station);
+					ChargeStations.Add (station);
 					nextStationToSpawn++;
 				}
 			}
@@ -76,10 +76,10 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 	}
 
 	private void deleteLastLevel() {
-		foreach (GameObject obj in chargeStations) {
+		foreach (GameObject obj in ChargeStations) {
 			Destroy (obj);
 		}
-		chargeStations.Clear ();
+		ChargeStations.Clear ();
 	}
 
 	private bool currentLevelShouldBeAnswered(){
@@ -89,19 +89,19 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		return false;
 	}
 
-	public double calculateDistanceToStation (double i){
+	public double CalculateDistanceToStation (double i){
 
 		int index;
 		int.TryParse(i.ToString(), out index);
 
-		if (index < 0 || index > chargeStations.Count - 1) {
-			PMWrapper.RaiseError ("Stationsnummret " + (index + 1) + " finns inte med i denna uppgift. Prova att stoppa in en siffra mellan 0 och " + chargeStations.Count); 
+		if (index < 0 || index > ChargeStations.Count - 1) {
+			PMWrapper.RaiseError ("Stationsnummret " + (index + 1) + " finns inte med i denna uppgift. Prova att stoppa in en siffra mellan 0 och " + ChargeStations.Count); 
 		}
 
-		ChargeStation station = chargeStations [index].GetComponent<ChargeStation> ();
+		ChargeStation station = ChargeStations [index].GetComponent<ChargeStation> ();
 
-		float distanceX = Mathf.Abs (player.currentPosition.x - station.position.x);
-		float distanceY = Mathf.Abs (player.currentPosition.y - station.position.y);
+		float distanceX = Mathf.Abs (Player.currentPosition.x - station.position.x);
+		float distanceY = Mathf.Abs (Player.currentPosition.y - station.position.y);
 
 		return (double)(distanceX + distanceY);
 	}

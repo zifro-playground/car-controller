@@ -741,16 +741,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dcce6300fcfd1847952edbd7090a516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1545113567}
-  answeres: {fileID: 215815310}
-  chargeStationPrefabs:
+  Player: {fileID: 1545113567}
+  Answeres: {fileID: 215815310}
+  ChargeStationPrefabs:
   - {fileID: 1994973681744636, guid: 09f1f5e85b8a547b7a48fe7033824dba, type: 2}
   - {fileID: 1910917662772906, guid: d9f2230a174ce42d2a5bc2b5ba10a1cd, type: 2}
-  - {fileID: 1749003709511188, guid: ab71cf5665651423383aaabe5aa53170, type: 2}
-  - {fileID: 1825639626849092, guid: bb4af32f5abf644ef8ed4a13891b58d3, type: 2}
-  - {fileID: 1584879454063998, guid: f8d0d9870d7084989ababac401ea1972, type: 2}
-  chargeStations: []
-  grid: {fileID: 650023148}
+  ChargeStations: []
+  Grid: {fileID: 650023148}
 --- !u!4 &215815308
 Transform:
   m_ObjectHideFlags: 0
@@ -2231,7 +2228,7 @@ Prefab:
     - target: {fileID: 224826740196440030, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 224375313687469690, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
@@ -2241,7 +2238,7 @@ Prefab:
     - target: {fileID: 224375313687469690, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 235
       objectReference: {fileID: 0}
     - target: {fileID: 224798046438077428, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
@@ -2251,7 +2248,7 @@ Prefab:
     - target: {fileID: 224798046438077428, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 224627817055343580, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
@@ -2261,7 +2258,7 @@ Prefab:
     - target: {fileID: 224627817055343580, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: 224606643059271430, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
@@ -2271,7 +2268,7 @@ Prefab:
     - target: {fileID: 224606643059271430, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -148.75027
       objectReference: {fileID: 0}
     - target: {fileID: 224191301835766582, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
@@ -2281,7 +2278,7 @@ Prefab:
     - target: {fileID: 224191301835766582, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -148.75027
       objectReference: {fileID: 0}
     - target: {fileID: 224151508601108990, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
@@ -2291,7 +2288,7 @@ Prefab:
     - target: {fileID: 224151508601108990, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -148.75024
       objectReference: {fileID: 0}
     - target: {fileID: 224001847468986644, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
@@ -2301,7 +2298,7 @@ Prefab:
     - target: {fileID: 224326501610990258, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.4387817
+      value: 1.4387512
       objectReference: {fileID: 0}
     - target: {fileID: 224326501610990258, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
@@ -5984,10 +5981,10 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.50052094
-    y: 0.13662004
-    width: 0.44731408
-    height: 0.68430233
+    x: 0.5004958
+    y: 0.13663816
+    width: 0.44726938
+    height: 0.684268
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
