@@ -2,128 +2,144 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
+	public float PlayerSpeed = 4;
 
-	#region attributes
-
-	public float distanceBetweenPoints;
-	public float playerSpeed = 4;
-
-	public Vector2 currentPosition;
-	public Vector3 startPosition;
+	public Vector2 CurrentGridPosition;
+	public Vector3 StartPosition;
 	private Vector3 lastPosition;
 
 	private bool isMoving;
-	private direction currentDirection;
+	private Direction currentDirection;
 
-	public bool atChargeStation;
+	public bool AtChargeStation;
 
-	#endregion
-
-
-	void Start () {
-		resetPlayer ();
+	private void OnEnable()
+	{
+		Reset();
 	}
 
-	void Update () {
-		if (isMoving) {
-			transform.position += transform.up * Time.deltaTime * PMWrapper.speedMultiplier * playerSpeed;
+	private void Update()
+	{
+		if (!isMoving) return;
 
-			// Calculate differance in distance without sqrt
-			if (Mathf.Pow((transform.position.x - lastPosition.x), 2) + Mathf.Pow((transform.position.y - lastPosition.y), 2) > Mathf.Pow(distanceBetweenPoints, 2)) {
-				transform.position = lastPosition + transform.up * distanceBetweenPoints;
-				isMoving = false;
-				lastPosition = transform.position;
-				PMWrapper.UnpauseWalker ();
-			}
+		transform.position += transform.up * Time.deltaTime * PMWrapper.speedMultiplier * PlayerSpeed;
+
+		// Calculate differance in distance without sqrt
+		if (Mathf.Pow(transform.position.x - lastPosition.x, 2) + Mathf.Pow(transform.position.y - lastPosition.y, 2) > Mathf.Pow(CityGrid.DistanceBetweenPoints, 2))
+		{
+			transform.position = lastPosition + transform.up * CityGrid.DistanceBetweenPoints;
+			isMoving = false;
+			lastPosition = transform.position;
+			PMWrapper.UnpauseWalker();
 		}
 	}
 
-	public void resetPlayer() {
-		transform.position = startPosition;
+	public void Reset()
+	{
+		transform.position = StartPosition;
 		isMoving = false;
-		currentDirection = direction.north;
-		transform.localEulerAngles = new Vector3 (180, 0, 180);
-		atChargeStation = false;
+		currentDirection = Direction.North;
+		transform.localEulerAngles = new Vector3(180, 0, 180);
+		AtChargeStation = false;
 	}
 
-	void OnTriggerEnter(Collider other){
-		if (other.CompareTag ("ChargeStation")) {
-			atChargeStation = true;
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("ChargeStation"))
+		{
+			AtChargeStation = true;
 		}
 	}
-	
-	void OnTriggerExit(Collider other){
-		if (other.CompareTag ("ChargeStation")) {
-			atChargeStation = false;
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.CompareTag("ChargeStation"))
+		{
+			AtChargeStation = false;
 		}
 	}
 
 
 	#region Custom functions called from user
-	public void moveEast(){
+	public void MoveEast()
+	{
 		lastPosition = transform.position;
-		currentPosition.x += 1;
-		if (currentDirection != direction.east) {
-			transform.localEulerAngles = new Vector3 (180, 0, -90);
-			currentDirection = direction.east;
+		CurrentGridPosition.x += 1;
+		if (currentDirection != Direction.East)
+		{
+			transform.localEulerAngles = new Vector3(180, 0, -90);
+			currentDirection = Direction.East;
 		}
 		isMoving = true;
 	}
 
-	public void moveWest(){
+	public void MoveWest()
+	{
 		lastPosition = transform.position;
-		currentPosition.x -= 1;
-		if (currentDirection != direction.west) {
-			transform.localEulerAngles = new Vector3 (180, 0, 90);
-			currentDirection = direction.west;
+		CurrentGridPosition.x -= 1;
+		if (currentDirection != Direction.West)
+		{
+			transform.localEulerAngles = new Vector3(180, 0, 90);
+			currentDirection = Direction.West;
 		}
 		isMoving = true;
 	}
 
-	public void moveNorth(){
+	public void MoveNorth()
+	{
 		lastPosition = transform.position;
-		currentPosition.y += 1;
-		if (currentDirection != direction.north) {
-			transform.localEulerAngles = new Vector3 (180, 0, 180);
-			currentDirection = direction.north;
+		CurrentGridPosition.y += 1;
+		if (currentDirection != Direction.North)
+		{
+			transform.localEulerAngles = new Vector3(180, 0, 180);
+			currentDirection = Direction.North;
 		}
 		isMoving = true;
 	}
 
-	public void moveSouth(){
+	public void MoveSouth()
+	{
 		lastPosition = transform.position;
-		currentPosition.y -= 1;
-		if (currentDirection != direction.south) {
-			transform.localEulerAngles = new Vector3 (180, 0, 0);
-			currentDirection = direction.south;
+		CurrentGridPosition.y -= 1;
+		if (currentDirection != Direction.South)
+		{
+			transform.localEulerAngles = new Vector3(180, 0, 0);
+			currentDirection = Direction.South;
 		}
 		isMoving = true;
 	}
 
-	public void charge(int lineNumber){
-		if (atChargeStation) {
-			//PMWrapper.ShowGuideBubble (transform.position, "Bra jobbat! Bilen hittade fram.");
-			PMWrapper.SetLevelCompleted ();
-		} else {
-			PMWrapper.RaiseError (lineNumber, "Det går inte att ladda här. Försök igen!");
+	public void Charge(int lineNumber)
+	{
+		if (AtChargeStation)
+		{
+			PMWrapper.SetCaseCompleted();
+		}
+		else
+		{
+			PMWrapper.RaiseError(lineNumber, "Kan inte ladda här. Se till att köra hela vägen till laddningsstationen.");
 		}
 	}
 
-	public int checkPositionX(){
-		return (int)currentPosition.x;
+	public int CheckPositionX()
+	{
+		return (int)CurrentGridPosition.x;
 	}
 
-	public int checkPositionY(){
-		return (int)currentPosition.y;
+	public int CheckPositionY()
+	{
+		return (int)CurrentGridPosition.y;
 	}
 	#endregion
 
 }
 
-public enum direction{
-	east,
-	west,
-	north,
-	south
+public enum Direction
+{
+	East,
+	West,
+	North,
+	South
 }

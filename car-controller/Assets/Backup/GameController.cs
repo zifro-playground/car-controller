@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 	public List<GameObject> ChargeStationPrefabs = new List<GameObject>();
 	public List<GameObject> ChargeStations = new List<GameObject>();
 
-	public GridPositions Grid;
+	public CityGrid CityGrid;
 	private Vector3[,] gridPositions;
 
 
@@ -22,24 +22,24 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 	public void OnPMCompilerStopped (HelloCompiler.StopStatus status) {
 		if (status == HelloCompiler.StopStatus.Finished) {
-			if (Player.atChargeStation) {
-				Player.resetPlayer ();
+			if (Player.AtChargeStation) {
+				Player.Reset ();
 				PMWrapper.RaiseError ("Glöm inte att ladda när du kommit fram!");
 			} else {
 				if (!currentLevelShouldBeAnswered()) {
-					Player.resetPlayer ();
+					Player.Reset ();
 					PMWrapper.RaiseError ("Bilen kom inte hela vägen fram. Försök igen!");
 				}
 			}
 			
 		} else {
-			Player.resetPlayer ();
+			Player.Reset ();
 		}
 	}
 
 	public void OnPMCaseSwitched (int caseNumber) {
-		gridPositions = Grid.calculatePositions ();
-		Player.distanceBetweenPoints = Grid.distanceBetweenPoints;
+		gridPositions = CityGrid.CalculatePositions ();
+		Player.DistanceBetweenPoints = CityGrid.DistanceBetweenPoints;
 		LoadCurrentTextLevel ();
 		SetAvailableFunctions ();
 		SetLevelAnswere ();
@@ -63,8 +63,8 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 				if (characters [j] == "P") {
 					Player.transform.position = gridPositions [j, i];
-					Player.startPosition = Player.transform.position;
-					Player.currentPosition = new Vector2 (j, 9-(i+1));
+					Player.StartPosition = Player.transform.position;
+					Player.CurrentGridPosition = new Vector2 (j, 9-(i+1));
 				} else if (characters [j] == "C") {
 					GameObject station = Instantiate (ChargeStationPrefabs[nextStationToSpawn], new Vector3(gridPositions [j, i].x, gridPositions [j, i].y, -0.1f), Quaternion.Euler(new Vector3(180,0,180)));
 					station.GetComponent<ChargeStation> ().position = new Vector2(j, 9-(i+1));
@@ -100,8 +100,8 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 		ChargeStation station = ChargeStations [index].GetComponent<ChargeStation> ();
 
-		float distanceX = Mathf.Abs (Player.currentPosition.x - station.position.x);
-		float distanceY = Mathf.Abs (Player.currentPosition.y - station.position.y);
+		float distanceX = Mathf.Abs (Player.CurrentGridPosition.x - station.position.x);
+		float distanceY = Mathf.Abs (Player.CurrentGridPosition.y - station.position.y);
 
 		return (double)(distanceX + distanceY);
 	}

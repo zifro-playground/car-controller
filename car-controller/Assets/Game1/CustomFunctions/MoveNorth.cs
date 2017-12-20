@@ -15,7 +15,7 @@ public class MoveNorth : Compiler.Function {
 	#region implemented abstract members of Function
 	public override Compiler.Variable runFunction (Compiler.Scope currentScope, Compiler.Variable[] inputParas, int lineNumber)
 	{
-		GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerMovement> ().moveNorth ();
+		GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerMovement> ().MoveNorth ();
 
 		return new Compiler.Variable ();
 	}

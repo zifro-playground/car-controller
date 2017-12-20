@@ -1,28 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using UnityEngine;
 using PM;
 
 public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 {
-	public PlayerMovement Player;
 	public LevelAnsweres Answeres;
 
+	[Header("Prefabs")]
+	public GameObject PlayerPrefab;
+	public GameObject ObstaclePrefab;
 	public List<GameObject> ChargeStationPrefabs = new List<GameObject>();
+
+	[HideInInspector]
+	public List<GameObject> Obstacles = new List<GameObject>();
+
+	[HideInInspector]
 	public List<GameObject> ChargeStations = new List<GameObject>();
+	
+	private PlayerMovement player;
+	private GameObject playerObject;
 
-	public GridPositions Grid;
-	private Vector3[,] gridPositions;
 
-	[SuppressMessage("ReSharper", "InvertIf")]
 	public void OnPMCompilerStopped(HelloCompiler.StopStatus status)
 	{
-		Player.resetPlayer();
 		if (status == HelloCompiler.StopStatus.Finished)
 		{
-			if (Player.atChargeStation)
+			if (player.AtChargeStation)
 			{
 				PMWrapper.RaiseTaskError("Bilen laddades inte. Kom ihåg att ladda när bilen kommer fram till stationen.");
 			}
@@ -34,23 +39,18 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 				}
 			}
 		}
+		player.Reset();
 	}
 
 	public void OnPMCaseSwitched(int caseNumber)
 	{
-		Player.resetPlayer();
-
-		gridPositions = Grid.calculatePositions();
-		Player.distanceBetweenPoints = Grid.distanceBetweenPoints;
-
+		DeleteLastLevel();
 		LoadCurrentTextLevel();
 	}
 
 
 	public void LoadCurrentTextLevel()
 	{
-		DeleteLastLevel();
-
 		string resourceName = "TextLevels/Level_{0}_{1}";
 		resourceName = string.Format(resourceName, PMWrapper.currentLevel, PMWrapper.currentCase);
 		TextAsset asset = Resources.Load<TextAsset>(resourceName);
@@ -67,19 +67,27 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 			for (int j = 0; j < 9; j++)
 			{
+				Vector3 currentGridPosition = CityGrid.Positions[j, i];
+				Vector3 position = new Vector3(currentGridPosition.x, currentGridPosition.y, -0.1f);
 
-				if (characters[j] == "P")
+				switch (characters[j])
 				{
-					Player.transform.position = gridPositions[j, i];
-					Player.startPosition = Player.transform.position;
-					Player.currentPosition = new Vector2(j, 9 - (i + 1));
-				}
-				else if (characters[j] == "C")
-				{
-					GameObject station = Instantiate(ChargeStationPrefabs[nextStationToSpawn], new Vector3(gridPositions[j, i].x, gridPositions[j, i].y, -0.1f), Quaternion.Euler(new Vector3(180, 0, 180)));
-					station.GetComponent<ChargeStation>().position = new Vector2(j, 9 - (i + 1));
-					ChargeStations.Add(station);
-					nextStationToSpawn++;
+					case "P":
+						playerObject = Instantiate(PlayerPrefab, currentGridPosition, Quaternion.Euler(new Vector3(0, 180, 0)));
+						player = playerObject.GetComponent<PlayerMovement>();
+						player.StartPosition = player.transform.position;
+						player.CurrentGridPosition = new Vector2(j, 9 - (i + 1));
+						break;
+					case "C":
+						GameObject station = Instantiate(ChargeStationPrefabs[nextStationToSpawn], position, Quaternion.Euler(new Vector3(180, 0, 180)));
+						station.GetComponent<ChargeStation>().position = new Vector2(j, 9 - (i + 1));
+						ChargeStations.Add(station);
+						nextStationToSpawn++;
+						break;
+					case "X":
+						GameObject obstacle = Instantiate(ObstaclePrefab, position, Quaternion.identity);
+						Obstacles.Add(obstacle);
+						break;
 				}
 			}
 		}
@@ -87,13 +95,22 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 	private void DeleteLastLevel()
 	{
+		Destroy(playerObject);
+
 		foreach (GameObject obj in ChargeStations)
 		{
 			Destroy(obj);
 		}
 		ChargeStations.Clear();
+
+		foreach (GameObject obj in Obstacles)
+		{
+			Destroy(obj);
+		}
+		Obstacles.Clear();
 	}
 
+	// Only used in game 2
 	public double CalculateDistanceToStation(double i)
 	{
 
@@ -107,8 +124,8 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 		ChargeStation station = ChargeStations[index].GetComponent<ChargeStation>();
 
-		float distanceX = Mathf.Abs(Player.currentPosition.x - station.position.x);
-		float distanceY = Mathf.Abs(Player.currentPosition.y - station.position.y);
+		float distanceX = Mathf.Abs(player.CurrentGridPosition.x - station.position.x);
+		float distanceY = Mathf.Abs(player.CurrentGridPosition.y - station.position.y);
 
 		return distanceX + distanceY;
 	}

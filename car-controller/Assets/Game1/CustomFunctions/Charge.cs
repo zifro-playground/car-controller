@@ -15,7 +15,7 @@ public class Charge : Compiler.Function {
 	#region implemented abstract members of Function
 	public override Compiler.Variable runFunction (Compiler.Scope currentScope, Compiler.Variable[] inputParas, int lineNumber)
 	{
-		GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerMovement> ().charge (lineNumber);
+		GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerMovement> ().Charge (lineNumber);
 
 		return new Compiler.Variable ();
 	}

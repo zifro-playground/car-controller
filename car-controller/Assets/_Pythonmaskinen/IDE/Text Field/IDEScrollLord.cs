@@ -22,7 +22,7 @@ namespace PM {
 
 			float offset = theTextField.inputRect.anchoredPosition.y;
 			// Here Y 0 is top, -Y is up and +Y is down
-			// Since that's how it is in the contents anchor positions
+			// Since that's how it is in the contents anchor Positions
 			float topY = -offset - theTextField.DetermineYOffset(lineNumber);
 			float botY = topY + approxLineHeight;
 

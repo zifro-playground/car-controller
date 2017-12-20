@@ -20,7 +20,7 @@ public class LevelAnsweres : MonoBehaviour {
 		}
 		
 		else if (PMWrapper.currentLevel == 7){
-			if (ans.Equals(Player.currentPosition.x))
+			if (ans.Equals(Player.CurrentGridPosition.x))
 				recievedCorrectAnswere = true;
 		}
 
@@ -67,7 +67,7 @@ public class LevelAnsweres : MonoBehaviour {
 			} else
 				PMWrapper.RaiseError ("Det är tyvärr fel svar. Försök igen!");
 		} else if (PMWrapper.currentLevel == 11) {
-			if (x.Equals (Player.currentPosition.x) && y.Equals (Player.currentPosition.y)) {
+			if (x.Equals (Player.CurrentGridPosition.x) && y.Equals (Player.CurrentGridPosition.y)) {
 				PMWrapper.ShowGuideBubble (lineNumber, "Svar: " + x + ", " + y);
 				StartCoroutine (LevelCompleted ());
 			} else

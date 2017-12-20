@@ -184,7 +184,7 @@ namespace PM {
 
 		protected void FocusOnCanvasPosition(Vector2 target, Vector2 direction) {
 
-			// Calculate positions
+			// Calculate Positions
 			var squarified = SquareifyVector2(direction);
 			var pos = target - squarified.normalized * distanceFromTarget;
 			var parent = (bubbleRect.parent as RectTransform).rect;
@@ -204,7 +204,7 @@ namespace PM {
 
 			pointerInside.localEulerAngles =
 				pointerOutside.localEulerAngles =
-					Vector3.forward * (Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg + 90);*/
+					Vector3.forward * (Mathf.Atan2(-Direction.y, -Direction.x) * Mathf.Rad2Deg + 90);*/
 		}
 
 		IEnumerator FadeRoutine(float target, float time) {

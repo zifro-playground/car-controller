@@ -15,7 +15,7 @@ public class CheckPositionX : Compiler.Function {
 	#region implemented abstract members of Function
 	public override Compiler.Variable runFunction (Compiler.Scope currentScope, Compiler.Variable[] inputParas, int lineNumber)
 	{
-		int xPosition = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerMovement> ().checkPositionX ();
+		int xPosition = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerMovement> ().CheckPositionX ();
 
 		return new Compiler.Variable("x", xPosition);
 	}

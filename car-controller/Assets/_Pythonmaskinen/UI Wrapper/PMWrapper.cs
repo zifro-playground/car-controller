@@ -145,7 +145,7 @@ public static class PMWrapper
 	}
 	/// <summary>
 	/// Wether or not the current level has demo manus.
-	/// <para>"One could ask, is general Juhziz in charge?"</para>
+	/// <para>"One could ask, is general Juhziz in Charge?"</para>
 	/// </summary>
 	public static bool isDemoLevel
 	{
