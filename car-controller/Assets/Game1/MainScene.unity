@@ -699,6 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dcce6300fcfd1847952edbd7090a516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameDataFileName: Game1/game1
   Answeres: {fileID: 215815310}
   PlayerPrefab: {fileID: 1394029729554114, guid: 53d5b3c492480b9408bd5b10524f5c88,
     type: 2}
@@ -2257,12 +2258,12 @@ Prefab:
     - target: {fileID: 224326501610990258, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.4387817
+      value: 1.4387665
       objectReference: {fileID: 0}
     - target: {fileID: 224326501610990258, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.6995544
+      value: -3.699562
       objectReference: {fileID: 0}
     - target: {fileID: 114639331556912418, guid: fbc1040b8261d44e8ab6fbfed18dcbda,
         type: 2}
@@ -5878,10 +5879,10 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.50062484
-    y: 0.13661318
-    width: 0.44736433
-    height: 0.68402946
+    x: 0.5001114
+    y: 0.13691688
+    width: 0.44658345
+    height: 0.683743
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

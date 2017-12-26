@@ -1,0 +1,38 @@
+﻿{
+	"levels": [
+		{
+			"id": "level0",
+			"cases": [
+				{
+					"cars": [
+						{
+							"position": {
+								"x": 3,
+								"y": 2.5,
+								"z": 0
+							}
+						}
+					],
+					"stations": [
+						{
+							"position": {
+								"x": 3,
+								"y": 2.5,
+								"z": 0
+							}
+						}
+					],
+					"obstacled": [
+						{
+							"position": {
+								"x": 3,
+								"y": 2.5,
+								"z": 0
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

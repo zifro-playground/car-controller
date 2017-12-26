@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using Newtonsoft.Json;
 using PM;
 
 public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 {
+	public string gameDataFileName;
 	public LevelAnsweres Answeres;
 
 	[Header("Prefabs")]
@@ -19,9 +21,26 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 	[HideInInspector]
 	public List<GameObject> ChargeStations = new List<GameObject>();
 	
+	private Game gameData;
 	private PlayerMovement player;
 	private GameObject playerObject;
 
+	public void Awake()
+	{
+		LoadGameData();
+	}
+
+	private void LoadGameData()
+	{
+		TextAsset jsonAsset = Resources.Load<TextAsset>(gameDataFileName);
+
+		if (jsonAsset == null)
+			throw new Exception("Could not find the file \"" + gameDataFileName + "\" that should contain game data in json format.");
+
+		string jsonString = jsonAsset.text;
+
+		gameData = JsonConvert.DeserializeObject<Game>(jsonString);
+	}
 
 	public void OnPMCompilerStopped(HelloCompiler.StopStatus status)
 	{
@@ -39,16 +58,53 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 				}
 			}
 		}
-		player.Reset();
+		if (player != null)
+			player.Reset();
 	}
 
 	public void OnPMCaseSwitched(int caseNumber)
 	{
+		LoadCase(caseNumber);
+
 		DeleteLastLevel();
-		LoadCurrentTextLevel();
+		//LoadCurrentTextLevel();
 	}
 
+	private void LoadCase(int caseNumber)
+	{
+		Case caseData = gameData.levels[PMWrapper.currentLevel].cases[caseNumber];
+		CreateAssets(caseData);
+	}
 
+	private void CreateAssets(Case caseData)
+	{
+		foreach (Car car in caseData.cars)
+		{
+			Vector3 position = CityGrid.GetWorldPosition(car.position);
+			playerObject = Instantiate(PlayerPrefab, position, Quaternion.Euler(new Vector3(0, 180, 0)));
+			player = playerObject.GetComponent<PlayerMovement>();
+			player.CurrentGridPosition = new Vector2(position.x, position.y);
+		}
+
+		int nextStationToSpawn = 0;
+		foreach (Station station in caseData.stations)
+		{
+			Vector3 position = CityGrid.GetWorldPosition(station.position);
+			GameObject stationObj = Instantiate(ChargeStationPrefabs[nextStationToSpawn], position, Quaternion.Euler(new Vector3(180, 0, 180)));
+			stationObj.GetComponent<ChargeStation>().position = new Vector2(position.x, position.y);
+			ChargeStations.Add(stationObj);
+			nextStationToSpawn++;
+		}
+
+		foreach (Obstacled obstacle in caseData.obstacled)
+		{
+			Vector3 position = CityGrid.GetWorldPosition(obstacle.position);
+			GameObject obstacleObj = Instantiate(ObstaclePrefab, position, Quaternion.identity);
+			Obstacles.Add(obstacleObj);
+		}
+	}
+
+	/*
 	public void LoadCurrentTextLevel()
 	{
 		string resourceName = "TextLevels/Level_{0}_{1}";
@@ -92,6 +148,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 			}
 		}
 	}
+	*/
 
 	private void DeleteLastLevel()
 	{
