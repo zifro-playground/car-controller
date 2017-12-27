@@ -64,14 +64,15 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 	public void OnPMCaseSwitched(int caseNumber)
 	{
-		LoadCase(caseNumber);
-
 		DeleteLastLevel();
-		//LoadCurrentTextLevel();
+		LoadCase(caseNumber);
 	}
 
 	private void LoadCase(int caseNumber)
 	{
+		if (gameData.levels.Count != PMWrapper.numOfLevels)
+			Debug.Log("Warning! There are " + gameData.levels.Count + " levels in gameData but " + PMWrapper.numOfLevels + " levels specified in IDE.");
+
 		Case caseData = gameData.levels[PMWrapper.currentLevel].cases[caseNumber];
 		CreateAssets(caseData);
 	}
@@ -103,52 +104,6 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 			Obstacles.Add(obstacleObj);
 		}
 	}
-
-	/*
-	public void LoadCurrentTextLevel()
-	{
-		string resourceName = "TextLevels/Level_{0}_{1}";
-		resourceName = string.Format(resourceName, PMWrapper.currentLevel, PMWrapper.currentCase);
-		TextAsset asset = Resources.Load<TextAsset>(resourceName);
-
-		if (asset == null)
-			throw new Exception("Could not find asset \"" + resourceName + "\"");
-
-		string[] rows = asset.text.Split('\n');
-		int nextStationToSpawn = 0;
-
-		for (int i = 0; i < 9; i++)
-		{
-			string[] characters = rows[i].Trim().Split(' ');
-
-			for (int j = 0; j < 9; j++)
-			{
-				Vector3 currentGridPosition = CityGrid.Positions[j, i];
-				Vector3 position = new Vector3(currentGridPosition.x, currentGridPosition.y, -0.1f);
-
-				switch (characters[j])
-				{
-					case "P":
-						playerObject = Instantiate(PlayerPrefab, currentGridPosition, Quaternion.Euler(new Vector3(0, 180, 0)));
-						player = playerObject.GetComponent<PlayerMovement>();
-						player.StartPosition = player.transform.position;
-						player.CurrentGridPosition = new Vector2(j, 9 - (i + 1));
-						break;
-					case "C":
-						GameObject station = Instantiate(ChargeStationPrefabs[nextStationToSpawn], position, Quaternion.Euler(new Vector3(180, 0, 180)));
-						station.GetComponent<ChargeStation>().position = new Vector2(j, 9 - (i + 1));
-						ChargeStations.Add(station);
-						nextStationToSpawn++;
-						break;
-					case "X":
-						GameObject obstacle = Instantiate(ObstaclePrefab, position, Quaternion.identity);
-						Obstacles.Add(obstacle);
-						break;
-				}
-			}
-		}
-	}
-	*/
 
 	private void DeleteLastLevel()
 	{

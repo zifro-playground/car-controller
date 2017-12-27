@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+ * Place this script on the parent object of all objects that decide the size of the grid. 
+ */
+
+using UnityEngine;
 
 public class CityGrid : MonoBehaviour
 {
@@ -8,27 +12,14 @@ public class CityGrid : MonoBehaviour
 
 	public static float DistanceBetweenPoints;
 
-	//public static Vector3[,] Positions = new Vector3[9, 9];
-
-
 	private void InitBounds()
 	{
-		Bounds bounds = GetComponent<MeshRenderer>().bounds;
+		Bounds bounds = CalculateBoundsInChildren(gameObject);
 		xMin = bounds.min.x;
 		yMin = bounds.min.y;
 		zMin = bounds.min.z;
 
 		DistanceBetweenPoints = (bounds.center.x + bounds.extents.x) / 4;
-
-		/* Use GetWorldPosition instead
-		for (int i = 0; i < Positions.GetLength(0); i++)
-		{
-			for (int j = 0; j < Positions.GetLength(0); j++)
-			{
-				Positions[i, j] = new Vector3(leftBound + i * DistanceBetweenPoints, upperBound - j * DistanceBetweenPoints, -0.3f);
-			}
-		}
-		*/
 	}
 
 	public static Vector3 GetWorldPosition(Position position)
@@ -37,11 +28,29 @@ public class CityGrid : MonoBehaviour
 		float worldY = yMin + position.y * DistanceBetweenPoints;
 		float worldZ = zMin + position.z * DistanceBetweenPoints;
 
-		return new Vector3(worldX, worldY, 0.5f);
+		return new Vector3(worldX, worldY, worldZ);
 	}
 
 	public void Awake()
 	{
 		InitBounds();
+	}
+
+	private Bounds CalculateBoundsInChildren(GameObject obj)
+	{
+		Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
+
+		if (renderers.Length == 0)
+			throw new System.Exception("Could not find any renderers in children of gameobject \"" + obj.name + "\".");
+
+		Bounds bounds = new Bounds(obj.transform.position, Vector3.zero);
+		foreach (Renderer renderer in renderers)
+		{
+			bounds.Encapsulate(renderer.bounds);
+		}
+		Vector3 localCenter = bounds.center - obj.transform.position;
+		bounds.center = localCenter;
+
+		return bounds;
 	}
 }
