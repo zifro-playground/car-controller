@@ -1,0 +1,2 @@
+1: Här skriver du koden! Den bestämmer vad som kommer att hända ute till höger.
+play: Klicka på play för att köra koden!
