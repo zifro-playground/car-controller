@@ -8,7 +8,7 @@ public class CityGrid : MonoBehaviour
 {
 	private static float xMin;
 	private static float yMin;
-	private static float zMin;
+	private static float zMax;
 
 	public static float DistanceBetweenPoints;
 
@@ -17,7 +17,7 @@ public class CityGrid : MonoBehaviour
 		Bounds bounds = CalculateBoundsInChildren(gameObject);
 		xMin = bounds.min.x;
 		yMin = bounds.min.y;
-		zMin = bounds.min.z;
+		zMax = bounds.max.z;
 
 		DistanceBetweenPoints = (bounds.center.x + bounds.extents.x) / 4;
 	}
@@ -26,7 +26,7 @@ public class CityGrid : MonoBehaviour
 	{
 		float worldX = xMin + position.x * DistanceBetweenPoints;
 		float worldY = yMin + position.y * DistanceBetweenPoints;
-		float worldZ = zMin + position.z * DistanceBetweenPoints;
+		float worldZ = zMax + position.z;
 
 		return new Vector3(worldX, worldY, worldZ);
 	}
@@ -48,8 +48,6 @@ public class CityGrid : MonoBehaviour
 		{
 			bounds.Encapsulate(renderer.bounds);
 		}
-		Vector3 localCenter = bounds.center - obj.transform.position;
-		bounds.center = localCenter;
 
 		return bounds;
 	}

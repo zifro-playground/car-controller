@@ -10,6 +10,7 @@ public class Position
 public class Car
 {
 	public Position position { get; set; }
+	public string direction { get; set; }
 }
 
 public class Station

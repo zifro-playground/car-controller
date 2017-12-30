@@ -22,7 +22,6 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 	public List<GameObject> ChargeStations = new List<GameObject>();
 	
 	private Game gameData;
-	private PlayerMovement player;
 	private GameObject playerObject;
 
 	public void Awake()
@@ -46,7 +45,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 	{
 		if (status == HelloCompiler.StopStatus.Finished)
 		{
-			if (player.AtChargeStation)
+			if (playerObject.GetComponent<PlayerMovement>().AtChargeStation)
 			{
 				PMWrapper.RaiseTaskError("Bilen laddades inte. Kom ihåg att ladda när bilen kommer fram till stationen.");
 			}
@@ -58,8 +57,6 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 				}
 			}
 		}
-		if (player != null)
-			player.Reset();
 	}
 
 	public void OnPMCaseSwitched(int caseNumber)
@@ -83,8 +80,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		{
 			Vector3 position = CityGrid.GetWorldPosition(car.position);
 			playerObject = Instantiate(PlayerPrefab, position, Quaternion.Euler(new Vector3(0, 180, 0)));
-			player = playerObject.GetComponent<PlayerMovement>();
-			player.CurrentGridPosition = new Vector2(position.x, position.y);
+			playerObject.GetComponent<PlayerMovement>().Init(car);
 		}
 
 		int nextStationToSpawn = 0;
@@ -122,10 +118,11 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		Obstacles.Clear();
 	}
 
-	// Only used in game 2
+	// Only used in game 2. Method should be moved somwhere else.
 	public double CalculateDistanceToStation(double i)
 	{
-
+		return 0d;
+		/*
 		int index;
 		int.TryParse(i.ToString(CultureInfo.InvariantCulture), out index);
 
@@ -140,5 +137,6 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		float distanceY = Mathf.Abs(player.CurrentGridPosition.y - station.position.y);
 
 		return distanceX + distanceY;
+		*/
 	}
 }

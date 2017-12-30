@@ -1,23 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using PM;
+using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IPMCompilerStopped
 {
 	public float PlayerSpeed = 4;
 
-	public Vector2 CurrentGridPosition;
-	public Vector3 StartPosition;
+	private Vector2 currentGridPosition;
+	private Vector3 startPosition;
 	private Vector3 lastPosition;
+	private string startDirection;
 
 	private bool isMoving;
 	private Direction currentDirection;
 
 	public bool AtChargeStation;
-
-	private void OnEnable()
-	{
-		StartPosition = transform.position;
-		Reset();
-	}
 
 	private void Update()
 	{
@@ -37,11 +34,52 @@ public class PlayerMovement : MonoBehaviour
 
 	public void Reset()
 	{
-		transform.position = StartPosition;
+		transform.position = startPosition;
 		isMoving = false;
-		currentDirection = Direction.North;
-		transform.localEulerAngles = new Vector3(180, 0, 180);
+		SetDirection(startDirection);
 		AtChargeStation = false;
+	}
+
+	private void SetDirection(string direction)
+	{
+		if (direction == null)
+			direction = "north";
+
+		switch (direction.ToLower())
+		{
+			case "east":
+				currentDirection = Direction.East;
+				transform.localEulerAngles = new Vector3(180, 0, -90);
+				break;
+			case "west":
+				currentDirection = Direction.West;
+				transform.localEulerAngles = new Vector3(180, 0, 90);
+				break;
+			case "north":
+				currentDirection = Direction.North;
+				transform.localEulerAngles = new Vector3(180, 0, 180);
+				break;
+			case "south":
+				currentDirection = Direction.South;
+				transform.localEulerAngles = new Vector3(180, 0, 0);
+				break;
+			default:
+				throw new Exception("The direction \"" + direction + "\" is not supported.");
+		}
+	}
+
+	public void Init(Car carData)
+	{
+		startPosition = transform.position;
+		startDirection = carData.direction;
+
+		currentGridPosition = new Vector2(carData.position.x, carData.position.y);
+		Reset();
+	}
+
+	public void OnPMCompilerStopped(HelloCompiler.StopStatus status)
+	{
+		Reset();
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -65,48 +103,36 @@ public class PlayerMovement : MonoBehaviour
 	public void MoveEast()
 	{
 		lastPosition = transform.position;
-		CurrentGridPosition.x += 1;
-		if (currentDirection != Direction.East)
-		{
-			transform.localEulerAngles = new Vector3(180, 0, -90);
-			currentDirection = Direction.East;
-		}
+		currentGridPosition.x += 1;
+
+		SetDirection("east");
 		isMoving = true;
 	}
 
 	public void MoveWest()
 	{
 		lastPosition = transform.position;
-		CurrentGridPosition.x -= 1;
-		if (currentDirection != Direction.West)
-		{
-			transform.localEulerAngles = new Vector3(180, 0, 90);
-			currentDirection = Direction.West;
-		}
+		currentGridPosition.x -= 1;
+
+		SetDirection("west");
 		isMoving = true;
 	}
 
 	public void MoveNorth()
 	{
 		lastPosition = transform.position;
-		CurrentGridPosition.y += 1;
-		if (currentDirection != Direction.North)
-		{
-			transform.localEulerAngles = new Vector3(180, 0, 180);
-			currentDirection = Direction.North;
-		}
+		currentGridPosition.y += 1;
+		
+		SetDirection("north");
 		isMoving = true;
 	}
 
 	public void MoveSouth()
 	{
 		lastPosition = transform.position;
-		CurrentGridPosition.y -= 1;
-		if (currentDirection != Direction.South)
-		{
-			transform.localEulerAngles = new Vector3(180, 0, 0);
-			currentDirection = Direction.South;
-		}
+		currentGridPosition.y -= 1;
+		
+		SetDirection("south");
 		isMoving = true;
 	}
 
@@ -124,13 +150,14 @@ public class PlayerMovement : MonoBehaviour
 
 	public int CheckPositionX()
 	{
-		return (int)CurrentGridPosition.x;
+		return (int)currentGridPosition.x;
 	}
 
 	public int CheckPositionY()
 	{
-		return (int)CurrentGridPosition.y;
+		return (int)currentGridPosition.y;
 	}
+
 	#endregion
 
 }
