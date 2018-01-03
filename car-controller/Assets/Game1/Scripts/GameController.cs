@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		{
 			if (playerObject.GetComponent<PlayerMovement>().AtChargeStation)
 			{
-				PMWrapper.RaiseTaskError("Bilen laddades inte. Kom ihåg att ladda när bilen kommer fram till stationen.");
+				PMWrapper.RaiseTaskError("Bilen laddades inte. Kom ihåg att ladda() vid stationen.");
 			}
 			else
 			{

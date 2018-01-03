@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		deleteLastLevel ();
 
 		string resourceName = "TextLevels/Level_{0}_{1}";
-		resourceName = string.Format (resourceName, PMWrapper.currentLevel, PMWrapper.currentCase);
+		resourceName = string.Format (resourceName, PMWrapper.currentLevel, PMWrapper.CurrentCase);
 		TextAsset asset = Resources.Load<TextAsset> (resourceName);
 
 		string[] rows = asset.text.Split ('\n');
@@ -146,7 +146,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 	private void SetLevelAnswere () {
 
 		int level = PMWrapper.currentLevel;
-		int caseNumber = PMWrapper.currentCase;
+		int caseNumber = PMWrapper.CurrentCase;
 
 		if (level == 6) {
 			if (caseNumber == 0)

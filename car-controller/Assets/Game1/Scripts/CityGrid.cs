@@ -6,6 +6,13 @@ using UnityEngine;
 
 public class CityGrid : MonoBehaviour
 {
+	[Header("Grid dimensions in number of houses")]
+	public int N = 9;
+	public int M = 8;
+
+	[Space()]
+	public float Padding = 0.5f;
+
 	private static float xMin;
 	private static float yMin;
 	private static float zMax;
@@ -15,11 +22,11 @@ public class CityGrid : MonoBehaviour
 	private void InitBounds()
 	{
 		Bounds bounds = CalculateBoundsInChildren(gameObject);
-		xMin = bounds.min.x;
-		yMin = bounds.min.y;
+		xMin = bounds.min.x - Padding;
+		yMin = bounds.min.y - Padding;
 		zMax = bounds.max.z;
 
-		DistanceBetweenPoints = (bounds.center.x + bounds.extents.x) / 4;
+		DistanceBetweenPoints = (bounds.size.x + 2 * Padding) / N;
 	}
 
 	public static Vector3 GetWorldPosition(Position position)
@@ -44,9 +51,9 @@ public class CityGrid : MonoBehaviour
 			throw new System.Exception("Could not find any renderers in children of gameobject \"" + obj.name + "\".");
 
 		Bounds bounds = new Bounds(obj.transform.position, Vector3.zero);
-		foreach (Renderer renderer in renderers)
+		foreach (Renderer rend in renderers)
 		{
-			bounds.Encapsulate(renderer.bounds);
+			bounds.Encapsulate(rend.bounds);
 		}
 
 		return bounds;

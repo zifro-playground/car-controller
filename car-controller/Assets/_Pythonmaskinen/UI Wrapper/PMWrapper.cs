@@ -14,7 +14,7 @@ public static class PMWrapper
 	/// <summary>
 	/// Version of the Pythonmachine wrapper/UI.
 	/// </summary>
-	public const string version = "1.1.0";
+	public const string Version = "1.2.0";
 
 	/// <summary>
 	/// Value from the speed slider. Ranges from 0 to 1, with a default of 0.5.
@@ -129,25 +129,25 @@ public static class PMWrapper
 	/// <summary>
 	/// Boolean representing wether the compiler is currently executing or not.
 	/// </summary>
-	public static bool isCompilerRunning { get { return UISingleton.instance.compiler.isRunning; } }
+	public static bool IsCompilerRunning { get { return UISingleton.instance.compiler.isRunning; } }
 
 	/// <summary>
 	/// Boolean representing wether the walker is currently paused by the user (via pressing the pause button).
 	/// </summary>
-	public static bool isCompilerUserPaused { get { return UISingleton.instance.walker.isUserPaused; } }
+	public static bool IsCompilerUserPaused { get { return UISingleton.instance.walker.IsUserPaused; } }
 
 	/// <summary>
 	/// Wether or not the level is playing && is in "demo" mode.
 	/// </summary>
-	public static bool isDemoingLevel
+	public static bool IsDemoingLevel
 	{
 		get { return PM.Manus.ManusPlayer.isPlaying; }
 	}
 	/// <summary>
 	/// Wether or not the current level has demo manus.
-	/// <para>"One could ask, is general Juhziz in Charge?"</para>
+	/// <para>"One could ask, is general Juhziz in charge?"</para>
 	/// </summary>
-	public static bool isDemoLevel
+	public static bool IsDemoLevel
 	{
 		get { return PMWrapper.currentLevel < PM.Manus.Loader.allManuses.Count && PMWrapper.currentLevel >= 0 && PM.Manus.Loader.allManuses[PMWrapper.currentLevel] != null; }
 	}
@@ -198,7 +198,7 @@ public static class PMWrapper
 	/// </summary>
 	public static void UnpauseWalker()
 	{
-		UISingleton.instance.walker.resumeWalker();
+		UISingleton.instance.walker.ResumeWalker();
 	}
 
 	/// <summary>
@@ -239,7 +239,7 @@ public static class PMWrapper
 	}
 
 	/// <summary>
-	/// Set the correct Answeres for the current case.
+	/// Set the correct answeres for the current case.
 	/// </summary>
 	public static void SetCaseAnswer(params int[] answer)
 	{
@@ -247,7 +247,7 @@ public static class PMWrapper
 	}
 
 	/// <summary>
-	/// Set the correct Answeres for the current case.
+	/// Set the correct answeres for the current case.
 	/// </summary>
 	public static void SetCaseAnswer(params string[] answer)
 	{
@@ -255,7 +255,7 @@ public static class PMWrapper
 	}
 
 	/// <summary>
-	/// Set the correct Answeres for the current case.
+	/// Set the correct answeres for the current case.
 	/// </summary>
 	public static void SetCaseAnswer(params bool[] answer)
 	{
@@ -344,7 +344,7 @@ public static class PMWrapper
 	/// </summary>
 	public static int currentCase
 	{
-		get { return UISingleton.instance.levelHandler.currentLevel.caseHandler.currentCase; }
+		get { return UISingleton.instance.levelHandler.currentLevel.caseHandler.CurrentCase; }
 	}
 
 	/// <summary>

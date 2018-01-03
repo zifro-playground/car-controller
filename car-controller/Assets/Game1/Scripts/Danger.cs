@@ -6,7 +6,8 @@ public class Danger : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			print("Player crached");
+			// TODO play crash animation
+			PMWrapper.RaiseTaskError("Bilen kraschade. Undvik vägarbeten.");
 		}
 	}
 }

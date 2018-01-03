@@ -8,7 +8,7 @@
 						{
 							"position": {
 								"x": 3,
-								"y": 3,
+                "y": 3,
 								"z": -0.18
 							},
 							"direction":  "east"
@@ -32,13 +32,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 3,
-								"y": 3,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 3,
+                "y": 3,
+                "z": -0.18
+              },
+              "direction": "east"
+            }
 					],
 					"stations": [
 						{
@@ -58,13 +60,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 7,
-								"y": 3,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 7,
+                "y": 3,
+                "z": -0.18
+              },
+              "direction": "west"
+            }
 					],
 					"stations": [
 						{
@@ -92,13 +96,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 2,
-								"y": 5,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 2,
+                "y": 5,
+                "z": -0.18
+              },
+              "direction": "east"
+            }
 					],
 					"stations": [
 						{
@@ -118,13 +124,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 5,
-								"y": 2,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 5,
+                "y": 2,
+                "z": -0.18
+              },
+              "direction": "north"
+            }
 					],
 					"stations": [
 						{
@@ -144,13 +152,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 5,
-								"y": 2,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 5,
+                "y": 2,
+                "z": -0.18
+              },
+              "direction": "north"
+            }
 					],
 					"stations": [
 						{
@@ -170,13 +180,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 2,
-								"y": 2,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 2,
+                "y": 2,
+                "z": -0.18
+              },
+              "direction": "east"
+            }
 					],
 					"stations": [
 						{
@@ -211,13 +223,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 2,
-								"y": 2,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 2,
+                "y": 2,
+                "z": -0.18
+              },
+              "direction": "east"
+            }
 					],
 					"stations": [
 						{
@@ -245,13 +259,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 7,
-								"y": 2,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 7,
+                "y": 2,
+                "z": -0.18
+              },
+              "direction": "west"
+            }
 					],
 					"stations": [
 						{
@@ -293,13 +309,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 2,
-								"y": 7,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 2,
+                "y": 7,
+                "z": -0.18
+              },
+              "direction": "south"
+            }
 					],
 					"stations": [
 						{
@@ -348,13 +366,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 1,
-								"y": 1,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 1,
+                "y": 1,
+                "z": -0.18
+              },
+              "direction": "east"
+            }
 					],
 					"stations": [
 						{
@@ -403,13 +423,15 @@
 			"cases": [
 				{
 					"cars": [
-						{
-							"position": {
-								"x": 7,
-								"y": 1,
-								"z": -0.18
-							}
-						}
+            {
+              "position":
+              {
+                "x": 7,
+                "y": 1,
+                "z": -0.18
+              },
+              "direction": "west"
+            }
 					],
 					"stations": [
 						{

@@ -186,7 +186,7 @@ namespace PM {
 
 		protected void FocusOnCanvasPosition(Vector2 target, Vector2 direction) {
 
-			// Calculate Positions
+			// Calculate positions
 			var squarified = SquareifyVector2(direction);
 			var pos = target - squarified.normalized * distanceFromTarget;
 			var parent = (bubbleRect.parent as RectTransform).rect;

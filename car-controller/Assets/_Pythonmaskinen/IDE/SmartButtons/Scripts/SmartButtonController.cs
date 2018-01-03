@@ -95,10 +95,10 @@ namespace PM {
 				// Move to next line
 				offset = new Vector2(0, offset.y - height - margin);
 
-			// min.x = West
-			// min.y = South
-			// max.x = East
-			// max.y = North
+			// min.x = west
+			// min.y = south
+			// max.x = east
+			// max.y = north
 			clone.rect.offsetMin = new Vector2(offset.x, offset.y - height);
 			clone.rect.offsetMax = new Vector2(offset.x + width, offset.y);
 
