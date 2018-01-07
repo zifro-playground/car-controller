@@ -93,7 +93,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 			nextStationToSpawn++;
 		}
 
-		foreach (Obstacled obstacle in caseData.obstacled)
+		foreach (Obstacles obstacle in caseData.obstacles)
 		{
 			Vector3 position = CityGrid.GetWorldPosition(obstacle.position);
 			GameObject obstacleObj = Instantiate(ObstaclePrefab, position, Quaternion.identity);
