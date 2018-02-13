@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		{
 			if (playerObject.GetComponent<PlayerMovement>().AtChargeStation)
 			{
-				PMWrapper.RaiseTaskError("Bilen laddades inte. Kom ihåg att ladda() vid stationen.");
+				PMWrapper.RaiseTaskError("Bilen laddades inte. Kom ihåg att ladda().");
 			}
 			else
 			{
@@ -57,6 +57,8 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 				}
 			}
 		}
+		if (playerObject != null)
+			playerObject.GetComponent<PlayerMovement>().Reset();
 	}
 
 	public void OnPMCaseSwitched(int caseNumber)

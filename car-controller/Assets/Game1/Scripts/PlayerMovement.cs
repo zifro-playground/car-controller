@@ -2,7 +2,7 @@
 using PM;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IPMCompilerStopped
+public class PlayerMovement : MonoBehaviour
 {
 	public float PlayerSpeed = 4;
 
@@ -74,11 +74,6 @@ public class PlayerMovement : MonoBehaviour, IPMCompilerStopped
 		startDirection = carData.direction;
 
 		currentGridPosition = new Vector2(carData.position.x, carData.position.y);
-		Reset();
-	}
-
-	public void OnPMCompilerStopped(HelloCompiler.StopStatus status)
-	{
 		Reset();
 	}
 
