@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PM.Level
 {
-	public class LevelHandler : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged, IPMCaseSwitched
+	public class LevelHandler : MonoBehaviour, IPMCompilerStopped, IPMLevelChanged
 	{
 		public const string settingsResourceName = "settings-master";
 		private static readonly string[] linebreaks = new string[] { "\n\r", "\r\n", "\n", "\r" };
@@ -88,12 +88,6 @@ namespace PM.Level
 		{
 			StopAllCoroutines();
 			currentLevel.caseHandler.ResetHandlerAndButtons();
-		}
-
-		public void OnPMCaseSwitched(int caseNumber)
-		{
-			StopAllCoroutines();
-			UISingleton.instance.answerBubble.HideMessage();
 		}
 	}
 }

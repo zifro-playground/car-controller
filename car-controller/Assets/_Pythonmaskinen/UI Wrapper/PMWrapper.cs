@@ -165,7 +165,6 @@ public static class PMWrapper
 	/// </summary>
 	public static void RunCode()
 	{
-		UISingleton.instance.levelHandler.currentLevel.caseHandler.AllCasesCompleted = false;
 		UISingleton.instance.levelHandler.currentLevel.caseHandler.ResetHandlerAndButtons();
 		UISingleton.instance.levelHandler.currentLevel.caseHandler.RunCase(0);
 	}
@@ -270,7 +269,7 @@ public static class PMWrapper
 	/// <exception cref="ArgumentOutOfRangeException">Thrown if set to value outside of levels list index range, i.e. thrown if <seealso cref="currentLevel"/>.set &lt; 0 or ≥ <seealso cref="numOfLevels"/></exception>
 	public static int currentLevel
 	{
-		get { return UISingleton.instance.levelbar.Current; }
+		get { return UISingleton.instance.levelbar.current; }
 		set
 		{
 			if (value < 0 || value >= numOfLevels)
@@ -285,7 +284,7 @@ public static class PMWrapper
 	/// </summary>
 	public static int previousLevel
 	{
-		get { return UISingleton.instance.levelbar.Previous; }
+		get { return UISingleton.instance.levelbar.previous; }
 	}
 
 	/// <summary>
@@ -294,7 +293,7 @@ public static class PMWrapper
 	/// <exception cref="ArgumentOutOfRangeException">In the case of non-positive values in setting <see cref="numOfLevels"/>.</exception>
 	public static int numOfLevels
 	{
-		get { return UISingleton.instance.levelbar.NumberOfLevels; }
+		get { return UISingleton.instance.levelbar.numOfLevels; }
 		set
 		{
 			if (value > 0) UISingleton.instance.levelbar.RecreateButtons(value, Mathf.Clamp(currentLevel, 0, value - 1), unlockedLevel);
@@ -324,7 +323,7 @@ public static class PMWrapper
 	/// <exception cref="ArgumentOutOfRangeException">In the case of invalid values in setting <see cref="unlockedLevel"/></exception>
 	public static int unlockedLevel
 	{
-		get { return UISingleton.instance.levelbar.Unlocked; }
+		get { return UISingleton.instance.levelbar.unlocked; }
 		set
 		{
 			if (value >= 0 && value < numOfLevels) UISingleton.instance.levelbar.UpdateButtons(currentLevel, value);
@@ -456,14 +455,9 @@ public static class PMWrapper
 		UISingleton.instance.textField.theLineMarker.setErrorMarker(targetWorldPosition, message);
 	}
 
-
-	/// <summary>
-	/// Stops compiler and shows feedback dialog from robot.
-	/// </summary>
 	public static void RaiseTaskError(string message)
 	{
 		UISingleton.instance.taskDescription.ShowTaskError(message);
-		StopCompiler();
 	}
 
 	/// <summary>
