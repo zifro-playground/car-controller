@@ -1,1 +1,1 @@
-﻿5: Räkna ut avståndet bilvägen och svara sedan med *svara()*.
+﻿5: Räkna ut avståndet körvägen och svara sedan med *svara()*.

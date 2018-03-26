@@ -7,7 +7,7 @@ public class Danger : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 			// TODO play crash animation
-			PMWrapper.RaiseTaskError("Bilen kraschade. Undvik vägarbeten.");
+			PMWrapper.RaiseTaskError("Podden kraschade. Undvik vägarbeten.");
 			PMWrapper.StopCompiler();
 		}
 	}

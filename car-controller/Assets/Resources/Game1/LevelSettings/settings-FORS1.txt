@@ -1,4 +1,4 @@
-taskdescription: Styr bilen till laddstationen och sätt den på laddning.
+taskdescription: Styr podden till laddstationen och sätt den på laddning.
 startcode: for i in range(5):\n
 smartbuttons: åk_mot_öst(), åk_mot_väst(), åk_mot_norr(), åk_mot_syd(), ladda()
 rowlimit: 5

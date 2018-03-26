@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 			} else {
 				if (!currentLevelShouldBeAnswered()) {
 					Player.Reset ();
-					PMWrapper.RaiseError ("Bilen kom inte hela vägen fram. Försök igen!");
+					PMWrapper.RaiseError ("Podden kom inte hela vägen fram. Försök igen!");
 				}
 			}
 			

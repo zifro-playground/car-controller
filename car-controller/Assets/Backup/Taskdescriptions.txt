@@ -1,10 +1,10 @@
-﻿Styr bilen till laddstationen och sätt den på laddning.
+﻿Styr podden till laddstationen och sätt den på laddning.
 Vad är stationens x-läge?
-Vad är bilens x-läge?
-Vad är avståndet mellan bilen och stationen?
+Vad är poddens x-läge?
+Vad är avståndet mellan podden och stationen?
 Vad är avståndet till den närmsta stationen?  (Station 1 är västerut och station 2 är österut)
 Vad är stationens x-läge och y-läge?
-Vad är bilens position, dvs x-läge och y-läge?
-Vad är avståndet (bilvägen) mellan bilen och stationen?
-Hur långt bort, bilvägen, ligger närmsta stationen?  (Om de är lika långt borta, så spelar det ingen roll vilken du svarar.)
-Hur långt bort, bilvägen, ligger närmsta stationen?  (Om de är lika långt borta, så spelar det ingen roll vilken du svarar.)
+Vad är poddens position, dvs x-läge och y-läge?
+Vad är avståndet mellan podden och stationen?
+Hur långt bort, körvägen, ligger närmsta stationen?  (Om de är lika långt borta, så spelar det ingen roll vilken du svarar.)
+Hur långt bort, körvägen, ligger närmsta stationen?  (Om de är lika långt borta, så spelar det ingen roll vilken du svarar.)

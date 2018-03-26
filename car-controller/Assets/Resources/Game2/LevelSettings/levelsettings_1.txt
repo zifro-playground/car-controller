@@ -1,4 +1,4 @@
-taskdescription: Vad är bilens x-läge?
+taskdescription: Vad är poddens x-läge?
 startcode:bil_x = kolla_x_läge()
 casecount: 2
 rowlimit: 20
