@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace PM.Level
 {
-
 	public class CaseHandler
 	{
-
 		private int numberOfCases = 1;
 
+		public bool AllCasesCompleted = false;
 		public int CurrentCase = 0;
 		public List<GameObject> CaseButtons;
 
@@ -33,7 +32,7 @@ namespace PM.Level
 				if (i < numberOfCases && numberOfCases > 1)
 				{
 					CaseButtons[i].SetActive(true);
-					CaseButtons[i].GetComponent<CaseButton>().SetButtonActive();
+					CaseButtons[i].GetComponent<CaseButton>().SetButtonDefault();
 				}
 				else
 				{
@@ -45,21 +44,33 @@ namespace PM.Level
 
 		public void SetCurrentCase(int caseNumber)
 		{
+			if (caseNumber != CurrentCase)
+			{
+				// currentCaseButtonUnpressed
+				CaseButtons[CurrentCase].GetComponent<CaseButton>().SetButtonDefault();
 
-			//TODO animate currentCaseButtonUnpressed
-			CurrentCase = Mathf.Clamp(caseNumber, 0, numberOfCases);
-			//TODO animate currentCaseButtonPressed
+				CurrentCase = Mathf.Clamp(caseNumber, 0, numberOfCases);
+
+				CaseFlash.Instance.HideFlash();
+				if (numberOfCases > 1)
+					CaseFlash.Instance.ShowNewCaseFlash(CurrentCase);
+			}
+
+			// currentCaseButtonPressed
+			CaseButtons[CurrentCase].GetComponent<CaseButton>().SetButtonActive();
 
 			// Call every implemented event
 			foreach (var ev in UISingleton.FindInterfaces<IPMCaseSwitched>())
 				ev.OnPMCaseSwitched(CurrentCase);
 		}
-
-		//Add to pmwrapper
+		
 		public void RunCase(int caseNumber)
 		{
-			//TODO animate currentCaseButtonRunning
-			PMWrapper.StartCompiler();
+			CaseFlash.Instance.HideFlash();
+			if (numberOfCases > 1)
+				CaseFlash.Instance.ShowNewCaseFlash(CurrentCase, true);
+			else
+				PMWrapper.StartCompiler();
 
 		}
 
@@ -68,34 +79,35 @@ namespace PM.Level
 		{
 			PMWrapper.StopCompiler();
 
+			UISingleton.instance.levelHandler.StartCoroutine(ShowFeedbackAndRunNextCase());
+		}
+
+		public void CaseFailed()
+		{
+			CaseButtons[CurrentCase].GetComponent<CaseButton>().SetButtonFailed();
+		}
+
+		private IEnumerator ShowFeedbackAndRunNextCase()
+		{
+			UISingleton.instance.taskDescription.ShowPositiveMessage("Test " + (CurrentCase + 1) + " avklarat!");
+
+			yield return new WaitForSeconds(3 * (1 - PMWrapper.speedMultiplier));
+
+			UISingleton.instance.answerBubble.HideMessage();
+			UISingleton.instance.taskDescription.HideTaskFeedback();
 			CaseButtons[CurrentCase].GetComponent<CaseButton>().SetButtonCompleted();
 
 			CurrentCase++;
 
 			if (CurrentCase >= numberOfCases)
 			{
+				AllCasesCompleted = true;
 				PMWrapper.SetLevelCompleted();
-
-				return;
+				yield break;
 			}
 
 			SetCurrentCase(CurrentCase);
 			RunCase(CurrentCase);
 		}
-
-		public void CaseFailed()
-		{
-			UISingleton.instance.StartCoroutine(ResetFailButton());
-		}
-
-		private IEnumerator ResetFailButton()
-		{
-			CaseButtons[CurrentCase].GetComponent<CaseButton>().SetButtonFailed();
-			yield return new WaitForSeconds(2);
-			UISingleton.instance.answerBubble.HideMessage();
-			// TODO UISingleton.instance.errorBubble.HideMessage ();
-			ResetHandlerAndButtons();
-		}
-
 	}
 }

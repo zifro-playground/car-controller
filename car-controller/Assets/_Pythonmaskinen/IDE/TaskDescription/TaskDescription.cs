@@ -4,32 +4,46 @@ using PM;
 
 public class TaskDescription : MonoBehaviour, IPMLevelChanged, IPMCompilerStarted
 {
-	[Header("Object references")]
-	public GameObject bigTDParent;
-	public GameObject smallTDParent;
-	public GameObject feedbackParent;
-	public GameObject iconObject;
+	public Animator IconAnimator;
 
-	[Header("Text references")]
-	public Text taskDescriptionSmall;
-	public Text taskDescriptionBig;
-	public Text feedbackText;
+	[Header("Big task description")]
+	public GameObject LevelStartParent;
+	public Text LevelStartText;
+
+	[Header("Small task description")]
+	public GameObject TaskBarParent;
+	public Text TaskBarText;
+
+	[Header("Positive Feedback")]
+	public GameObject PositiveParent;
+	public Text PositiveText;
+
+	[Header("Positive Feedback")]
+	public GameObject NegativeParent;
+	public Text NegativeText;
+
+	private Animator anim;
+
+	private void Awake()
+	{
+		anim = IconAnimator;
+	}
 
 	public void SetTaskDescription (string taskDescription)
 	{
-		bigTDParent.SetActive (false);
+		LevelStartParent.SetActive (false);
 		if (taskDescription.Length < 1)
 		{
-			smallTDParent.SetActive (false);
+			TaskBarParent.SetActive (false);
 		}
 		else
 		{
-			smallTDParent.SetActive (true);
-			taskDescriptionSmall.text = taskDescription;
+			TaskBarParent.SetActive (true);
+			TaskBarText.text = taskDescription;
 			if (!UISingleton.instance.levelHandler.currentLevel.hasShownTaskDescription)
 			{
-				bigTDParent.SetActive (true);
-				taskDescriptionBig.text = taskDescription;
+				LevelStartParent.SetActive (true);
+				LevelStartText.text = taskDescription;
 				UISingleton.instance.levelHandler.currentLevel.hasShownTaskDescription = true;
 			}
 		}
@@ -38,24 +52,33 @@ public class TaskDescription : MonoBehaviour, IPMLevelChanged, IPMCompilerStarte
 
 	public void ShowTaskError(string message)
 	{
-		feedbackParent.SetActive(true);
-		feedbackText.text = message;
+		NegativeParent.SetActive(true);
+		NegativeText.text = message;
 
-		Animator anim = iconObject.GetComponent<Animator>();
-		anim.SetTrigger("Jump");
+		anim.SetTrigger("Shake");
 	}
 
-	public void HideTaskError()
+	public void HideTaskFeedback()
 	{
-		feedbackParent.SetActive(false);
+		NegativeParent.SetActive(false);
+		PositiveParent.SetActive(false);
+
+	}
+
+	public void ShowPositiveMessage(string message)
+	{
+		PositiveParent.SetActive(true);
+		PositiveText.text = message;
+
+		anim.SetTrigger("Jump");
 	}
 
 	public void OnPMLevelChanged()
 	{
-		HideTaskError();
+		HideTaskFeedback();
 	}
 	public void OnPMCompilerStarted()
 	{
-		HideTaskError();
+		HideTaskFeedback();
 	}
 }

@@ -1,35 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PM;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CaseButton : MonoBehaviour {
-
+public class CaseButton : MonoBehaviour
+{
 	[Header("Button states")]
-	public Sprite active;
-	public Sprite inactive;
-	public Sprite completed;
-	public Sprite failed;
+	public Sprite Default;
+	public Sprite Active;
+	public Sprite Completed;
+	public Sprite Failed;
 
-	public Image image;
+	public Image Image;
 
-	public void SetButtonActive(){
-		image.sprite = active;
+	public void SetButtonDefault()
+	{
+		if (!UISingleton.instance.levelHandler.currentLevel.caseHandler.AllCasesCompleted)
+			Image.sprite = Default;
 	}
 
-	public void SetButtonInactive(){
-		image.sprite = inactive;
+	public void SetButtonActive()
+	{
+		if (!UISingleton.instance.levelHandler.currentLevel.caseHandler.AllCasesCompleted)
+			Image.sprite = Active;
 	}
 
-	public void SetButtonCompleted(){
-		image.sprite = completed;
+	public void SetButtonCompleted()
+	{
+		Image.sprite = Completed;
 	}
 
-	public void SetButtonFailed(){
-		image.sprite = failed;
+	public void SetButtonFailed()
+	{
+		Image.sprite = Failed;
 	}
 
-	public void SwitchToCase (int caseNumber){
-		PMWrapper.SwitchCase (caseNumber);
+	public void SwitchToCase(int caseNumber)
+	{
+		if (PMWrapper.IsCompilerRunning || PMWrapper.IsCompilerUserPaused)
+			return;
+		
+		SetButtonActive();
+		PMWrapper.SwitchCase(caseNumber);
 	}
 }
