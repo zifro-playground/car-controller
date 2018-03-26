@@ -33,7 +33,7 @@ public class CityGrid : MonoBehaviour
 	{
 		float worldX = xMin + position.x * DistanceBetweenPoints;
 		float worldY = yMin + position.y * DistanceBetweenPoints;
-		float worldZ = zMax + position.z;
+        float worldZ = -0.01f;//zMax + position.z;
 
 		return new Vector3(worldX, worldY, worldZ);
 	}
