@@ -8,6 +8,7 @@ public class Danger : MonoBehaviour
 		{
 			// TODO play crash animation
 			PMWrapper.RaiseTaskError("Bilen kraschade. Undvik vägarbeten.");
+			PMWrapper.StopCompiler();
 		}
 	}
 }
