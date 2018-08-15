@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using PM;
 using UnityEngine;
 
@@ -103,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
 		SetDirection("east");
 		isMoving = true;
 	}
-
 	public void MoveWest()
 	{
 		lastPosition = transform.position;
@@ -112,7 +112,6 @@ public class PlayerMovement : MonoBehaviour
 		SetDirection("west");
 		isMoving = true;
 	}
-
 	public void MoveNorth()
 	{
 		lastPosition = transform.position;
@@ -121,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
 		SetDirection("north");
 		isMoving = true;
 	}
-
 	public void MoveSouth()
 	{
 		lastPosition = transform.position;
@@ -135,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (AtChargeStation)
 		{
-			PMWrapper.SetCaseCompleted();
+			StartCoroutine(PlayChargeAnimation());
 		}
 		else
 		{
@@ -155,6 +153,15 @@ public class PlayerMovement : MonoBehaviour
 
 	#endregion
 
+	private IEnumerator PlayChargeAnimation()
+	{
+		var animator = GameObject.FindGameObjectWithTag("ChargeStation").GetComponent<Animator>();
+		animator.SetTrigger("Charge");
+
+		yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+
+		PMWrapper.SetCaseCompleted();
+	}
 }
 
 public enum Direction

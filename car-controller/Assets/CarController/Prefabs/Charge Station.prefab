@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 114268000368103234}
   - component: {fileID: 54813870900142588}
   - component: {fileID: 65613620817177988}
+  - component: {fileID: 95684220781485524}
   m_Layer: 0
   m_Name: Charge Station
   m_TagString: ChargeStation
@@ -175,6 +176,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.55}
   m_Center: {x: 0, y: 0, z: -0.3}
+--- !u!95 &95684220781485524
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1737310554709780}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b4f9554ed3d473f408575bfd7c712aa3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &108330469056068766
 Light:
   m_ObjectHideFlags: 1
