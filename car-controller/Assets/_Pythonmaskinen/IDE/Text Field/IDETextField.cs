@@ -15,8 +15,8 @@ namespace PM
 		public IDELineMarker theLineMarker;
 		public IDEScrollLord theScrollLord;
 		public Text preText;
+        public Text text;
 		public Text visibleText;
-		public Text postText;
 		public IDESpeciallCommands theSpeciallCommands;
 		public int codeRowsLimit = 32;
 		public bool devBuild = false;
@@ -28,7 +28,7 @@ namespace PM
 
 		[NonSerialized]
 		public RectTransform inputRect;
-		private int maxChars = 45;
+		private int maxChars = 100;
 
 		private string lastText = "";
 		private float startYPos;
@@ -49,6 +49,8 @@ namespace PM
 
 		void Start()
 		{
+            text.horizontalOverflow = HorizontalWrapMode.Overflow;
+
 			theLineMarker.initLineMarker(this, theFocusLord);
 
 			inputRect = theInputField.GetComponent<RectTransform>();
@@ -129,16 +131,9 @@ namespace PM
 
 		public void MoveLineMarker()
 		{
-			if (PMWrapper.IsDemoingLevel)
-			{
-				IDELineMarker.instance.SetState(IDELineMarker.State.Hidden);
-			}
-			else
-			{
-				int preRows = (string.IsNullOrEmpty(preCode) ? 0 : preCode.Split('\n').Length) + 1;
-				int selected = preRows + IDEPARSER.calcCurrentSelectedLine(theInputField.caretPosition, theInputField.text);
-				IDELineMarker.SetIDEPosition(selected);
-			}
+			int preRows = (string.IsNullOrEmpty(preCode) ? 0 : preCode.Split('\n').Length) + 1;
+			int selected = preRows + IDEPARSER.calcCurrentSelectedLine(theInputField.caretPosition, theInputField.text);
+			IDELineMarker.SetIDEPosition(selected);
 		}
 
 		public float DetermineYOffset(int lineNumber)
@@ -256,8 +251,7 @@ namespace PM
 			}
 
 			FocusCursor();
-
-			// Save
+			
 			SaveData.SaveMainCode();
 
 			theLineMarker.removeErrorMessage();
@@ -361,6 +355,7 @@ namespace PM
 
 		public void InsertMainCodeAtStart(string code)
 		{
+			// TODO should check if student has played level before
 			if (theInputField.text.Length == 0)
 			{
 				theInputField.text = code;
@@ -402,14 +397,12 @@ namespace PM
 
 		void IPMCompilerStarted.OnPMCompilerStarted()
 		{
-			if (!PMWrapper.IsDemoingLevel)
-				deActivateField();
+			deActivateField();
 		}
 
 		void IPMCompilerStopped.OnPMCompilerStopped(HelloCompiler.StopStatus status)
 		{
-			if (!PMWrapper.IsDemoingLevel)
-				reActivateField();
+			reActivateField();
 		}
 	}
 

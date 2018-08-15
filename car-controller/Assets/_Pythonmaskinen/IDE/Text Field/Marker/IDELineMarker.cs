@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace PM {
@@ -20,7 +17,7 @@ namespace PM {
 
 		private Image theImage;
 		//private static readonly Color functionColor = new Color(0, 1, 1, 0.3f);
-		private static readonly Color walkerColor =  new Color(0, 1, 0, 0.3f);
+		private static readonly Color walkerColor =  new Color(0.2470588f, 0.7215686f, 0.6117647f, 0.4f);
 		private static readonly Color errorColor = new Color(1, 0, 0, 0.3f);
 		private static readonly Color IDEColor = new Color(1, 1, 1, 0.1f);
 

@@ -62,7 +62,15 @@ public interface IPMCaseSwitched {
 }
 
 /// <summary>
-/// Executes <see cref="OnPMWrongAnswer()"/> when wrong answer is passed to the AnswerFunction.
+/// Executes <see cref="OnPMSwitchedToSandbox()"/> when game is switched to sandbox mode.
+/// </summary>
+public interface IPMSwitchedToSandbox
+{
+	void OnPMSwitchedToSandbox();
+}
+
+/// <summary>
+/// Executes <see cref="OnPMWrongAnswer()"/> when wrong answer is passed to the Answer.
 /// </summary>
 public interface IPMWrongAnswer
 {
@@ -70,9 +78,17 @@ public interface IPMWrongAnswer
 }
 
 /// <summary>
-/// Executes <see cref="OnPMCorrectAnswer()"/> when correct answer is passed to the AnswerFunction.
+/// Executes <see cref="OnPMCorrectAnswer()"/> when correct answer is passed to the Answer.
 /// </summary>
 public interface IPMCorrectAnswer
 {
 	void OnPMCorrectAnswer(string answer);
+}
+
+/// <summary>
+/// Executes <see cref="OnPMTimeToCorrectCase()"/> when codewalker har finished and it is time to correct the case.
+/// </summary>
+public interface IPMTimeToCorrectCase
+{
+	void OnPMTimeToCorrectCase();
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Compiler;
 
 namespace PM
 {
@@ -22,14 +23,19 @@ namespace PM
 		float sleepTime = 3f;
 		private float sleepTimer;
 		#endregion
-
-		public static bool ManusPlayerSaysICanContinue = true;
+		
 		public static bool IsSleeping;
 		public static bool WalkerRunning = true;
 		public bool IsUserPaused { get; private set; }
 
+		public static int CurrentLineNumber;
+
 		private static bool doEndWalker;
 		private static Action<HelloCompiler.StopStatus> stopCompiler;
+
+		// Properties needed for input connections to compiler 
+		public static Scope CurrentScope;
+		public static Action<string, Scope> SubmitInput;
 
 		//This Script needs to be added to an object in the scene
 		//To start the compiler simply call "ActivateWalker" Method
@@ -40,13 +46,15 @@ namespace PM
 		/// </summary>
 		public void ActivateWalker(Action<HelloCompiler.StopStatus> stopCompilerMeth)
 		{
-			Compiler.SyntaxCheck.CompileCode(PMWrapper.fullCode, EndWalker, PauseWalker, IDELineMarker.activateFunctionCall, IDELineMarker.SetWalkerPosition);
+			Compiler.SyntaxCheck.CompileCode(PMWrapper.fullCode, EndWalker, PauseWalker, LinkInputSubmitter, IDELineMarker.activateFunctionCall, IDELineMarker.SetWalkerPosition);
+			stopCompiler = stopCompilerMeth;
+
 			enabled = true;
 			WalkerRunning = true;
 			doEndWalker = false;
-			stopCompiler = stopCompilerMeth;
 			IsUserPaused = false;
-			ManusPlayerSaysICanContinue = true;
+
+			CurrentLineNumber = 0;
 		}
 		#endregion
 
@@ -67,17 +75,11 @@ namespace PM
 					return;
 				}
 
-				if (PMWrapper.IsDemoingLevel && !ManusPlayerSaysICanContinue)
-					return;
-
 				try
 				{
 					Runtime.CodeWalker.parseLine();
 
-					if (PMWrapper.IsDemoingLevel)
-					{
-						ManusPlayerSaysICanContinue = false;
-					}
+					CurrentLineNumber++;
 				}
 				catch
 				{
@@ -97,7 +99,7 @@ namespace PM
 		{
 			sleepTimer += Time.deltaTime;
 			float firstInterval = sleepTime - sleepTime / 20;
-			if (sleepTimer > firstInterval)
+			if (sleepTimer > firstInterval && !Runtime.CodeWalker.isWaitingForUserInput)
 			{
 				IDELineMarker.instance.SetState(IDELineMarker.State.Hidden);
 				if (sleepTimer > sleepTime)
@@ -121,6 +123,12 @@ namespace PM
 		public static void PauseWalker()
 		{
 			WalkerRunning = false;
+		}
+
+		public static void LinkInputSubmitter(Action<string, Scope> submitInput, Scope currentScope)
+		{
+			SubmitInput = submitInput;
+			CurrentScope = currentScope;
 		}
 		#endregion
 

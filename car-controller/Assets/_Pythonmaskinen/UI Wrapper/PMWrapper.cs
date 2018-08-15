@@ -1,8 +1,9 @@
 using PM;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using CodeWalker = PM.CodeWalker;
 
 /// <summary>
 /// PMWrapper, short for "Python Machine Wrapper".
@@ -17,6 +18,14 @@ public static class PMWrapper
 	public const string Version = "1.2.0";
 
 	/// <summary>
+	/// Tells which mode the level is currently running. See <see cref="PM.LevelMode"/> for avaliable modes.
+	/// </summary>
+	public static LevelMode LevelMode
+	{
+		get { return LevelModeController.Instance.LevelMode; }
+	}
+
+	/// <summary>
 	/// Value from the speed slider. Ranges from 0 to 1, with a default of 0.5.
 	/// <para>To get instant updates from the speed change, use <see cref="IPMSpeedChanged"/>.</para>
 	/// </summary>
@@ -26,11 +35,19 @@ public static class PMWrapper
 		set { UISingleton.instance.speed.currentSpeed = value; }
 	}
 
-	public static float codewalkerBaseSpeed
+	/// <summary>
+	/// A base factor in how long it takes for the walker to take one step in the code. 
+	/// It is multiplied with <see cref="speedMultiplier"/> to calculate the actual step time.
+	/// </summary>
+	public static float walkerStepTime
 	{
 		get { return UISingleton.instance.walker.BaseWalkerWaitTime; }
 		set { UISingleton.instance.walker.BaseWalkerWaitTime = value; }
 	}
+
+    public static Level LevelData{
+        get { return Main.Instance.LevelData; }
+    }
 
 	/// <summary>
 	/// The pre code, i.e. the un-changeable code BEFORE the main code.
@@ -69,7 +86,7 @@ public static class PMWrapper
 
 	/// <summary>
 	/// All codes combined, i.e. <see cref="preCode"/> + <see cref="mainCode"/> + <see cref="postCode"/> (with linebreaks inbetween).
-	/// <para>This is the property that <seealso cref="CodeWalker"/> uses when sending the code to compile to the <seealso cref="Compiler.SyntaxCheck"/>.</para>
+	/// <para>This is the property that <seealso cref="PM.CodeWalker"/> uses when sending the code to compile to the <seealso cref="Compiler.SyntaxCheck"/>.</para>
 	/// </summary>
 	public static string fullCode
 	{
@@ -110,6 +127,11 @@ public static class PMWrapper
 		UISingleton.instance.textField.InsertMainCodeAtStart(code);
 	}
 
+	public static int CurrentLineNumber
+	{
+		get { return CodeWalker.CurrentLineNumber; }
+	}
+
 	/// <summary>
 	/// Scrolls so that the <paramref name="lineNumber"/> is visible in the IDE.
 	/// </summary>
@@ -127,6 +149,11 @@ public static class PMWrapper
 	}
 
 	/// <summary>
+	/// Boolean representing wether cases is currently running or not.
+	/// </summary>
+	public static bool IsCasesRunning { get { return Main.Instance.CaseHandler.IsCasesRunning; } }
+
+	/// <summary>
 	/// Boolean representing wether the compiler is currently executing or not.
 	/// </summary>
 	public static bool IsCompilerRunning { get { return UISingleton.instance.compiler.isRunning; } }
@@ -135,22 +162,6 @@ public static class PMWrapper
 	/// Boolean representing wether the walker is currently paused by the user (via pressing the pause button).
 	/// </summary>
 	public static bool IsCompilerUserPaused { get { return UISingleton.instance.walker.IsUserPaused; } }
-
-	/// <summary>
-	/// Wether or not the level is playing && is in "demo" mode.
-	/// </summary>
-	public static bool IsDemoingLevel
-	{
-		get { return PM.Manus.ManusPlayer.isPlaying; }
-	}
-	/// <summary>
-	/// Wether or not the current level has demo manus.
-	/// <para>"One could ask, is general Juhziz in charge?"</para>
-	/// </summary>
-	public static bool IsDemoLevel
-	{
-		get { return PMWrapper.currentLevel < PM.Manus.Loader.allManuses.Count && PMWrapper.currentLevel >= 0 && PM.Manus.Loader.allManuses[PMWrapper.currentLevel] != null; }
-	}
 
 	/// <summary>
 	/// Starts the compiler if it's not currently running. Static wrapper for <see cref="HelloCompiler.compileCode"/>
@@ -165,32 +176,41 @@ public static class PMWrapper
 	/// </summary>
 	public static void RunCode()
 	{
-		UISingleton.instance.levelHandler.currentLevel.caseHandler.AllCasesCompleted = false;
-		UISingleton.instance.levelHandler.currentLevel.caseHandler.ResetHandlerAndButtons();
-		UISingleton.instance.levelHandler.currentLevel.caseHandler.RunCase(0);
+		LevelModeController.Instance.RunProgram();
 	}
 
 	/// <summary>
-	/// Stops the compiler if it's currently running. Static wrapper for <see cref="HelloCompiler.stopCompiler(HelloCompiler.StopStatus)"/> with the argument <seealso cref="HelloCompiler.StopStatus.Forced"/>
+	/// Stops the compiler if it's currently running. Static wrapper for <see cref="HelloCompiler.stopCompiler(HelloCompiler.StopStatus)"/> with the argument <seealso cref="HelloCompiler.StopStatus.CodeForced"/>
 	/// </summary>
 	public static void StopCompiler()
 	{
-		UISingleton.instance.compiler.stopCompiler(HelloCompiler.StopStatus.Forced);
+		UISingleton.instance.compiler.stopCompiler(HelloCompiler.StopStatus.CodeForced);
 	}
 
 	/// <summary>
-	/// Sets the compiler functions avalible for the user. Called from levelsettings when new level is loaded and adds functions from levelsettings text file.
+	/// Sets the compiler functions avalible for the user.
 	/// </summary>
-	public static void SetCompilerFunctions(params Compiler.Function[] functions)
+	public static void SetCompilerFunctions(List<Compiler.Function> functions)
 	{
-		UISingleton.instance.compiler.addedFunctions = new List<Compiler.Function>(functions);
+		SetSmartButtons(functions.Select(function => function.buttonText).ToList());
+		UISingleton.instance.compiler.addedFunctions = functions;
 	}
 
 	/// <summary>
 	/// Adds a list of functions to the already existing list of compiler functions.
 	/// </summary>
+	public static void AddCompilerFunctions(List<Compiler.Function> functions)
+	{
+		AddSmartButtons(functions.Select(function => function.buttonText).ToList());
+		UISingleton.instance.compiler.addedFunctions.AddRange(functions);
+	}
+
+	/// <summary>
+	/// Adds all parameters of type <see cref="HelloCompiler.stopCompiler(Compiler.Function)"/> to the already existing list of compiler functions.
+	/// </summary>
 	public static void AddCompilerFunctions(params Compiler.Function[] functions)
 	{
+		AddSmartButtons(functions.Select(function => function.buttonText).ToList());
 		UISingleton.instance.compiler.addedFunctions.AddRange(functions);
 	}
 
@@ -203,8 +223,7 @@ public static class PMWrapper
 	}
 
 	/// <summary>
-	/// Creates multiple smart buttons below the code view. Once pressed, it inserts code into the main code view.
-	/// <para>If you wish to clear away all smart buttons, run this function or <seealso cref="SetSmartRichButtons(string[])"/> with empty parameters.</para>
+	/// Set smart buttons from parameters.
 	/// </summary>
 	public static void SetSmartButtons(params string[] codes)
 	{
@@ -216,11 +235,36 @@ public static class PMWrapper
 	}
 
 	/// <summary>
-	/// Creates one smart button below the code view. Once pressed, it inserts code into the main code view.
+	/// Set smart buttons from list.
 	/// </summary>
-	public static void AddSmartButton(string code)
+	public static void SetSmartButtons(List<string> buttonTexts)
 	{
-		UISingleton.instance.smartButtons.AddSmartButton(code, code);
+		UISingleton.instance.smartButtons.ClearSmartButtons();
+		for (int i = 0; i < buttonTexts.Count; i++)
+		{
+			UISingleton.instance.smartButtons.AddSmartButton(buttonTexts[i], buttonTexts[i]);
+		}
+	}
+
+	/// <summary>
+	/// Add one smart button below code window.
+	/// <para>Text on button</para>
+	/// </summary>
+	public static void AddSmartButton(string buttonText)
+	{
+		UISingleton.instance.smartButtons.AddSmartButton(buttonText, buttonText);
+	}
+
+	/// <summary>
+	/// Add one smart button below code window.
+	/// <para>Text on button</para>
+	/// </summary>
+	public static void AddSmartButtons(List<string> buttonTexts)
+	{
+		for (int i = 0; i < buttonTexts.Count; i++)
+		{
+			UISingleton.instance.smartButtons.AddSmartButton(buttonTexts[i], buttonTexts[i]);
+		}
 	}
 
 	/// <summary>
@@ -234,9 +278,9 @@ public static class PMWrapper
 	/// <summary>
 	/// Set the task description for current level. If passed empty string, both placeholders for task description will be deactivated.
 	/// </summary>
-	public static void SetTaskDescription(string taskDescription)
+    public static void SetTaskDescription(string header,string body)
 	{
-		UISingleton.instance.taskDescription.SetTaskDescription(taskDescription);
+        UISingleton.instance.taskDescription.SetTaskDescription(header, body);
 	}
 
 	/// <summary>
@@ -244,7 +288,7 @@ public static class PMWrapper
 	/// </summary>
 	public static void SetCaseAnswer(params int[] answer)
 	{
-		UISingleton.instance.levelHandler.currentLevel.levelAnswer = new PM.Level.LevelAnswer(answer);
+		Main.Instance.LevelAnswer = new LevelAnswer(answer);
 	}
 
 	/// <summary>
@@ -252,7 +296,7 @@ public static class PMWrapper
 	/// </summary>
 	public static void SetCaseAnswer(params string[] answer)
 	{
-		UISingleton.instance.levelHandler.currentLevel.levelAnswer = new PM.Level.LevelAnswer(answer);
+		Main.Instance.LevelAnswer = new LevelAnswer(answer);
 	}
 
 	/// <summary>
@@ -260,7 +304,7 @@ public static class PMWrapper
 	/// </summary>
 	public static void SetCaseAnswer(params bool[] answer)
 	{
-		UISingleton.instance.levelHandler.currentLevel.levelAnswer = new PM.Level.LevelAnswer(answer);
+		Main.Instance.LevelAnswer = new LevelAnswer(answer);
 	}
 
 	/// <summary>
@@ -303,7 +347,7 @@ public static class PMWrapper
 	}
 
 	/// <summary>
-	/// Returns true if current level has defined AnswerFunction and the user is supposed to answer level.
+	/// Returns true if current level has defined Answer and the user is supposed to answer level.
 	/// </summary>
 	public static bool levelShouldBeAnswered
 	{
@@ -311,7 +355,7 @@ public static class PMWrapper
 		{
 			foreach (Compiler.Function fun in UISingleton.instance.compiler.addedFunctions)
 			{
-				if (fun.GetType() == new AnswerFunction().GetType())
+				if (fun.GetType() == new Answer().GetType())
 					return true;
 			}
 			return false;
@@ -333,19 +377,11 @@ public static class PMWrapper
 	}
 
 	/// <summary>
-	/// The highest level that has had it's story revealed.
-	/// </summary>
-	public static int storydLevel
-	{
-		get { return UISingleton.instance.levelHints.storyRevealedForLevel; }
-	}
-
-	/// <summary>
 	/// Returns the index of the current case. Index starts from 0.
 	/// </summary>
 	public static int currentCase
 	{
-		get { return UISingleton.instance.levelHandler.currentLevel.caseHandler.CurrentCase; }
+		get { return Main.Instance.CaseHandler.CurrentCase; }
 	}
 
 	/// <summary>
@@ -361,7 +397,7 @@ public static class PMWrapper
 	/// </summary>
 	public static void SetCaseCompleted()
 	{
-		UISingleton.instance.levelHandler.currentLevel.caseHandler.CaseCompleted();
+		Main.Instance.CaseHandler.CaseCompleted();
 	}
 
 	/// <summary>
@@ -370,7 +406,7 @@ public static class PMWrapper
 	/// <param name="caseNumber">The case number to switch to.</param> 
 	public static void SwitchCase(int caseNumber)
 	{
-		UISingleton.instance.levelHandler.currentLevel.caseHandler.SetCurrentCase(caseNumber);
+		Main.Instance.CaseHandler.SetCurrentCase(caseNumber);
 	}
 
 	/// <summary>
@@ -388,22 +424,6 @@ public static class PMWrapper
 	public static void JumpToFirstLevel()
 	{
 		currentLevel = 0;
-	}
-
-	/// <summary>
-	/// Shows the "Help I'm stuck!" popup.
-	/// </summary>
-	public static void ShowHintsPopup()
-	{
-		UISingleton.instance.levelHints.ButtonShowHintScreen();
-	}
-
-	/// <summary>
-	/// Hides the "Help I'm stuck!" popup.
-	/// </summary>
-	public static void HideHintsPopup()
-	{
-		UISingleton.instance.levelHints.StartHideFading();
 	}
 
 	/// <summary>
@@ -463,6 +483,7 @@ public static class PMWrapper
 	public static void RaiseTaskError(string message)
 	{
 		UISingleton.instance.taskDescription.ShowTaskError(message);
+		Main.Instance.CaseHandler.CaseFailed();
 		StopCompiler();
 	}
 
@@ -476,5 +497,4 @@ public static class PMWrapper
 			UISingleton.instance.ideRoot.parent = null;
 		UnityEngine.Object.DontDestroyOnLoad(UISingleton.instance.ideRoot);
 	}
-
 }

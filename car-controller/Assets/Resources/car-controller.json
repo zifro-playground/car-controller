@@ -1,0 +1,676 @@
+﻿{
+	"activeLevels": [
+		{
+			"sceneName": "Scene1",
+			"levelId": "HCNE1"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "HCNE2"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "HCNW1"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "FORE1"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "FORS1"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "FORSE"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "2FOR1"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "FORD1"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "FORD2"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "FORDO"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "FOR2D"
+		},
+		{
+			"sceneName": "Scene1",
+			"levelId": "FOR2S"
+		}
+	],
+	"scenes": [
+		{
+			"name": "Scene1",
+			"sceneSettings": {
+				"availableFunctions": [
+					"MoveEast",
+					"MoveWest",
+					"MoveNorth",
+					"MoveSouth",
+					"Charge"
+				]
+			},
+			"levels": [
+				{
+					"id": "HCNE1",
+					"guideBubbles": [
+						{
+							"target": "1",
+							"text": "Här skriver du koden! Den bestämmer vad som kommer att hända ute till höger."
+						},
+						{
+							"target": "play",
+							"text": "Klicka på play för att köra koden!"
+						}
+					],
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"startCode": "åk_mot_öst()\nåk_mot_öst()\nåk_mot_öst()\nåk_mot_norr()\nladda()",
+						"rowLimit": 10
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 3,
+									"y": 3,
+									"z": -0.18
+								},
+								"direction": "east"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 6,
+									"y": 4,
+									"z": -0.5
+								}
+							}
+						],
+						"obstacles": []
+					}
+				},
+				{
+					"id": "HCNE2",
+					"guideBubbles": [
+						{
+							"target": "1",
+							"text": "Nu är det din tur!"
+						}
+					],
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"rowLimit": 10
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 3,
+									"y": 3,
+									"z": -0.18
+								},
+								"direction": "east"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 4,
+									"y": 7,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": [
+							{
+								"position": {
+									"x": 5.5,
+									"y": 4,
+									"z": -0.6
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": "HCNW1",
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"rowLimit": 10
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 7,
+									"y": 3,
+									"z": -0.18
+								},
+								"direction": "west"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 5,
+									"y": 7,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": [
+							{
+								"position": {
+									"x": 6.5,
+									"y": 6,
+									"z": -0.6
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": "FORE1",
+					"guideBubbles": [
+						{
+							"target": "1",
+							"text": "Här är en for-slinga. Den här gör så att koden under kommer att köras <b>6</b> gånger."
+						},
+						{
+							"target": "2",
+							"text": "Koden som står en tabb in från vänsterkanten kommer att upprepas."
+						},
+						{
+							"target": "3",
+							"text": "<b>ladda()</b> körs bara en gång eftersom den inte är en tabb in."
+						},
+						{
+							"target": "play",
+							"text": "Testa att köra!"
+						}
+					],
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"startCode": "for i in range(6):\n\tåk_mot_öst()\nladda()",
+						"rowLimit": 5
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 2,
+									"y": 5,
+									"z": -0.18
+								},
+								"direction": "east"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 8,
+									"y": 5,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": []
+					}
+				},
+				{
+					"id": "FORS1",
+					"guideBubbles": [
+						{
+							"target": "2",
+							"text": "Fyll på med kod!"
+						}
+					],
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"startCode": "for i in range(5):\n",
+						"rowLimit": 5
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 5,
+									"y": 2,
+									"z": -0.18
+								},
+								"direction": "north"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 5,
+									"y": 7,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": [
+							{
+								"position": {
+									"x": 3,
+									"y": 3,
+									"z": -0.6
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": "FORSE",
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"rowLimit": 5
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 5,
+									"y": 2,
+									"z": -0.18
+								},
+								"direction": "north"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 6,
+									"y": 7,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": [
+							{
+								"position": {
+									"x": 3,
+									"y": 3,
+									"z": -0.6
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": "2FOR1",
+					"guideBubbles": [
+						{
+							"target": "3",
+							"text": "Fyll på med kod!"
+						}
+					],
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"startCode": "for i in range(6):\n\tåk_mot_öst()",
+						"rowLimit": 5
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 2,
+									"y": 2,
+									"z": -0.18
+								},
+								"direction": "east"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 8,
+									"y": 7,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": [
+							{
+								"position": {
+									"x": 2,
+									"y": 3.5,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 7,
+									"y": 5.5,
+									"z": -0.6
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": "FORD1",
+					"guideBubbles": [
+						{
+							"target": "1",
+							"text": "Här kan vi välja att sick-sacka mot stationen."
+						},
+						{
+							"target": "play",
+							"text": "Testa att köra!"
+						}
+					],
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"startCode": "for i in range(5):\n\tåk_mot_öst()\n\tåk_mot_norr()\nladda()",
+						"rowLimit": 5
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 2,
+									"y": 2,
+									"z": -0.18
+								},
+								"direction": "east"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 7,
+									"y": 7,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": [
+							{
+								"position": {
+									"x": 2,
+									"y": 6.5,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 7,
+									"y": 3,
+									"z": -0.6
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": "FORD2",
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"rowLimit": 5
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 8,
+									"y": 2,
+									"z": -0.18
+								},
+								"direction": "west"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 3,
+									"y": 7,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": [
+							{
+								"position": {
+									"x": 3,
+									"y": 3.5,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 8,
+									"y": 4.5,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 6.5,
+									"y": 7,
+									"z": -0.6
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": "FORDO",
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"rowLimit": 5
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 2,
+									"y": 7,
+									"z": -0.18
+								},
+								"direction": "south"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 7,
+									"y": 2,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": [
+							{
+								"position": {
+									"x": 2,
+									"y": 3.5,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 3,
+									"y": 6.5,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 7,
+									"y": 4.5,
+									"z": -0.6
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": "FOR2D",
+					"guideBubbles": [
+						{
+							"target": "1",
+							"text": "Här sick-sackar vi med större steg för att undvika vägarbetena."
+						},
+						{
+							"target": "play",
+							"text": "Testa att köra!"
+						}
+					],
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"startCode": "for i in range(3):\n\tåk_mot_norr()\n\tåk_mot_norr()\n\tåk_mot_öst()\n\tåk_mot_öst()\nladda()",
+						"rowLimit": 10
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 1,
+									"y": 1,
+									"z": -0.18
+								},
+								"direction": "east"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 7,
+									"y": 7,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": [
+							{
+								"position": {
+									"x": 1,
+									"y": 5,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 2,
+									"y": 2,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 6,
+									"y": 5.5,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 7,
+									"y": 2.5,
+									"z": -0.6
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": "FOR2S",
+					"levelSettings": {
+						"taskDescription": {
+							"header": "Styr podden till laddstationen och sätt den på laddning."
+						},
+						"rowLimit": 10
+					},
+					"levelDefinition": {
+						"cars": [
+							{
+								"position": {
+									"x": 7,
+									"y": 7,
+									"z": -0.18
+								},
+								"direction": "south"
+							}
+						],
+						"stations": [
+							{
+								"position": {
+									"x": 1,
+									"y": 1,
+									"z": -0.18
+								}
+							}
+						],
+						"obstacles": [
+							{
+								"position": {
+									"x": 2.5,
+									"y": 2,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 1,
+									"y": 4.5,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 6.5,
+									"y": 1,
+									"z": -0.6
+								}
+							},
+							{
+								"position": {
+									"x": 3.5,
+									"y": 4,
+									"z": -0.6
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	]
+}
