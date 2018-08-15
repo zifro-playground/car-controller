@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		foreach (Station station in caseData.stations)
 		{
 			Vector3 position = CityGrid.GetWorldPosition(station.position);
-			GameObject stationObj = Instantiate(ChargeStationPrefabs[nextStationToSpawn], position, Quaternion.Euler(new Vector3(90, 0, 0)));
+			GameObject stationObj = Instantiate(ChargeStationPrefabs[nextStationToSpawn], position, Quaternion.Euler(new Vector3(0, 0, 0)));
 			stationObj.GetComponent<ChargeStation>().position = new Vector2(position.x, position.y);
 			ChargeStations.Add(stationObj);
 			nextStationToSpawn++;
