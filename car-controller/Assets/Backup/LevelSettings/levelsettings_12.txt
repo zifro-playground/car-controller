@@ -1,4 +1,0 @@
-precode: station_x = 3\nstation_y = 5
-startcode: bil_x = kolla_x_läge()\n\navstånd_x = station_x - bil_x
-smartbuttons: kolla_x_läge(), kolla_y_läge(), svara()
-casecount: 2

@@ -1,1 +1,0 @@
-﻿1: Här sparas poddens x-läge i variabeln *bil_x*.

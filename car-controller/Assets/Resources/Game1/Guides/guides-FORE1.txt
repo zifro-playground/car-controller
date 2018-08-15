@@ -1,4 +1,0 @@
-1: Här är en for-slinga. Den här gör så att koden under kommer att köras <b>6</b> gånger.
-2: Koden som står ett hopp in från vänsterkanten kommer att upprepas.
-4: <b>ladda()</b> körs bara en gång, för den är inte ett hopp in.
-play: Testa att köra!

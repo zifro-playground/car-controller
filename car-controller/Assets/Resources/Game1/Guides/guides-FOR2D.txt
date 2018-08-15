@@ -1,2 +1,0 @@
-1: Här sick-sackar vi med större steg för att undvika vägarbetena.
-play: Testa att köra!

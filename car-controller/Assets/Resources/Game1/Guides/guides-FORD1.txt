@@ -1,2 +1,0 @@
-1: Här kan vi välja att sick-sacka mot stationen.
-play: Testa att köra!

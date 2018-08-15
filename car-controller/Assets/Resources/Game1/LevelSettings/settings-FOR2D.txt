@@ -1,5 +1,0 @@
-﻿taskdescription: Styr podden till laddstationen och sätt den på laddning.
-startcode: for i in range(3):\n\tåk_mot_norr()\n\tåk_mot_norr()\n\tåk_mot_öst()\n\tåk_mot_öst()\n\nladda()
-smartbuttons: åk_mot_öst(), åk_mot_väst(), åk_mot_norr(), åk_mot_syd(), ladda()
-rowlimit: 10
-functions: MoveEast, MoveWest, MoveNorth, MoveSouth, Charge
