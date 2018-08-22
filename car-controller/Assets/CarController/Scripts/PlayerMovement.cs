@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	public float PlayerSpeed = 4;
+	public bool isCharging;
 
 	private Vector2 currentGridPosition;
 	private Vector3 startPosition;
@@ -133,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (AtChargeStation)
 		{
+			isCharging = true;
 			StartCoroutine(PlayChargeAnimation());
 		}
 		else
@@ -161,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
 		yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
 		PMWrapper.SetCaseCompleted();
+		isCharging = false;
 	}
 }
 

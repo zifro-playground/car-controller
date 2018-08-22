@@ -19,15 +19,24 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 	public void OnPMCompilerStopped(HelloCompiler.StopStatus status)
 	{
+		PlayerMovement playerMovement = null;
+		if (playerObject != null)
+			playerMovement = playerObject.GetComponent<PlayerMovement>();
+
 		if (status == HelloCompiler.StopStatus.Finished)
 		{
-			if (playerObject.GetComponent<PlayerMovement>().AtChargeStation)
-				PMWrapper.RaiseTaskError("Podden laddades inte. Kom ihåg att ladda().");
+			if (playerMovement != null && playerMovement.AtChargeStation)
+			{
+				if (!playerMovement.isCharging)
+					PMWrapper.RaiseTaskError("Podden laddades inte. Kom ihåg att ladda().");
+			}
 			else
+			{
 				PMWrapper.RaiseTaskError("Podden kom inte hela vägen fram.");
+			}
 		}
-		if (playerObject != null)
-			playerObject.GetComponent<PlayerMovement>().Reset();
+		if (playerMovement != null && !playerMovement.isCharging)
+			playerMovement.Reset();
 	}
 
 	public void OnPMCaseSwitched(int caseNumber)
