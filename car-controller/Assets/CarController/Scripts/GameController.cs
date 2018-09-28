@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 	private void CreateAssets()
 	{
-		var levelDefinition = PMWrapper.LevelData.levelDefinition;
+		var levelDefinition = PMWrapper.CurreLevel.levelDefinition;
 
 		foreach (Car car in levelDefinition.cars)
 		{

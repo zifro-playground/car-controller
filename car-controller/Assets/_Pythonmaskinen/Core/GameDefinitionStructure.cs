@@ -28,7 +28,11 @@ public class LevelSettings
 {
 	public string precode { get; set; }
 	public string startCode { get; set; }
-	public int rowLimit { get; set; }
+    /// <summary>
+    /// Example of sultion code for current level. Precode is excluded.
+    /// </summary>
+    public string exampleSolutionCode { get; set; }
+    public int rowLimit { get; set; }
     public TaskDescription taskDescription { get; set; }
 	public List<string> availableFunctions { get; set; }
 }
@@ -105,6 +109,7 @@ public class Scene
 
 public class GameDefinition
 {
+	public string gameId { get; set; }
 	public List<ActiveLevel> activeLevels { get; set; }
 	public List<Scene> scenes { get; set; }
 }
