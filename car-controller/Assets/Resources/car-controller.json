@@ -1,7 +1,6 @@
 ﻿{
   "gameId": "CARCONTROLLER",
-  "activeLevels":
-  [
+  "activeLevels": [
     {
       "sceneName": "Scene1",
       "levelId": "CARCONTROLLER_HCNE1"
@@ -51,14 +50,11 @@
       "levelId": "CARCONTROLLER_FOR2S"
     }
   ],
-  "scenes":
-  [
+  "scenes": [
     {
       "name": "Scene1",
-      "sceneSettings":
-      {
-        "availableFunctions":
-        [
+      "sceneSettings": {
+        "availableFunctions": [
           "MoveEast",
           "MoveWest",
           "MoveNorth",
@@ -66,12 +62,10 @@
           "Charge"
         ]
       },
-      "levels":
-      [
+      "levels": [
         {
           "id": "CARCONTROLLER_HCNE1",
-          "guideBubbles":
-          [
+          "guideBubbles": [
             {
               "target": "1",
               "text": "Här skriver du koden! Den bestämmer vad som kommer att hända ute till höger."
@@ -81,22 +75,18 @@
               "text": "Klicka på play för att köra koden!"
             }
           ],
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
             "startCode": "åk_mot_öst()\nåk_mot_öst()\nåk_mot_öst()\nåk_mot_norr()\nladda()",
+            "exampleSolutionCode": "åk_mot_öst()\nåk_mot_öst()\nåk_mot_öst()\nåk_mot_norr()\nladda()",
             "rowLimit": 10
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 3,
                   "y": 3,
                   "z": -0.18
@@ -104,46 +94,38 @@
                 "direction": "east"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 6,
                   "y": 4,
                   "z": -0.5
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
             ]
           }
         },
         {
           "id": "CARCONTROLLER_HCNE2",
-          "guideBubbles":
-          [
+          "guideBubbles": [
             {
               "target": "1",
               "text": "Nu är det din tur!"
             }
           ],
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
+            "exampleSolutionCode": "åk_mot_öst()\nåk_mot_öst()\nåk_mot_norr()\nåk_mot_norr()\nåk_mot_norr()\nåk_mot_norr()\nladda()",
             "rowLimit": 10
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 5,
                   "y": 3,
                   "z": -0.18
@@ -151,22 +133,18 @@
                 "direction": "east"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 7,
                   "y": 7,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
               {
-                "position":
-                {
+                "position": {
                   "x": 5.5,
                   "y": 4,
                   "z": -0.6
@@ -177,21 +155,17 @@
         },
         {
           "id": "CARCONTROLLER_HCNW1",
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
+            "exampleSolutionCode": "åk_mot_väst()\nåk_mot_väst()\nåk_mot_norr()\nåk_mot_norr()\nåk_mot_norr()\nåk_mot_norr()\nladda()",
             "rowLimit": 10
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 7,
                   "y": 3,
                   "z": -0.18
@@ -199,22 +173,18 @@
                 "direction": "west"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 5,
                   "y": 7,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
               {
-                "position":
-                {
+                "position": {
                   "x": 6.5,
                   "y": 6,
                   "z": -0.6
@@ -225,8 +195,7 @@
         },
         {
           "id": "CARCONTROLLER_FORE1",
-          "guideBubbles":
-          [
+          "guideBubbles": [
             {
               "target": "1",
               "text": "Här är en for-slinga. Den här gör så att koden under kommer att köras <b>6</b> gånger."
@@ -244,22 +213,18 @@
               "text": "Testa att köra!"
             }
           ],
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
             "startCode": "for i in range(6):\n\tåk_mot_öst()\nladda()",
+            "exampleSolutionCode": "for i in range(6):\n\tåk_mot_öst()\nladda()",
             "rowLimit": 5
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 2,
                   "y": 5,
                   "z": -0.18
@@ -267,47 +232,39 @@
                 "direction": "east"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 8,
                   "y": 5,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
             ]
           }
         },
         {
           "id": "CARCONTROLLER_FORS1",
-          "guideBubbles":
-          [
+          "guideBubbles": [
             {
               "target": "2",
               "text": "Fyll på med kod!"
             }
           ],
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
             "startCode": "for i in range(5):\n",
+            "exampleSolutionCode": "for i in range(5):\n\tåk_mot_norr()\nladda()",
             "rowLimit": 5
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 5,
                   "y": 2,
                   "z": -0.18
@@ -315,22 +272,18 @@
                 "direction": "north"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 5,
                   "y": 7,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
               {
-                "position":
-                {
+                "position": {
                   "x": 3,
                   "y": 3,
                   "z": -0.6
@@ -341,21 +294,17 @@
         },
         {
           "id": "CARCONTROLLER_FORSE",
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
+            "exampleSolutionCode": "for i in range(5):\n\tåk_mot_norr()\nåk_mot_öst()\nladda()",
             "rowLimit": 5
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 5,
                   "y": 2,
                   "z": -0.18
@@ -363,22 +312,18 @@
                 "direction": "north"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 6,
                   "y": 7,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
               {
-                "position":
-                {
+                "position": {
                   "x": 3,
                   "y": 3,
                   "z": -0.6
@@ -389,29 +334,24 @@
         },
         {
           "id": "CARCONTROLLER_2FOR1",
-          "guideBubbles":
-          [
+          "guideBubbles": [
             {
               "target": "3",
               "text": "Fyll på med kod!"
             }
           ],
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
             "startCode": "for i in range(6):\n\tåk_mot_öst()",
+            "exampleSolutionCode": "for i in range(6):\n\tåk_mot_öst()\nfor i in range(5):\n\tåk_mot_norr()\nladda()",
             "rowLimit": 5
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 2,
                   "y": 2,
                   "z": -0.18
@@ -419,30 +359,25 @@
                 "direction": "east"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 8,
                   "y": 7,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
               {
-                "position":
-                {
+                "position": {
                   "x": 2,
                   "y": 3.5,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 7,
                   "y": 5.5,
                   "z": -0.6
@@ -453,8 +388,7 @@
         },
         {
           "id": "CARCONTROLLER_FORD1",
-          "guideBubbles":
-          [
+          "guideBubbles": [
             {
               "target": "1",
               "text": "Här kan vi välja att sick-sacka mot stationen."
@@ -464,22 +398,18 @@
               "text": "Testa att köra!"
             }
           ],
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
             "startCode": "for i in range(5):\n\tåk_mot_öst()\n\tåk_mot_norr()\nladda()",
+            "exampleSolutionCode": "for i in range(5):\n\tåk_mot_öst()\n\tåk_mot_norr()\nladda()",
             "rowLimit": 5
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 2,
                   "y": 2,
                   "z": -0.18
@@ -487,30 +417,25 @@
                 "direction": "east"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 7,
                   "y": 7,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
               {
-                "position":
-                {
+                "position": {
                   "x": 2,
                   "y": 6.5,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 7,
                   "y": 3,
                   "z": -0.6
@@ -521,21 +446,17 @@
         },
         {
           "id": "CARCONTROLLER_FORD2",
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
+            "exampleSolutionCode": "for i in range(5):\n\tåk_mot_väst()\n\tåk_mot_norr()\nladda()",
             "rowLimit": 5
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 8,
                   "y": 2,
                   "z": -0.18
@@ -543,38 +464,32 @@
                 "direction": "west"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 3,
                   "y": 7,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
               {
-                "position":
-                {
+                "position": {
                   "x": 3,
                   "y": 3.5,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 8,
                   "y": 4.5,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 6.5,
                   "y": 7,
                   "z": -0.6
@@ -585,21 +500,17 @@
         },
         {
           "id": "CARCONTROLLER_FORDO",
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
+            "exampleSolutionCode": "for i in range(5):\n\tåk_mot_syd()\n\tåk_mot_öst()\nladda()",
             "rowLimit": 5
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 2,
                   "y": 7,
                   "z": -0.18
@@ -607,38 +518,32 @@
                 "direction": "south"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 7,
                   "y": 2,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
               {
-                "position":
-                {
+                "position": {
                   "x": 2,
                   "y": 3.5,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 3,
                   "y": 6.5,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 7,
                   "y": 4.5,
                   "z": -0.6
@@ -649,33 +554,17 @@
         },
         {
           "id": "CARCONTROLLER_FOR2D",
-          "guideBubbles":
-          [
-            {
-              "target": "1",
-              "text": "Här sick-sackar vi med större steg för att undvika vägarbetena."
-            },
-            {
-              "target": "play",
-              "text": "Testa att köra!"
-            }
-          ],
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
-            "startCode": "for i in range(3):\n\tåk_mot_norr()\n\tåk_mot_norr()\n\tåk_mot_öst()\n\tåk_mot_öst()\nladda()",
+            "exampleSolutionCode": "for i in range(3):\n\tåk_mot_norr()\n\tåk_mot_norr()\n\tåk_mot_öst()\n\tåk_mot_öst()\nladda()",
             "rowLimit": 10
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 1,
                   "y": 1,
                   "z": -0.18
@@ -683,46 +572,39 @@
                 "direction": "east"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 7,
                   "y": 7,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
               {
-                "position":
-                {
+                "position": {
                   "x": 1,
                   "y": 5,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 2,
                   "y": 2,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 6,
                   "y": 5.5,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 7,
                   "y": 2.5,
                   "z": -0.6
@@ -733,21 +615,17 @@
         },
         {
           "id": "CARCONTROLLER_FOR2S",
-          "levelSettings":
-          {
-            "taskDescription":
-            {
+          "levelSettings": {
+            "taskDescription": {
               "header": "Styr podden till laddstationen och sätt den på laddning."
             },
+            "exampleSolutionCode": "for i in range(3):\n\tåk_mot_syd()\n\tåk_mot_syd()\n\tåk_mot_väst()\n\tåk_mot_väst()\nladda()",
             "rowLimit": 10
           },
-          "levelDefinition":
-          {
-            "cars":
-            [
+          "levelDefinition": {
+            "cars": [
               {
-                "position":
-                {
+                "position": {
                   "x": 7,
                   "y": 7,
                   "z": -0.18
@@ -755,46 +633,39 @@
                 "direction": "south"
               }
             ],
-            "stations":
-            [
+            "stations": [
               {
-                "position":
-                {
+                "position": {
                   "x": 1,
                   "y": 1,
                   "z": -0.18
                 }
               }
             ],
-            "obstacles":
-            [
+            "obstacles": [
               {
-                "position":
-                {
+                "position": {
                   "x": 2.5,
                   "y": 2,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 1,
                   "y": 4.5,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 6.5,
                   "y": 1,
                   "z": -0.6
                 }
               },
               {
-                "position":
-                {
+                "position": {
                   "x": 3.5,
                   "y": 4,
                   "z": -0.6
