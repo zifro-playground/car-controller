@@ -163,11 +163,12 @@ namespace PM
 		}
 		private void SetLevelSettings()
 		{
-			LoadMainCode();
-
 			if (currentLevelSettings == null)
+			{
+				LoadMainCode();
 				return;
-
+			}
+				
 			if (!string.IsNullOrEmpty(currentLevelSettings.precode))
 				PMWrapper.preCode = currentLevelSettings.precode;
 			
@@ -184,6 +185,8 @@ namespace PM
 				var availableFunctions = CreateFunctionsFromStrings(currentLevelSettings.availableFunctions);
 				PMWrapper.AddCompilerFunctions(availableFunctions);
 			}
+
+			LoadMainCode();
 		}
 		private void SetCaseSettings()
 		{

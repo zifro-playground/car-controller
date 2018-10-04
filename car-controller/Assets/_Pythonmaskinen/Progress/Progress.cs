@@ -115,9 +115,7 @@ namespace PM
 		public void OnPMUnloadLevel()
 		{
 			if (LevelData.ContainsKey(PMWrapper.CurrentLevelIndex))
-			{
 				SaveUserLevelProgress();
-			}
 		}
 	}
 }
