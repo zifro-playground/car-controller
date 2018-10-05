@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -90,10 +89,10 @@ namespace PM
 					}
 
 					if (!string.IsNullOrEmpty(levelPrecode))
-						tw.WriteLine("					{ \"" + activeLevel.levelId + "\", \"" + levelPrecode + "\" },");
+						tw.WriteLine("					{ \"" + activeLevel.levelId + "\", \"" + levelPrecode.Replace("\n", "\\n") + "\" },");
 				}
 				tw.WriteLine("				};\n");
-				
+
 				tw.WriteLine("				foreach (var levelToUpdate in levelsToUpdate)");
 				tw.WriteLine("				{");
 				tw.WriteLine("					var level = levelsInDatabase.FirstOrDefault(x => x.LevelId == levelToUpdate);");

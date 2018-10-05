@@ -39,10 +39,7 @@ namespace PM
 		{
 			GameDefinition = ParseJson();
 
-			// Will create level navigation buttons
-			PMWrapper.numOfLevels = GameDefinition.activeLevels.Count;
-
-			StartLevel(0); // TODO Load last level played from database
+			StartCoroutine(Progress.Instance.LoadUserGameProgress("/levels/load?gameId=" + GameDefinition.gameId));
 		}
 
 		private GameDefinition ParseJson()
@@ -59,6 +56,13 @@ namespace PM
 			return gameDefinition;
 		}
 
+		public void StartGame()
+		{
+			// Will create level navigation buttons
+			PMWrapper.numOfLevels = GameDefinition.activeLevels.Count;
+
+			StartLevel(0);
+		}
 		public void StartLevel(int levelIndex)
 		{
 			var sceneName = GameDefinition.activeLevels[levelIndex].sceneName;
@@ -66,8 +70,6 @@ namespace PM
 
 			var levelId = GameDefinition.activeLevels[levelIndex].levelId;
 			LoadLevel(levelId);
-
-			Progress.Instance.LevelData[PMWrapper.CurrentLevelIndex].IsStarted = true;
 
 			foreach (var ev in UISingleton.FindInterfaces<IPMLevelChanged>())
 				ev.OnPMLevelChanged();
@@ -112,10 +114,6 @@ namespace PM
 
 			currentLevelSettings = LevelDefinition.levelSettings;
 
-			//TODO Load level progress from database
-			if (!Progress.Instance.LevelData.ContainsKey(PMWrapper.CurrentLevelIndex))
-				Progress.Instance.LevelData[PMWrapper.CurrentLevelIndex] = new LevelData(LevelDefinition.id);
-
 			LevelModeButtons.Instance.CreateButtons();
 
 			BuildGuides(LevelDefinition.guideBubbles);
@@ -137,6 +135,8 @@ namespace PM
 				SetSandboxSettings();
 			else if (PMWrapper.LevelMode == LevelMode.Case)
 				SetCaseSettings();
+
+			LoadMainCode();
 		}
 		private void ClearSettings()
 		{
@@ -164,11 +164,8 @@ namespace PM
 		private void SetLevelSettings()
 		{
 			if (currentLevelSettings == null)
-			{
-				LoadMainCode();
 				return;
-			}
-				
+
 			if (!string.IsNullOrEmpty(currentLevelSettings.precode))
 				PMWrapper.preCode = currentLevelSettings.precode;
 			
@@ -185,8 +182,6 @@ namespace PM
 				var availableFunctions = CreateFunctionsFromStrings(currentLevelSettings.availableFunctions);
 				PMWrapper.AddCompilerFunctions(availableFunctions);
 			}
-
-			LoadMainCode();
 		}
 		private void SetCaseSettings()
 		{
@@ -266,9 +261,9 @@ namespace PM
 
 		private void LoadMainCode()
 		{
-			if (Progress.Instance.LevelData[PMWrapper.CurrentLevelIndex].IsStarted)
+			if (Progress.Instance.LevelData[PMWrapper.CurrentLevel.id].IsStarted)
 			{
-				PMWrapper.mainCode = Progress.Instance.LevelData[PMWrapper.CurrentLevelIndex].MainCode;
+				PMWrapper.mainCode = Progress.Instance.LevelData[PMWrapper.CurrentLevel.id].MainCode;
 			}
 			else
 			{
@@ -276,6 +271,8 @@ namespace PM
 					PMWrapper.AddCodeAtStart(currentLevelSettings.startCode);
 				else
 					PMWrapper.mainCode = string.Empty;
+
+				Progress.Instance.LevelData[PMWrapper.CurrentLevel.id].IsStarted = true;
 			}
 		}
 		private List<Function> CreateFunctionsFromStrings(List<string> functionNames)
