@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 		PlayerMovement playerMovement = null;
 		if (playerObject != null)
 			playerMovement = playerObject.GetComponent<PlayerMovement>();
-
+        
 		if (status == HelloCompiler.StopStatus.Finished)
 		{
 			if (playerMovement != null && playerMovement.AtChargeStation)
