@@ -15,8 +15,6 @@ public class PlayerMovement : MonoBehaviour
 	[FormerlySerializedAs("PlayerSpeed")]
 	public float playerSpeed = 4;
 
-	Direction currentDirection;
-
 	Vector2 currentGridPosition;
 
 	bool isMoving;
@@ -76,19 +74,15 @@ public class PlayerMovement : MonoBehaviour
 		switch (direction.ToLower())
 		{
 		case "east":
-			currentDirection = Direction.East;
 			transform.localEulerAngles = new Vector3(180, 0, -90);
 			break;
 		case "west":
-			currentDirection = Direction.West;
 			transform.localEulerAngles = new Vector3(180, 0, 90);
 			break;
 		case "north":
-			currentDirection = Direction.North;
 			transform.localEulerAngles = new Vector3(180, 0, 180);
 			break;
 		case "south":
-			currentDirection = Direction.South;
 			transform.localEulerAngles = new Vector3(180, 0, 0);
 			break;
 		default:
@@ -185,12 +179,4 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	#endregion
-}
-
-public enum Direction
-{
-	East,
-	West,
-	North,
-	South
 }
