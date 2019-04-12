@@ -1,73 +1,35 @@
 ﻿using System;
 using System.Collections;
-using PM;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
-	public float PlayerSpeed = 4;
+	static readonly int ANIM_CHARGE = Animator.StringToHash("Charge");
+
+	[FormerlySerializedAs("AtChargeStation")]
+	public bool atChargeStation;
+
 	public bool isCharging;
 
-	private Vector2 currentGridPosition;
-	private Vector3 startPosition;
-	private Vector3 lastPosition;
-	private string startDirection;
+	[FormerlySerializedAs("PlayerSpeed")]
+	public float playerSpeed = 4;
 
-	private bool isMoving;
-	private Direction currentDirection;
+	Direction currentDirection;
 
-	public bool AtChargeStation;
+	Vector2 currentGridPosition;
 
-	private void Update()
-	{
-		if (!isMoving) return;
-
-		transform.position += transform.up * Time.deltaTime * PMWrapper.speedMultiplier * PlayerSpeed;
-
-		// Calculate differance in distance without sqrt
-		if (Mathf.Pow(transform.position.x - lastPosition.x, 2) + Mathf.Pow(transform.position.y - lastPosition.y, 2) > Mathf.Pow(CityGrid.DistanceBetweenPoints, 2))
-		{
-			transform.position = lastPosition + transform.up * CityGrid.DistanceBetweenPoints;
-			isMoving = false;
-			lastPosition = transform.position;
-			PMWrapper.ResolveYield();
-		}
-	}
+	bool isMoving;
+	Vector3 lastPosition;
+	string startDirection;
+	Vector3 startPosition;
 
 	public void Reset()
 	{
 		transform.position = startPosition;
 		isMoving = false;
 		SetDirection(startDirection);
-		AtChargeStation = false;
-	}
-
-	private void SetDirection(string direction)
-	{
-		if (direction == null)
-			direction = "north";
-
-		switch (direction.ToLower())
-		{
-			case "east":
-				currentDirection = Direction.East;
-				transform.localEulerAngles = new Vector3(180, 0, -90);
-				break;
-			case "west":
-				currentDirection = Direction.West;
-				transform.localEulerAngles = new Vector3(180, 0, 90);
-				break;
-			case "north":
-				currentDirection = Direction.North;
-				transform.localEulerAngles = new Vector3(180, 0, 180);
-				break;
-			case "south":
-				currentDirection = Direction.South;
-				transform.localEulerAngles = new Vector3(180, 0, 0);
-				break;
-			default:
-				throw new Exception("The direction \"" + direction + "\" is not supported.");
-		}
+		atChargeStation = false;
 	}
 
 	public void Init(Car carData)
@@ -79,24 +41,90 @@ public class PlayerMovement : MonoBehaviour
 		Reset();
 	}
 
-	private void OnTriggerEnter(Collider other)
+	void Update()
 	{
-		if (other.CompareTag("ChargeStation"))
+		if (!isMoving)
 		{
-			AtChargeStation = true;
+			return;
+		}
+
+		Transform car = transform;
+		Vector3 position = car.position;
+
+		position += car.up * Time.deltaTime * PMWrapper.speedMultiplier * playerSpeed;
+
+		// Calculate difference in distance without sqrt
+		if (Mathf.Pow(position.x - lastPosition.x, 2) + Mathf.Pow(position.y - lastPosition.y, 2) >
+		    Mathf.Pow(CityGrid.distanceBetweenPoints, 2))
+		{
+			position = lastPosition + transform.up * CityGrid.distanceBetweenPoints;
+			isMoving = false;
+			lastPosition = position;
+			PMWrapper.ResolveYield();
+		}
+
+		transform.position = position;
+	}
+
+	void SetDirection(string direction)
+	{
+		if (direction == null)
+		{
+			direction = "north";
+		}
+
+		switch (direction.ToLower())
+		{
+		case "east":
+			currentDirection = Direction.East;
+			transform.localEulerAngles = new Vector3(180, 0, -90);
+			break;
+		case "west":
+			currentDirection = Direction.West;
+			transform.localEulerAngles = new Vector3(180, 0, 90);
+			break;
+		case "north":
+			currentDirection = Direction.North;
+			transform.localEulerAngles = new Vector3(180, 0, 180);
+			break;
+		case "south":
+			currentDirection = Direction.South;
+			transform.localEulerAngles = new Vector3(180, 0, 0);
+			break;
+		default:
+			throw new Exception("The direction \"" + direction + "\" is not supported.");
 		}
 	}
 
-	private void OnTriggerExit(Collider other)
+	void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("ChargeStation"))
 		{
-			AtChargeStation = false;
+			atChargeStation = true;
 		}
 	}
 
+	void OnTriggerExit(Collider other)
+	{
+		if (other.CompareTag("ChargeStation"))
+		{
+			atChargeStation = false;
+		}
+	}
+
+	IEnumerator PlayChargeAnimation()
+	{
+		Animator animator = GameObject.FindGameObjectWithTag("ChargeStation").GetComponent<Animator>();
+		animator.SetTrigger(ANIM_CHARGE);
+
+		yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+
+		PMWrapper.SetCaseCompleted();
+		isCharging = false;
+	}
 
 	#region Custom functions called from user
+
 	public void MoveEast()
 	{
 		lastPosition = transform.position;
@@ -105,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
 		SetDirection("east");
 		isMoving = true;
 	}
+
 	public void MoveWest()
 	{
 		lastPosition = transform.position;
@@ -113,26 +142,28 @@ public class PlayerMovement : MonoBehaviour
 		SetDirection("west");
 		isMoving = true;
 	}
+
 	public void MoveNorth()
 	{
 		lastPosition = transform.position;
 		currentGridPosition.y += 1;
-		
+
 		SetDirection("north");
 		isMoving = true;
 	}
+
 	public void MoveSouth()
 	{
 		lastPosition = transform.position;
 		currentGridPosition.y -= 1;
-		
+
 		SetDirection("south");
 		isMoving = true;
 	}
 
 	public void Charge()
 	{
-		if (AtChargeStation)
+		if (atChargeStation)
 		{
 			isCharging = true;
 			StartCoroutine(PlayChargeAnimation());
@@ -154,17 +185,6 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	#endregion
-
-	private IEnumerator PlayChargeAnimation()
-	{
-		var animator = GameObject.FindGameObjectWithTag("ChargeStation").GetComponent<Animator>();
-		animator.SetTrigger("Charge");
-
-		yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-
-		PMWrapper.SetCaseCompleted();
-		isCharging = false;
-	}
 }
 
 public enum Direction
