@@ -4,6 +4,17 @@ using PM;
 
 public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 {
+	static GameController()
+	{
+		Main.RegisterFunction(new Charge());
+		Main.RegisterFunction(new MoveNorth());
+		Main.RegisterFunction(new MoveEast());
+		Main.RegisterFunction(new MoveSouth());
+		Main.RegisterFunction(new MoveWest());
+
+		Main.RegisterLevelDefinitionContract<CarLevelDefinition>();
+	}
+
 	[Header("Prefabs")]
 	public GameObject PlayerPrefab;
 	public GameObject ObstaclePrefab;
@@ -17,13 +28,13 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 	private GameObject playerObject;
 
-	public void OnPMCompilerStopped(HelloCompiler.StopStatus status)
+	public void OnPMCompilerStopped(StopStatus status)
 	{
 		PlayerMovement playerMovement = null;
 		if (playerObject != null)
 			playerMovement = playerObject.GetComponent<PlayerMovement>();
-        
-		if (status == HelloCompiler.StopStatus.Finished)
+		
+		if (status == StopStatus.Finished)
 		{
 			if (playerMovement != null && playerMovement.AtChargeStation)
 			{
@@ -47,7 +58,7 @@ public class GameController : MonoBehaviour, IPMCompilerStopped, IPMCaseSwitched
 
 	private void CreateAssets()
 	{
-		var levelDefinition = PMWrapper.CurrentLevel.levelDefinition;
+		var levelDefinition = (CarLevelDefinition)PMWrapper.currentLevel.levelDefinition;
 
 		foreach (Car car in levelDefinition.cars)
 		{
