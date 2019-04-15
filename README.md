@@ -4,6 +4,8 @@
 
 Car controller is a game of controlling a car/pod through a city. Goal is to get the pod to the charging station.
 
+"Zifro Playground: Styr Podden" is developed, maintained, and owned by © Zifro AB ([zifro.se](https://zifro.se/))
+
 ## Live version: [zifro.se/playground/styr-podden](https://www.zifro.se/playground/styr-podden/)
 
 ## Focus points
