@@ -18,7 +18,7 @@ jobs:
       SCRIPTS: /root/repo/ci/scripts/
 
     docker:
-      - image: zifrose/kjell-testrunner
+      - image: zifrose/unity3d
         
     steps:
       - add_ssh_keys:
