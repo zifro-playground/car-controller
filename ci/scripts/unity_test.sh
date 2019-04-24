@@ -103,6 +103,9 @@ do
         stacktrace="$(xmlstarlet sel -T -t -v "//test-case[@id=$id]/failure/stack-trace/text()" -n $test_results_file)"
         echo "Found failed test: $name\n\t$message"
 
+        # Take only first line of message
+        message="$(echo "$message" | head -n 1)"
+
         if [ "$errors" ]
         then
             errors="$errors\n> :small_red_triangle_down: \`$platform\` *Failed* $name"
@@ -118,6 +121,9 @@ do
         message="$(xmlstarlet sel -T -t -v "//test-case[@id=$id]/reason/message/text()" -n $test_results_file)"
         echo "Found inconclusive test: $name\n\t$message"
 
+        # Take only first line of message
+        message="$(echo "$message" | head -n 1)"
+        
         if [ "$errors" ]
         then
             errors="$errors\n> :small_orange_diamond: \`$platform\` *Inconclusive* $name"
