@@ -1,6 +1,7 @@
 #!/bin/bash
 
 : ${SLACK_WEBHOOK?}
+: ${SLACK_THUMBNAIL:="https://img.icons8.com/ultraviolet/100/000000/sedan.png"}
 
 : ${DEPLOY_STATUS:="fail"}
 : ${DEPLOY_TAG_KJELL:=}
@@ -109,7 +110,7 @@ data=" {
         \"text\": \"$text\",
         \"mrkdwn_in\": [\"fields\", \"text\"], 
         \"color\": \"$color\",
-        \"thumb_url\": \"https://img.icons8.com/dusk/100/000000/bottom-navigation-toolbar.png\",
+        \"thumb_url\": \"$SLACK_THUMBNAIL\",
         \"fields\": [
             $fields
         ],

@@ -5,6 +5,7 @@
 : ${SLACK_AUTHOR_NAME:=}
 : ${SLACK_AUTHOR_ICON:=}
 : ${SLACK_AUTHOR_LINK:=}
+: ${SLACK_THUMBNAIL:="https://img.icons8.com/ultraviolet/100/000000/sedan.png"}
 
 : ${TEST_PASSED:=0}
 : ${TEST_FAILED:=0}
@@ -265,7 +266,7 @@ data=" {
         \"text\": \"$text\\n$errorsField\",
         \"mrkdwn_in\": [\"fields\", \"text\"], 
         \"color\": \"$color\",
-        \"thumb_url\": \"https://img.icons8.com/dusk/100/000000/bottom-navigation-toolbar.png\",
+        \"thumb_url\": \"$SLACK_THUMBNAIL\",
         \"fields\": [
             $fields
         ],
