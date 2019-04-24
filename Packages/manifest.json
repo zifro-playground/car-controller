@@ -1,10 +1,8 @@
 {
   "dependencies": {
-    "com.unity.ads": "2.0.8",
     "com.unity.analytics": "3.2.2",
     "com.unity.collab-proxy": "1.2.15",
     "com.unity.package-manager-ui": "2.0.7",
-    "com.unity.purchasing": "2.0.3",
     "com.unity.textmeshpro": "1.3.0",
     "se.zifro.mellis": "ssh://git@github.com/zardan/compiler.git#upm",
     "se.zifro.ui": "ssh://git@github.com/zardan/ui.git#upm",
@@ -45,7 +43,7 @@
       "revision": "upm"
     },
     "se.zifro.ui": {
-      "hash": "a123654607da4132c4a787bb908f1212ddcc9c67",
+      "hash": "b23b6304582a2d387631747b7f2f34cf656d5c9a",
       "revision": "upm"
     }
   }
