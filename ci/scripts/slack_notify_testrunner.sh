@@ -213,6 +213,12 @@ else
     testPercent=$((0))
 fi
 
+versions="\
+Playground car-controller: $(formatVersion "$PLAYGROUND_CARCONTROLLER_VERSION")\\n\
+Playground UI: $(formatVersion "$PLAYGROUND_UI_VERSION")\\n\
+Mellis: $(formatVersion "$MELLIS_VERSION")\\n\
+Python3 module: $(formatVersion "$MELLIS_PYTHON3_VERSION")"
+
 fields="
 {
     \"title\": \"Test results: $testPercent %\",
@@ -221,10 +227,7 @@ fields="
 },
 {
     \"title\": \"Versions\",
-    \"value\": \"Playground car-controller: $(formatVersion "$PLAYGROUND_CARCONTROLLER_VERSION")\\n\
-                 Playground UI: $(formatVersion "$PLAYGROUND_UI_VERSION")\\n\
-                 Mellis: $(formatVersion "$MELLIS_VERSION")\\n\
-                 Python3 module: $(formatVersion "$MELLIS_PYTHON3_VERSION")\",
+    \"value\": \"$versions\",
     \"short\": true
 }"
 
