@@ -100,11 +100,8 @@ do
     do
         name="$(xmlstarlet sel -T -t -v "//test-case[@id=$id]/@name" -n $test_results_file)"
         message="$(xmlstarlet sel -T -t -v "//test-case[@id=$id]/failure/message/text()" -n $test_results_file)"
-        stacktrace="$(xmlstarlet sel -T -t -v "//test-case[@id=$id]/failure/stack-trace/text()" -n $test_results_file)"
-        echo "Found failed test: $name\n\t$message"
-
-        # Take only first line of message
-        message="$(echo "$message" | head -n 1)"
+        # stacktrace="$(xmlstarlet sel -T -t -v "//test-case[@id=$id]/failure/stack-trace/text()" -n $test_results_file)"
+        echo "Found failed test: $name$($'\n\t')$message"
 
         if [ "$errors" ]
         then
@@ -112,17 +109,14 @@ do
         else
             errors="> :small_red_triangle_down: \`$platform\` *Failed* $name"
         fi
-        errors="$errors\n> \`\`\`\n$(escapeJson "$message")\n$(escapeJson "$stacktrace")\n\`\`\`"
+        errors="$errors\n> \`\`\`\n$(escapeJson "$message")\n\`\`\`"
     done < <(xmlstarlet sel -T -t -m //test-case[failure] -v @id -n $test_results_file)
     
     while read id
     do
         name="$(xmlstarlet sel -T -t -v "//test-case[@id=$id]/@name" -n $test_results_file)"
         message="$(xmlstarlet sel -T -t -v "//test-case[@id=$id]/reason/message/text()" -n $test_results_file)"
-        echo "Found inconclusive test: $name\n\t$message"
-
-        # Take only first line of message
-        message="$(echo "$message" | head -n 1)"
+        echo "Found inconclusive test: $name$($'\n\t')$message"
         
         if [ "$errors" ]
         then
