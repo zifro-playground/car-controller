@@ -1,5 +1,16 @@
 # Setup CircleCI
 
+## Add Github API key
+
+The Github API key is used to deploy the project as a Github Release (with artifacts).
+
+Head over to <https://github.com/settings/tokens> and generate a personal access token.
+Then paste it into `GITHUB_API_KEY` environment variable in CircleCI.
+
+Required scopes:
+
+- `repo` : _"Full control of private repositories"_
+
 ## Generate GPG key
 
 ```sh
@@ -77,6 +88,7 @@ List of all environment variables, to check if one is missing in CircleCI
 
 | Key                         | Description |
 | --------------------------- | ----------- |
+| `GITHUB_API_KEY`            | Github personal access token (aka. API key) |
 | `GITHUB_GPG_ID`             | ID of GPG key. |
 | `GITHUB_GPG_SEC_B64`        | GPG private key, base64 encoded. |
 | `GITHUB_USER_EMAIL`         | Deployment github account email, same as used in GPG and SSH key. |
