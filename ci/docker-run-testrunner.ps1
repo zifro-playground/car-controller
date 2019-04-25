@@ -31,7 +31,7 @@ Write-Output "Using Docker image $DockerImage"
 Write-Output ""
 
 $UnityLicenseContent = Get-Content -Path $UnityLicenseULF -Raw
-$UnityLicenseBytes = [System.Text.Encoding]::Unicode.GetBytes($UnityLicenseContent)
+$UnityLicenseBytes = [System.Text.Encoding]::UTF8.GetBytes($UnityLicenseContent)
 $UnityLicenseB64 = [Convert]::ToBase64String($UnityLicenseBytes)
 
 $UnityID = Get-Credential -Message "Enter UnityID login"

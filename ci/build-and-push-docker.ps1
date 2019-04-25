@@ -7,14 +7,18 @@
 param(
     # Docker image account
     [string]
-    $Account = "zifrose",
+    $account = "zifrose",
     
     # Docker images (same as filenames without .Dockerfile)
     [string[]]
     $images = @(
         "unity3d-webgl",
         "unity3d"
-    )
+    ),
+
+    # Unity version, also used as Docker image tag
+    [string]
+    $UnityVersion = "2018.3.11f1"
 )
 
 $basePath = Resolve-Path $PSCommandPath | Split-Path -Parent
@@ -25,12 +29,13 @@ $steps = $images.Count * 2
 
 foreach ($image in $images) {
     $step++;
+    $imageFullName = "$account/$($image):$UnityVersion"
     $file = Join-Path $basePath "$image.Dockerfile"
-    Write-Host "> Building $Account/$image docker image (step $step/$steps)" -BackgroundColor DarkGreen
+    Write-Host "> Building $imageFullName docker image (step $step/$steps)" -BackgroundColor DarkGreen
     Write-Host ""
-    docker build . -t $Account/$image -f $file
+    docker build . -t $imageFullName -f $file --build-arg UNITY_VERSION=$UnityVersion
     if (-not $?) {
-        throw "Failed to build $Account/$image (step $step/$steps)"
+        throw "Failed to build $imageFullName (step $step/$steps)"
     }
     Write-Host ""
 }
@@ -39,11 +44,12 @@ Write-Host ">>> Pushing" -BackgroundColor Blue
 
 foreach ($image in $images) {
     $step++;
-    Write-Host "> Pushing $Account/$image docker image (step $step/$steps)" -BackgroundColor DarkBlue
+    $imageFullName = "$account/$($image):$UnityVersion"
+    Write-Host "> Pushing $imageFullName docker image (step $step/$steps)" -BackgroundColor DarkBlue
     Write-Host ""
-    docker push $Account/$image
+    docker push $imageFullName
     if (-not $?) {
-        throw "Failed to push $Account/$image (step $step/$steps)"
+        throw "Failed to push $imageFullName (step $step/$steps)"
     }
     Write-Host ""
 }

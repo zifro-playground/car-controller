@@ -1,5 +1,6 @@
 
-FROM gableroux/unity3d:2018.3.11f1-webgl
+ARG UNITY_VERSION=2018.3.11f1
+FROM gableroux/unity3d:${UNITY_VERSION}-webgl
 
 # Add trusted sources
 RUN mkdir -p ~/.ssh \
