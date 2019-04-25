@@ -8,7 +8,13 @@ set -o pipefail
 PROJECT=${1?Project path}
 : ${BUILD_TARGET?Build target (ex: WebGL)}
 : ${BUILD_NAME?Build name (output name)}
-: ${BUILD_PATH:=./Builds/$BUILD_TARGET/}
+: ${BUILD_PATH:=$PROJECT/Builds/$BUILD_TARGET/}
+
+if ! [[ "$BUILD_PATH" = /* ]]
+then
+    # Build path is relative => use current directory
+    $BUILD_PATH=$PWD/$BUILD_PATH
+fi
 
 mkdir -pv $BUILD_PATH
 
@@ -27,8 +33,7 @@ ${UNITY_EXECUTABLE:-xvfb-run -as '-screen 0 640x480x24' /opt/Unity/Editor/Unity}
     -customBuildPath $BUILD_PATH \
     -customBuildOptions AcceptExternalModificationsToPlayer \
     -executeMethod BuildCommand.PerformBuild \
-    -quit \
-    -logfile
+    -logfile ${BUILD_LOG:-}
 
 UNITY_EXIT_CODE=$?
 
