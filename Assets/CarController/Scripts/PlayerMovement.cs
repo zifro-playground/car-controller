@@ -15,6 +15,12 @@ public class PlayerMovement : MonoBehaviour
 	[FormerlySerializedAs("PlayerSpeed")]
 	public float playerSpeed = 4;
 
+	/// <summary>
+	/// Used in unit testing to speed up testing
+	/// </summary>
+	[NonSerialized]
+	public bool skipChangeWait;
+
 	Vector2 currentGridPosition;
 
 	bool isMoving;
@@ -52,8 +58,7 @@ public class PlayerMovement : MonoBehaviour
 		position += car.up * Time.deltaTime * PMWrapper.speedMultiplier * playerSpeed;
 
 		// Calculate difference in distance without sqrt
-		if (Mathf.Pow(position.x - lastPosition.x, 2) + Mathf.Pow(position.y - lastPosition.y, 2) >
-		    Mathf.Pow(CityGrid.distanceBetweenPoints, 2))
+		if (((Vector2)position - (Vector2)lastPosition).sqrMagnitude > CityGrid.distanceBetweenPoints * CityGrid.distanceBetweenPoints)
 		{
 			position = lastPosition + transform.up * CityGrid.distanceBetweenPoints;
 			isMoving = false;
@@ -111,7 +116,10 @@ public class PlayerMovement : MonoBehaviour
 		Animator animator = GameObject.FindGameObjectWithTag("ChargeStation").GetComponent<Animator>();
 		animator.SetTrigger(ANIM_CHARGE);
 
-		yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+		if (!skipChangeWait)
+		{
+			yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+		}
 
 		PMWrapper.SetCaseCompleted();
 		isCharging = false;
