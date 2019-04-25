@@ -39,11 +39,12 @@ echo
 # Reading changelogs
 cd $repo
 echo "Fetching changelog from '$repo'"
+echo "Referencing range '$COMMIT_RANGE'"
+
 changeset="$(git diff --shortstat $COMMIT_RANGE)"
 echo "Changeset: $changeset"
-
-echo "Referencing range '$COMMIT_RANGE'"
-changelog="$(git --no-pager log --oneline --decorate $COMMIT_RANGE)"
+# using tac to get youngest commit first
+changelog="$(git --no-pager log --oneline $COMMIT_RANGE | tac)"
 echo "Changelog:"
 echo "$changelog"
 echo
@@ -60,20 +61,19 @@ fi
 echo ">>> Tagging"
 set +e
 
-tagMessage="$PROJECT_NAME v$PROJECT_VERSION
+TAGMESSAGE="$PROJECT_NAME v$PROJECT_VERSION
 This tag was created autonomously by a script in the CircleCI workflow.
 
 :shipit: $CIRCLE_BUILD_URL
 :octocat: https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/commit/$CIRCLE_SHA1"
 
-git tag -s "$TAG" -m "$MESSAGE"
-local TAG_STATUS=$?
-if [ $TAG_STATUS -ne 0 ]
+git tag -s "$TAG" -m "$TAGMESSAGE"
+if [ $? -ne 0 ]
 then
     echo "<<< Unexpected error during tagging \"$TAG\". Aborting."
     exit 1
 else
-    echo "Added tag \"$TAG\", message \"$MESSAGE\""
+    echo "Added tag \"$TAG\", message \"$TAGMESSAGE\""
 fi
 
 echo ">>> Pushing to $CIRCLE_REPOSITORY_URL"
@@ -101,6 +101,8 @@ body="# $PROJECT_NAME release
 
 ## Changelog
 
+_(youngest first)_
+
 $changelog"
 
 releaseName="$PROJECT_NAME v$PROJECT_VERSION"
@@ -121,7 +123,6 @@ releaseJson="$(curl -u $GITHUB_USER_ID:$GITHUB_API_KEY -X POST --data "$data" "$
 releaseId="$(echo "$releaseJson" | jq '.id' -r)"
 echo "export DEPLOY_RELEASE_ID='$releaseId'" >> $BASH_ENV
 
-releaseUrl="$(echo "$releaseJson" | jq '.html_url' -r)"
 artifactsUploadUrlTemplate="$(echo "$releaseJson" | jq '.upload_url' -r)"
 
 if ! [ "$artifactsUploadUrlTemplate" ]
@@ -138,27 +139,28 @@ echo "Using upload url: $artifactsUploadUrlTemplate"
 artifactsUploadUrlBare="$(echo "$artifactsUploadUrlTemplate" | grep -oP '^[^{]+')"
 function artifactsUploadUrl {
     # artifactsUploadUrl <fileName> [label]
-    : ${1?Artifact file name}
-    : ${2:=}
+    local name=${1?Artifact file name}
+    local label=${2:-}
 
-    if [ "$2" ]
+    if [ "$label" ]
     then
-        echo "$artifactsUploadUrlBare?name=$1&label=$2"
+        echo "$artifactsUploadUrlBare?name=$name&label=$label"
     else
-        echo "$artifactsUploadUrlBare?name=$1"
+        echo "$artifactsUploadUrlBare?name=$name"
     fi
 }
 
 # Upload artifacts
 function artifactsUpload {
     # artifactsUpload <fileName> [label]
-    artifact=${1?Artifact path}
-    label=${2:-"$(basename "$artifact")"}
+    local artifact=${1?Artifact path}
+    local name="$(basename "$artifact")"
+    local label=${2:-}
     
-    url="$(artifactsUploadUrl "$artifact" "$label")"
-    contentType="$(file -b --mime-type "$artifact")"
+    local url="$(artifactsUploadUrl "$name" "$label")"
+    local contentType="$(file -b --mime-type "$artifact")"
 
-    echo "Uploading: $label"
+    echo "Uploading: $name ($contentType)"
     echo "$url"
 
     curl -u $GITHUB_USER_ID:$GITHUB_API_KEY \
@@ -185,8 +187,12 @@ echo "Publishing release, removing draft flag, with request:"
 echo "$url"
 echo "$data"
 
-curl -u $GITHUB_USER_ID:$GITHUB_API_KEY \
-     -X PATCH --data "$data" "$url"
+releaseJson="$(curl -u $GITHUB_USER_ID:$GITHUB_API_KEY \
+     -X PATCH --data "$data" "$url")"
+
+releaseUrl="$(echo "$releaseJson" | jq '.html_url' -r)"
+
+echo "Published release"
 
 # Export variables
 echo "export DEPLOY_CHANGESET='$changeset'" >> $BASH_ENV
