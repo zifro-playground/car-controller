@@ -1,8 +1,7 @@
 {
     "name": "CarController.Tests.PlayMode",
     "references": [
-        "ZifroPlayground.UI",
-        "ZifroPlayground.UI.Tests"
+        "ZifroPlayground.UI"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"
