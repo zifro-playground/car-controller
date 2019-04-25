@@ -33,6 +33,7 @@ ${UNITY_EXECUTABLE:-xvfb-run -as '-screen 0 640x480x24' /opt/Unity/Editor/Unity}
     -customBuildPath $BUILD_PATH \
     -customBuildOptions AcceptExternalModificationsToPlayer \
     -executeMethod BuildCommand.PerformBuild \
+    -quit \
     -logfile ${BUILD_LOG:-}
 
 UNITY_EXIT_CODE=$?
