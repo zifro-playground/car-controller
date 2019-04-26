@@ -1,6 +1,6 @@
 #!/bin/bash
 
-: ${COMMIT_RANGE?}
+: ${COMMIT_RANGE:="$CIRCLE_SHA1^...$CIRCLE_SHA1"}
 
 : ${SLACK_WEBHOOK?}
 : ${SLACK_FOOTER:=}
