@@ -34,6 +34,10 @@ jobs:
           command: chmod +x $SCRIPTS/**.sh -v
 
       - run:
+          name: Get commit range
+          command: $SCRIPTS/get_commit_range.sh
+
+      - run:
           name: Setup Unity license
           command: $SCRIPTS/unity_login.sh
       
@@ -62,9 +66,6 @@ jobs:
             echo "PLAYGROUND_UI_VERSION='$PLAYGROUND_UI_VERSION'" >> $BASH_ENV
             echo "MELLIS_VERSION='$MELLIS_VERSION'" >> $BASH_ENV
             echo "MELLIS_PYTHON3_VERSION='$MELLIS_PYTHON3_VERSION'" >> $BASH_ENV
-            
-            # Get commit range of build
-            $SCRIPTS/get_commit_range.sh
 
       - run:
           name: Test Unity project
@@ -109,6 +110,10 @@ jobs:
       - run:
           name: Enable permissions on scripts
           command: chmod +x $SCRIPTS/**.sh -v
+
+      - run:
+          name: Enable permissions on scripts
+          command: chmod +x $SCRIPTS/**.sh -v
     
       # TODO: Use cache from build-test
       # TODO: Create artifact
@@ -129,6 +134,10 @@ jobs:
       - run:
           name: Enable permissions on scripts
           command: chmod +x $SCRIPTS/**.sh -v
+
+      - run:
+          name: Enable permissions on scripts
+          command: chmod +x $SCRIPTS/**.sh -v
             
       - run:
           name: Obtaining Playground UI version
@@ -141,9 +150,6 @@ jobs:
 
             # Save to environment
             echo "PLAYGROUND_CARCONTROLLER_VERSION='$PLAYGROUND_CARCONTROLLER_VERSION'" >> $BASH_ENV
-
-            # Get commit range of build
-            $SCRIPTS/get_commit_range.sh
 
       - run:
           name: Cancel if tag already exists
