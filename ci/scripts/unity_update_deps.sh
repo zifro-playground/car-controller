@@ -45,6 +45,15 @@ ${UNITY_EXECUTABLE:-xvfb-run -as '-screen 0 640x480x24' /opt/Unity/Editor/Unity}
 
 EXIT_STATUS=$?
 
+LOGS=~/.config/unity3d/Unity/Editor/Editor.log
+if [ -f $LOGS ]
+then
+    echo "(Reading logs from $LOGS)"
+    cat $LOGS
+    rm $LOGS
+    exit 1
+fi
+
 echo
 echo ">>>>>> Compilation finished successfully"
 

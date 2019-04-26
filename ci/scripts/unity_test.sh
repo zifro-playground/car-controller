@@ -52,6 +52,15 @@ do
         -logfile
 
     UNITY_EXIT_CODE=$?
+    
+    LOGS=~/.config/unity3d/Unity/Editor/Editor.log
+    if [ -f $LOGS ]
+    then
+        echo "(Reading logs from $LOGS)"
+        cat $LOGS
+        rm $LOGS
+        exit 1
+    fi
 
     echo
     echo "<<<<<< Unity '$platform' execution complete"
