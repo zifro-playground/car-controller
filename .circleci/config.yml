@@ -226,6 +226,14 @@ workflows:
             branches:
               <<: *WORKFLOW_BUILD_TEST_DEPLOY_FILTER
 
+      - build-webgl:
+          requires:
+            - build-test
+
+          filters:
+            branches:
+              <<: *WORKFLOW_BUILD_TEST_DEPLOY_FILTER
+
       - deploy-github-release:
           requires:
             - build-webgl
