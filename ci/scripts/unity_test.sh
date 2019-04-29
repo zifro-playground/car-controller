@@ -49,7 +49,7 @@ do
         -testResults $test_results_file \
         -buildTarget Linux \
         -batchmode \
-        -logfile
+        -logfile ${LOG_FILE:-}
 
     UNITY_EXIT_CODE=$?
     
