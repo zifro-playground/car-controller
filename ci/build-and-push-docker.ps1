@@ -9,17 +9,29 @@ param(
     [string]
     $account = "zifrose",
     
-    # Docker images (same as filenames without .Dockerfile)
+    # Docker images
     [string[]]
     $images = @(
         "unity3d-webgl",
         "unity3d"
     ),
 
+    # Dockerfile config to use
+    [string]
+    $DockerFile = ".Dockerfile",
+
     # Unity version, also used as Docker image tag
     [string]
     $UnityVersion = "2018.3.11f1"
 )
+
+function GetBaseImage ([string] $Image, [string] $Version) {
+    if ($Image.Contains('-')) {
+        return $Version + $Image.SubString($Image.IndexOf('-'))
+    } else {
+        return "$Version-unity"
+    }
+}
 
 $basePath = Resolve-Path $PSCommandPath | Split-Path -Parent
 
@@ -30,10 +42,11 @@ $steps = $images.Count * 2
 foreach ($image in $images) {
     $step++;
     $imageFullName = "$account/$($image):$UnityVersion"
-    $file = Join-Path $basePath "$image.Dockerfile"
+    $file = Join-Path $basePath $DockerFile
     Write-Host "> Building $imageFullName docker image (step $step/$steps)" -BackgroundColor DarkGreen
     Write-Host ""
-    docker build . -t $imageFullName -f $file --build-arg UNITY_VERSION=$UnityVersion
+    Write-Host "ARG UNITY_VERSION=$(GetBaseImage $image $UnityVersion)"
+    docker build . -t $imageFullName -f $file --build-arg UNITY_VERSION=$(GetBaseImage $image $UnityVersion)
     if (-not $?) {
         throw "Failed to build $imageFullName (step $step/$steps)"
     }
