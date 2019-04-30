@@ -12,6 +12,7 @@ VERSION_FILE=$PROJECT/ProjectSettings/ProjectVersion.txt
 if ! [ -f "$VERSION_FILE" ]
 then
     echo "Unable to find ProjectVersion.txt in project $PROJECT"
+    exit 1
 fi
 
 echo "Looking for Unity version in file $VERSION_FILE"
@@ -21,8 +22,9 @@ if [ "$VERSION" ]
 then
     echo "Found version: '$VERSION'"
     export UNITY_VERSION="$VERSION"
-    echo "Writing to \$UNITY_VERSION in \$BASH_ENV"
-    echo "\$UNITY_VERSION='$VERSION'" >> $BASH_ENV
+    echo "Writing to \$VERSION in \$BASH_ENV"
+    echo "export UNITY_VERSION='$VERSION'" >> $BASH_ENV
 else
     echo "Unable to find Unity version in $VERSION_FILE"
+    exit 1
 fi
