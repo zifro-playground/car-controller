@@ -46,7 +46,7 @@ jobs:
           command: $SCRIPTS/unity_update_deps.sh ~/repo
           
       - run:
-          name: Obtaining Playground UI & Mellis version
+          name: Obtaining versions
           command: |
             shopt -s globstar
             
@@ -147,13 +147,16 @@ jobs:
           command: chmod +x $SCRIPTS/**.sh -v
             
       - run:
-          name: Obtaining Playground UI version
+          name: Obtaining versions
           command: |
             shopt -s globstar
 
             # Get versions
             PLAYGROUND_CARCONTROLLER_VERSION="$($SCRIPTS/get_attr_version.sh ~/repo/Assets/**/CarControllerAssemblyInfo.cs)"
             echo ">>> Using Playground Car-Controller v$PLAYGROUND_CARCONTROLLER_VERSION"
+
+            $SCRIPTS/get_unity_version.sh ~/repo
+            echo ">>> Using Unity v${UNITY_VERSION}"
 
             # Save to environment
             echo "PLAYGROUND_CARCONTROLLER_VERSION='$PLAYGROUND_CARCONTROLLER_VERSION'" >> $BASH_ENV
