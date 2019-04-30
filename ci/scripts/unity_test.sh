@@ -59,7 +59,6 @@ do
         echo "(Reading logs from $LOGS)"
         cat $LOGS
         rm $LOGS
-        exit 1
     fi
 
     echo
