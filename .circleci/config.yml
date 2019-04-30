@@ -61,7 +61,7 @@ jobs:
             MELLIS_PYTHON3_VERSION="$($SCRIPTS/get_dll_version.sh ~/repo/Library/PackageCache/se.zifro.mellis*/**/Mellis.Lang.Python3.dll)"
             echo ">>> Using Mellis v$MELLIS_VERSION, and Python3 module v$MELLIS_PYTHON3_VERSION"
 
-            $SCRIPTS/get_unity_version.sh
+            $SCRIPTS/get_unity_version.sh ~/repo
             echo ">>> Using Unity v${UNITY_VERSION}"
 
             # Save to environment
