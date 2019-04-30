@@ -22,6 +22,7 @@ TEST_TOTAL=$((TEST_PASSED+TEST_FAILED+TEST_SKIPPED+TEST_INCONCLUSIVE))
 : ${PLAYGROUND_UI_VERSION:=}
 : ${MELLIS_VERSION:=}
 : ${MELLIS_PYTHON3_VERSION:=}
+: ${UNITY_VERSION:=}
 
 if [ -z "$SLACK_WEBHOOK" ]; then
     echo "NO SLACK WEBHOOK SET"
@@ -172,7 +173,8 @@ versions="\
 Playground car-controller: $(formatVersion "$PLAYGROUND_CARCONTROLLER_VERSION")\\n\
 Playground UI: $(formatVersion "$PLAYGROUND_UI_VERSION")\\n\
 Mellis: $(formatVersion "$MELLIS_VERSION")\\n\
-Python3 module: $(formatVersion "$MELLIS_PYTHON3_VERSION")"
+Python3 module: $(formatVersion "$MELLIS_PYTHON3_VERSION")\\n\
+Unity: $(formatVersion "$UNITY_VERSION")"
 
 fields="
 {

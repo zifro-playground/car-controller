@@ -61,6 +61,9 @@ jobs:
             MELLIS_PYTHON3_VERSION="$($SCRIPTS/get_dll_version.sh ~/repo/Library/PackageCache/se.zifro.mellis*/**/Mellis.Lang.Python3.dll)"
             echo ">>> Using Mellis v$MELLIS_VERSION, and Python3 module v$MELLIS_PYTHON3_VERSION"
 
+            $SCRIPTS/get_unity_version.sh
+            echo ">>> Using Unity v${UNITY_VERSION}"
+
             # Save to environment
             echo "PLAYGROUND_CARCONTROLLER_VERSION='$PLAYGROUND_CARCONTROLLER_VERSION'" >> $BASH_ENV
             echo "PLAYGROUND_UI_VERSION='$PLAYGROUND_UI_VERSION'" >> $BASH_ENV
