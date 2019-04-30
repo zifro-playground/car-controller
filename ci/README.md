@@ -56,12 +56,22 @@ steps:
 Gableroux on GitLab has a good tutorial. Follow it here to obtain a `.ulf` license file.  
 You can follow the instructions on here: <https://gitlab.com/gableroux/unity3d-gitlab-ci-example/tree/master#how-to-activate>
 
-With the `.ulf` downloaded, convert it to base64 and add it to the `UNITY_LICENSE_CONTENT_B64` environment key in the [env settings on CircleCI](https://circleci.com/gh/zardan/ui/edit#env-vars).
+With the `.ulf` downloaded, convert it to base64 and add it to the environment key in the [env settings on CircleCI](https://circleci.com/gh/zardan/ui/edit#env-vars). Useful bash command:
 
 ```sh
 $ base64 $UNITY_ULF_KEY_PATH | clip
-# paste into UNITY_LICENSE_CONTENT_B64 env var in circleci
+# paste into env var in circleci
 ```
+
+Follow these steps on the following docker images and add to the specified environment variables:
+
+| Docker image              | Environment key in CircleCI |
+| `zifrose/unity3d`         | `UNITY_LICENSE_B64` |
+| `zifrose/unity3d-webgl`   | `UNITY_LICENSE_WEBGL_B64` |
+
+:exclamation: **Note:** Unity license is bound to the machine ID.
+Make sure to add one using each docker image as different images are used in this repos
+CI workflow, and thereby needs different licenses.
 
 ## Add Slack webhook for notifications
 
@@ -94,6 +104,6 @@ List of all environment variables, to check if one is missing in CircleCI
 | `GITHUB_USER_EMAIL`         | Deployment github account email, same as used in GPG and SSH key. |
 | `GITHUB_USER_NAME`          | Deployment github account display name (not username). |
 | `GITHUB_USER_ID`            | Deployment github account username (same as <https://github.com/your_user_id>) |
-| `UNITY_LICENSE_CONTENT_B64` | Unity_lic.ulf in base 64 format |
+| `UNITY_LICENSE_B64`         | Unity_lic.ulf in base 64 format |
 | `SLACK_WEBHOOK`             | Slack webhook url, for use in Slack integration |
 | `CIRCLE_API_KEY`            | CircleCI personal API token, for use in Slack integration |
